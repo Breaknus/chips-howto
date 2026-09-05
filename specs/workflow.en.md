@@ -330,6 +330,12 @@ A useful practice from mappers: the netlist is exported **at two levels** — th
 hierarchical per-cell one (`mmc1.v` + `mmc1_cells.v`): this makes tracing errors easier to spot and
 the schematic easier to map back onto the photo.
 
+For large chips, SEGAChips uses a **hybrid approach**: inter-block connections ("broad strokes")
+are marked up in Photoshop over the interconnect maps (`rails`), the buses get names right away,
+which later go into the HDL by hand; the connections inside cell domains, on the other hand, are
+traced in Deroute — every domain has its own XMLZ project with a ready Verilog export
+(`Z80/netlist/Readme.md`).
+
 ### Tool: Deroute
 
 [Deroute](https://github.com/emu-russia/Deroute) — "a tool for untangling wires"
