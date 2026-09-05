@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chips HOWTO — Workflow изучения микросхем</title>
+<!-- GitHub Pages landing. Markdown source of truth: /specs/workflow.md and /specs/workflow_en.md -->
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --fg:#1c1e21; --muted:#6b7280;
+    --accent:#0b6e4f; --border:#e3e6ea; --tile-hover:#eef7f3;
+  }
+  html[data-theme="dark"]{
+    --bg:#111417; --card:#1a1e23; --fg:#e6e8ea; --muted:#9aa3ad;
+    --accent:#4cc38a; --border:#2a2f36; --tile-hover:#20282f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       background:var(--bg);color:var(--fg);line-height:1.55}
+  header{padding:32px 20px 20px;text-align:center}
+  h1{margin:0 0 8px;font-size:1.9rem}
+  .sub{color:var(--muted);max-width:760px;margin:0 auto}
+  .controls{position:fixed;top:12px;right:14px;display:flex;gap:8px;z-index:10}
+  .controls button{background:var(--card);color:var(--fg);border:1px solid var(--border);
+    border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.9rem}
+  .controls button:hover{background:var(--tile-hover)}
+  .hero{display:flex;justify-content:center;padding:10px 20px 0}
+  .hero img{max-width:640px;width:100%;border-radius:12px;border:1px solid var(--border)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+        gap:16px;max-width:1100px;margin:28px auto;padding:0 20px}
+  .tile{background:var(--card);border:1px solid var(--border);border-radius:12px;
+        padding:18px;text-decoration:none;color:var(--fg);transition:.15s;display:block}
+  .tile:hover{background:var(--tile-hover);transform:translateY(-2px)}
+  .tile .num{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;
+             padding:2px 8px;font-weight:700;font-size:.8rem;margin-bottom:8px}
+  .tile h3{margin:0 0 6px;font-size:1.05rem}
+  .tile p{margin:0;color:var(--muted);font-size:.86rem}
+  section{max-width:900px;margin:36px auto;padding:0 20px}
+  section h2{border-bottom:2px solid var(--accent);padding-bottom:6px}
+  .refs a{margin-right:14px;color:var(--accent)}
+  figure{margin:14px 0}
+  figure img{max-width:100%;border-radius:10px;border:1px solid var(--border)}
+  figcaption{color:var(--muted);font-size:.85rem;margin-top:4px}
+  footer{text-align:center;color:var(--muted);padding:30px 20px;font-size:.85rem}
+  code{background:var(--tile-hover);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="controls">
+  <button id="langBtn" onclick="toggleLang()">EN</button>
+  <button id="themeBtn" onclick="toggleTheme()" title="theme">🌓</button>
+</div>
+
+<header>
+  <h1 data-ru="Chips HOWTO: Workflow изучения микросхем" data-en="Chips HOWTO: Reverse-Engineering Workflow">Chips HOWTO: Workflow изучения микросхем</h1>
+  <p class="sub" data-ru="Общая методичка: процесс исследования чипов в домашних условиях, собранный из опыта проектов emu-russia: breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, Patterns. Начали новый чип — идите по шагам."
+     data-en="A common step-by-step methodology for chip research at home, distilled from emu-russia projects: breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, Patterns. Starting a new chip? Follow the steps.">
+     Общая методичка: процесс исследования чипов в домашних условиях, собранный из опыта проектов emu-russia: breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, Patterns. Начали новый чип — идите по шагам.</p>
+</header>
+
+<div class="hero">
+  <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/chip-perfect-approach.png"
+       alt="Die-Perfect approach">
+</div>
+
+<nav class="grid" id="tiles">
+  <a class="tile" href="#s0"><span class="num">0</span><h3 data-ru="Подготовка" data-en="Preparation">Подготовка</h3><p data-ru="Цель, референсы, терминология" data-en="Goal, references, terminology">Цель, референсы, терминология</p></a>
+  <a class="tile" href="#s1"><span class="num">1</span><h3 data-ru="Добыча" data-en="Acquisition">Добыча</h3><p data-ru="Чип, ревизия, датасеты" data-en="Chip, revision, datasets">Чип, ревизия, датасеты</p></a>
+  <a class="tile" href="#s2"><span class="num">2</span><h3 data-ru="Распаковка" data-en="Decapsulation">Распаковка</h3><p data-ru="Термика / HF, безопасность" data-en="Thermal / HF, safety">Термика / HF, безопасность</p></a>
+  <a class="tile" href="#s3"><span class="num">3</span><h3 data-ru="Съёмка" data-en="Imaging">Съёмка</h3><p data-ru="Микроскоп, змейка, overlap" data-en="Microscope, snake grid, overlap">Микроскоп, змейка, overlap</p></a>
+  <a class="tile" href="#s4"><span class="num">4</span><h3 data-ru="Сшивка" data-en="Stitching">Сшивка</h3><p data-ru="Fiji / Hugin → Master Dataset" data-en="Fiji / Hugin → Master Dataset">Fiji / Hugin → Master Dataset</p></a>
+  <a class="tile" href="#s5"><span class="num">5</span><h3 data-ru="Слои" data-en="Layers">Слои</h3><p data-ru="Полировка, лаги M1/M2/poly" data-en="Polishing, laps M1/M2/poly">Полировка, лаги M1/M2/poly</p></a>
+  <a class="tile" href="#s6"><span class="num">6</span><h3 data-ru="Ячейки" data-en="Cells">Ячейки</h3><p data-ru="Patterns, cells.md, библиотеки" data-en="Patterns, cells.md, libraries">Patterns, cells.md, библиотеки</p></a>
+  <a class="tile" href="#s7"><span class="num">7</span><h3 data-ru="Нетлист" data-en="Netlist">Нетлист</h3><p data-ru="Deroute: pads → слои → модули" data-en="Deroute: pads → layers → modules">Deroute: pads → слои → модули</p></a>
+  <a class="tile" href="#s8"><span class="num">8</span><h3 data-ru="Verilog" data-en="Verilog">Verilog</h3><p data-ru="Die-perfect экспорт" data-en="Die-perfect export">Die-perfect экспорт</p></a>
+  <a class="tile" href="#s9"><span class="num">9</span><h3 data-ru="EDA-схема" data-en="EDA schematic">EDA-схема</h3><p data-ru="PlanAhead рисует из verilog" data-en="PlanAhead draws from verilog">PlanAhead рисует из verilog</p></a>
+  <a class="tile" href="#s10"><span class="num">10</span><h3 data-ru="Анализ" data-en="Analysis">Анализ</h3><p data-ru="Модули, сигналы, waves" data-en="Modules, signals, waves">Модули, сигналы, waves</p></a>
+  <a class="tile" href="#s11"><span class="num">11</span><h3 data-ru="Верификация" data-en="Verification">Верификация</h3><p data-ru="Симуляция, кросс-чек, unverified" data-en="Simulation, cross-check, unverified">Симуляция, кросс-чек, unverified</p></a>
+  <a class="tile" href="#s12"><span class="num">12</span><h3 data-ru="Документация" data-en="Documentation">Документация</h3><p data-ru="Wiki, прогресс, книги, итерации" data-en="Wiki, progress, books, iterations">Wiki, прогресс, книги, итерации</p></a>
+</nav>
+
+<section id="s0">
+  <h2 data-ru="0. Подготовка" data-en="0. Preparation">0. Подготовка</h2>
+  <p data-ru="Фиксируем глубину: транзисторный нетлист (breaks), ячейки (SEGAChips), вентили (ula, mappers) или обзор SoC (psxcpu, dmgcpu). Собираем референсы: service manual, патенты, чужие реверсы. Записываем терминологию до начала."
+     data-en="Fix the depth: transistor netlist (breaks), standard cells (SEGAChips), gates (ula, mappers), or a SoC survey (psxcpu, dmgcpu). Collect references: service manual, patents, prior reverse-engineering. Write down terminology before starting."></p>
+</section>
+<section id="s1">
+  <h2 data-ru="1. Добыча" data-en="1. Acquisition">1. Добыча</h2>
+  <p data-ru="Донорская плата нужной ревизии; маркировка и tattoo кристалла фиксируются сразу (psxcpu). Сначала ищем готовые датасеты (visual6502, siliconpr0n, GDrive), чтобы не дублировать работу."
+     data-en="A donor board of the right revision; package marking and die tattoo recorded immediately (psxcpu). Search existing datasets first (visual6502, siliconpr0n, GDrive) to avoid duplicated work."></p>
+</section>
+<section id="s2">
+  <h2 data-ru="2. Распаковка" data-en="2. Decapsulation">2. Распаковка</h2>
+  <p data-ru="Термический способ (gas torch до серого пепла) или HF-травление. Безопасность — обязательно: вытяжка/улица, очки, перчатки."
+     data-en="Thermal method (gas torch until grey ash) or HF etching. Safety is mandatory: fume hood/outdoors, goggles, gloves."></p>
+</section>
+<section id="s3">
+  <h2 data-ru="3. Съёмка" data-en="3. Imaging">3. Съёмка</h2>
+  <p data-ru="Металлографический микроскоп + камера; слайды «змейкой» с перекрытием 5–20%; моторизованный стол и автосъёмка. Каждый delayering-проход — отдельный лог (lap/M1/M2)."
+     data-en="Metallurgical microscope + camera; snake-grid slides with 5–20% overlap; motorized stage and auto-capture. Each delayering pass is a separate lap (lap/M1/M2)."></p>
+</section>
+<section id="s4">
+  <h2 data-ru="4. Сшивка" data-en="4. Stitching">4. Сшивка</h2>
+  <p data-ru="Fiji Grid/Collection stitching (шаблон <code>{iiii}.jpg</code>), Hugin как запасной вариант. Результат — Master Dataset (для топологии — уменьшенный)."
+     data-en="Fiji Grid/Collection stitching (pattern <code>{iiii}.jpg</code>), Hugin as fallback. Result — Master Dataset (downscaled for topology)."></p>
+  <figure>
+    <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/ula6c001.png" alt="ULA master">
+    <figcaption data-ru="Master-изображение ULA 6C001 (ula)" data-en="ULA 6C001 master image (ula)"></figcaption>
+  </figure>
+</section>
+<section id="s5">
+  <h2 data-ru="5. Слои" data-en="5. Layers">5. Слои</h2>
+  <p data-ru="Полировка дремелем с пастой ГОИ по 50–100 нм, контроль и пересъёмка после каждого сеанса; слои poly/M1/M2 хранятся раздельно."
+     data-en="Dremel polishing with GOI paste, 50–100 nm per session; inspect and re-image after each; poly/M1/M2 layers stored separately."></p>
+</section>
+<section id="s6">
+  <h2 data-ru="6. Библиотека ячеек" data-en="6. Cell library">6. Библиотека ячеек</h2>
+  <p data-ru="Patterns сопоставляет ячейки с мастер-изображением и экспортирует XML для Deroute; каталог документируется в cells.md (YM_Cells, CoreWare, dmgcells)."
+     data-en="Patterns matches cells to the master image and exports XML for Deroute; the catalog lives in cells.md (YM_Cells, CoreWare, dmgcells)."></p>
+  <figure>
+    <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/patterns_workspace.png" alt="Patterns workspace">
+    <figcaption data-ru="Рабочая среда Patterns" data-en="Patterns workspace"></figcaption>
+  </figure>
+</section>
+<section id="s7">
+  <h2 data-ru="7. Нетлист" data-en="7. Netlist">7. Нетлист</h2>
+  <p data-ru="Deroute: сущности (провода, vias, ячейки), Lambda-координаты, XML. Порядок: pads → слои → модули."
+     data-en="Deroute: entities (wires, vias, cells), Lambda coordinates, XML. Order: pads → layers → modules."></p>
+  <figure>
+    <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/deroute_sample1.png" alt="Deroute sample">
+    <figcaption data-ru="Расшивка проводов в Deroute" data-en="Wire untangling in Deroute"></figcaption>
+  </figure>
+  <figure>
+    <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/deroute_sample2.png" alt="Deroute sample 2">
+    <figcaption data-ru="Пример трассировки в Deroute" data-en="Tracing example in Deroute"></figcaption>
+  </figure>
+</section>
+<section id="s8">
+  <h2 data-ru="8. Verilog" data-en="8. Verilog">8. Verilog</h2>
+  <p data-ru="Экспорт нетлиста в die-perfect Verilog (не синтезируемый — цель повторить оригинал)."
+     data-en="Export the netlist to die-perfect Verilog (not synthesizable — the goal is to replicate the original)."></p>
+</section>
+<section id="s9">
+  <h2 data-ru="9. EDA" data-en="9. EDA">9. EDA</h2>
+  <p data-ru="Xilinx PlanAhead автоматически рисует схему из verilog — дальше читаем и анализируем."
+     data-en="Xilinx PlanAhead auto-draws the schematic from verilog — then read and analyze."></p>
+</section>
+<section id="s10">
+  <h2 data-ru="10. Анализ" data-en="10. Analysis">10. Анализ</h2>
+  <p data-ru="Декомпозиция на модули и аннотирование изображений, именование сигналов пакетами (без фанатизма), таблицы «откуда→куда», временные диаграммы."
+     data-en="Module decomposition and image annotation, batch signal renaming (without fanaticism), from→to tables, timing diagrams."></p>
+  <figure>
+    <img src="https://raw.githubusercontent.com/emu-russia/chips-howto/main/imgstore/workflow/ula6c001_annotated.png" alt="ULA annotated">
+    <figcaption data-ru="Размеченная ULA (ula)" data-en="Annotated ULA (ula)"></figcaption>
+  </figure>
+</section>
+<section id="s11">
+  <h2 data-ru="11. Верификация" data-en="11. Verification">11. Верификация</h2>
+  <p data-ru="Тестбенчи (Icarus/GTKWave, logisim), структурная проверка HDL vs нетлист, кросс-чек с сообществом, честные пометки unverified."
+     data-en="Testbenches (Icarus/GTKWave, logisim), structural HDL vs netlist checks, community cross-checks, honest unverified flags."></p>
+</section>
+<section id="s12">
+  <h2 data-ru="12. Документация" data-en="12. Documentation">12. Документация</h2>
+  <p data-ru="Wiki по модулям с прогресс-таблицей, два языка, PDF-книги с релизами, развитие инструментов и переиспользование результатов между проектами."
+     data-en="Per-module wiki with a progress table, two languages, PDF books with releases, tool evolution and cross-project reuse."></p>
+</section>
+
+<section class="refs">
+  <h2 data-ru="Разделы / Sections" data-en="Sections">Разделы / Sections</h2>
+  <p>
+    <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.md">specs/workflow.md (RU)</a>
+    <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow_en.md">specs/workflow_en.md (EN)</a>
+    <a href="https://github.com/emu-russia/chips-howto/blob/main/methods.md">methods.md</a>
+    <a href="https://github.com/emu-russia/chips-howto/blob/main/hf.md">hf.md</a>
+    <a href="https://github.com/emu-russia/chips-howto/blob/main/gds.md">gds.md</a>
+  </p>
+</section>
+
+<footer>
+  <span data-ru="Собрано по материалам репозиториев emu-russia · emu-russia.github.io/chips-howto"
+        data-en="Compiled from emu-russia repositories · emu-russia.github.io/chips-howto"></span>
+</footer>
+
+<script>
+function toggleTheme(){
+  var h=document.documentElement;
+  var t=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',t);localStorage.setItem('chips-theme',t);
+}
+(function(){
+  var t=localStorage.getItem('chips-theme')||
+        (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',t);
+})();
+function applyLang(l){
+  document.documentElement.lang=l;
+  document.getElementById('langBtn').textContent=l==='ru'?'EN':'RU';
+  document.querySelectorAll('[data-ru]').forEach(function(e){
+    var v=l==='ru'?e.getAttribute('data-ru'):e.getAttribute('data-en');
+    if(v!==null)e.innerHTML=v;
+  });
+  localStorage.setItem('chips-lang',l);
+}
+function toggleLang(){applyLang(document.documentElement.lang==='ru'?'en':'ru');}
+applyLang(localStorage.getItem('chips-lang')||'ru');
+</script>
+</body>
+</html>

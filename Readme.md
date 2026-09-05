@@ -7,3 +7,11 @@
 ![chips_howto_1](/imgstore/chips_howto_1.jpg)
 
 (Так в представлении нейросети выглядит изучение микросхем).
+
+## Разделы
+
+- [Workflow изучения микросхем (общий мотив)](/specs/workflow.md) — пошаговая методика на основе опыта всех проектов: [English](/specs/workflow_en.md)
+- [Методы исследования (ACID FREE)](/methods.md)
+- [Плавиковая кислота (HF)](/hf.md)
+- [GDSII](/gds.md)
+- [HTML-версия для GitHub Pages](/docs/index.html)
