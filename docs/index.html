@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Workflow исследования микросхем — chips-howto</title>
-<meta name="description" content="Workflow исследования микросхем: пошаговый план реверс-инжиниринга чипов, инструменты, типичные грабли и примеры из проектов emu-russia.">
+<title>Chip Research Workflow — chips-howto</title>
+<meta name="description" content="Chip Research Workflow: the general workflow for studying integrated circuits, distilled from the emu-russia projects — a step-by-step plan, tools, typical pitfalls and examples from chips that have already been dissected.">
 <style>
   /* ============ Переменные темы ============ */
   :root {
@@ -337,15 +337,16 @@
 </head>
 <body id="top">
 
-<!-- ============ Верхняя панель + переключатель темы ============ -->
+<!-- ============ Top bar + theme toggle ============ -->
 <header class="topbar">
   <div class="container topbar-inner">
-    <a class="brand" href="#top"><span class="brand-ic">🔬</span>Workflow исследования микросхем</a>
-    <nav class="topbar-nav" aria-label="Навигация по документу">
-      <a class="topbar-link" href="#razdely">Разделы</a>
-      <a class="topbar-link" href="#chek-list">Чек-лист</a>
-      <a class="topbar-link" href="#karta">Карта</a>
-      <button type="button" id="themeToggle" aria-label="Переключить тему оформления">🌙 Тёмная</button>
+    <a class="brand" href="#top"><span class="brand-ic">🔬</span>Chip Research Workflow</a>
+    <nav class="topbar-nav" aria-label="Document navigation">
+      <a class="topbar-link" href="#razdely">Sections</a>
+      <a class="topbar-link" href="#chek-list">Checklist</a>
+      <a class="topbar-link" href="#karta">Map</a>
+      <a class="topbar-link" href="index_ru.html" hreflang="ru">🇷🇺 Русская версия</a>
+      <button type="button" id="themeToggle" aria-label="Switch color theme">🌙 Dark</button>
     </nav>
   </div>
 </header>
@@ -353,111 +354,114 @@
 <!-- ============ Hero ============ -->
 <div class="hero">
   <div class="container hero-inner">
-    <p class="hero-kicker">Реверс-инжиниринг микросхем · emu-russia</p>
-    <h1>Workflow исследования <span>микросхем</span></h1>
-    <p>Общий мотив изучения интегральных микросхем, извлечённый из проектов
-      <strong>emu-russia</strong> (breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, Patterns)
-      и «домашних» методик самого репозитория — <code>methods.md</code>, <code>hf.md</code>, <code>gds.md</code>.</p>
-    <p>Если завтра нам принесут <strong>новую микросхему</strong> — этот документ должен стать нашей отправной точкой:
-      пошаговый план, инструменты, типичные грабли и примеры из уже разобранных чипов.</p>
+    <p class="hero-kicker">Reverse engineering of chips · emu-russia</p>
+    <h1>Chip Research <span>Workflow</span></h1>
+    <p>The general workflow for studying integrated circuits, distilled from the
+      <strong>emu-russia</strong> projects (breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, Patterns)
+      and the “homegrown” guides of this very repository — <code>methods.md</code>, <code>hf.md</code>, <code>gds.md</code>.</p>
+    <p>If tomorrow someone brings us a <strong>new chip</strong> — this document should become our starting point:
+      a step-by-step plan, tools, typical pitfalls, and examples from chips that have already been dissected.</p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="../specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
-      <a class="btn" href="../specs/workflow.en.md">🌐 English (Markdown)</a>
+      <a class="btn btn-primary" href="index_ru.html" hreflang="ru">🇷🇺 Русская версия</a>
+      <a class="btn" href="../specs/workflow.en.md">📄 English (Markdown)</a>
+      <a class="btn" href="../specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
       <a class="btn" href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">🐞 GitHub issue #8</a>
-      <a class="btn" href="https://github.com/emu-russia/chips-howto" target="_blank" rel="noopener">📦 Репозиторий chips-howto</a>
+      <a class="btn" href="https://github.com/emu-russia/chips-howto" target="_blank" rel="noopener">📦 chips-howto repository</a>
     </div>
   </div>
 </div>
 
-<!-- ============ Плитки-навигация ============ -->
-<section class="tiles-section container" id="razdely" aria-label="Разделы документа">
-  <h2>Разделы документа</h2>
-  <nav aria-label="Переход к разделам">
+<!-- ============ Navigation tiles ============ -->
+<section class="tiles-section container" id="razdely" aria-label="Document sections">
+  <h2>Document sections</h2>
+  <nav aria-label="Jump to a section">
     <ul class="tiles">
       <li><a class="tile" href="#etapa-0">
-        <span class="tile-tag"><span class="dot"></span>Этап 0</span>
-        <span class="tile-title">Контекст и цель: понять чип до вскрытия</span>
-        <span class="tile-desc">зачем, что за чип, что уже известно</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 0</span>
+        <span class="tile-title">Context and goal: understand the chip before decapping</span>
+        <span class="tile-desc">why, which chip, what is already known</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-1">
-        <span class="tile-tag"><span class="dot"></span>Этап 1</span>
-        <span class="tile-title">Вскрытие корпуса (декапсуляция)</span>
-        <span class="tile-desc">термическое / химическое</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 1</span>
+        <span class="tile-title">Opening the package (decapsulation)</span>
+        <span class="tile-desc">thermal / chemical</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-2">
-        <span class="tile-tag"><span class="dot"></span>Этап 2</span>
-        <span class="tile-title">Съёмка слоёв</span>
-        <span class="tile-desc">«сырой» набор снимков: raw dataset</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 2</span>
+        <span class="tile-title">Layer imaging</span>
+        <span class="tile-desc">a “raw” set of shots: raw dataset</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-3">
-        <span class="tile-tag"><span class="dot"></span>Этап 3</span>
-        <span class="tile-title">Сшивка и подготовка Master-изображения</span>
-        <span class="tile-desc">«варёный» датасет: fused image</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 3</span>
+        <span class="tile-title">Stitching and preparing the Master image</span>
+        <span class="tile-desc">a “cooked” dataset: fused image</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-4">
-        <span class="tile-tag"><span class="dot"></span>Этап 4</span>
-        <span class="tile-title">Трассировка и восстановление нетлиста</span>
-        <span class="tile-desc">провода → порты → ячейки → нетлист</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 4</span>
+        <span class="tile-title">Tracing and netlist recovery</span>
+        <span class="tile-desc">wires → ports → cells → netlist</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-5">
-        <span class="tile-tag"><span class="dot"></span>Этап 5</span>
-        <span class="tile-title">Стандартные ячейки и библиотеки (Patterns)</span>
-        <span class="tile-desc">распознавание повторов, standard cells</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 5</span>
+        <span class="tile-title">Standard cells and libraries (Patterns)</span>
+        <span class="tile-desc">recognizing repeats, standard cells</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-6">
-        <span class="tile-tag"><span class="dot"></span>Этап 6</span>
-        <span class="tile-title">Верификация</span>
-        <span class="tile-desc">симуляция, сверка двух представлений</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 6</span>
+        <span class="tile-title">Verification</span>
+        <span class="tile-desc">simulation, cross-check of two representations</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-7">
-        <span class="tile-tag"><span class="dot"></span>Этап 7</span>
-        <span class="tile-title">Анализ, именование и документация</span>
-        <span class="tile-desc">модули, имена сигналов, wiki</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 7</span>
+        <span class="tile-title">Analysis, naming and documentation</span>
+        <span class="tile-desc">modules, signal names, wiki</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#etapa-8">
-        <span class="tile-tag"><span class="dot"></span>Этап 8</span>
-        <span class="tile-title">Переиспользование и экосистема</span>
-        <span class="tile-desc">HDL, Logisim, эмуляторы, книги</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Stage 8</span>
+        <span class="tile-title">Reuse and ecosystem</span>
+        <span class="tile-desc">HDL, Logisim, emulators, books</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#terminologia">
-        <span class="tile-tag"><span class="dot"></span>Справочник</span>
-        <span class="tile-title">Единая терминология</span>
-        <span class="tile-desc">договоримся о словах: die, слои, netlist, lambda…</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Reference</span>
+        <span class="tile-title">Unified terminology</span>
+        <span class="tile-desc">agree on the words: die, layers, netlist, lambda…</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#chek-list">
-        <span class="tile-tag"><span class="dot"></span>Сводка</span>
-        <span class="tile-title">Чек-лист нового чипа</span>
-        <span class="tile-desc">все этапы 0–8 одним списком</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Summary</span>
+        <span class="tile-title">Checklist for a new chip</span>
+        <span class="tile-desc">all stages 0–8 in one list</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
       <li><a class="tile" href="#karta">
-        <span class="tile-tag"><span class="dot"></span>Сводка</span>
-        <span class="tile-title">Карта «этап → инструмент → пример»</span>
-        <span class="tile-desc">этап → инструменты → репозиторий-пример → артефакт</span>
-        <span class="tile-arrow">Перейти →</span>
+        <span class="tile-tag"><span class="dot"></span>Summary</span>
+        <span class="tile-title">“Stage → tool → example” map</span>
+        <span class="tile-desc">stage → tools → example repository → artifact</span>
+        <span class="tile-arrow">Go →</span>
       </a></li>
     </ul>
   </nav>
 </section>
 
-<!-- ============ Содержимое документа ============ -->
+<!-- ============ Document content ============ -->
 <main>
 
-  <!-- Введение -->
-  <section class="doc-section" id="vvedenie" aria-label="Введение">
+  <!-- Introduction -->
+  <section class="doc-section" id="vvedenie" aria-label="Introduction">
+    <p><em>This is the English version of the document. The Russian original is
+      <a href="../specs/workflow.ru.md">workflow.ru.md</a>.</em></p>
     <blockquote class="quote">
-      <p>Общий мотив (workflow) изучения интегральных микросхем, извлечённый из проектов
-        <a href="https://github.com/emu-russia" target="_blank" rel="noopener">emu-russia</a>:
+      <p>The general workflow for studying integrated circuits, distilled from the
+        <a href="https://github.com/emu-russia" target="_blank" rel="noopener">emu-russia</a> projects:
         <a href="https://github.com/emu-russia/breaks" target="_blank" rel="noopener">breaks</a>,
         <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a>,
         <a href="https://github.com/emu-russia/dmgcpu" target="_blank" rel="noopener">dmgcpu</a>,
@@ -467,677 +471,682 @@
         <a href="https://github.com/emu-russia/ula" target="_blank" rel="noopener">ula</a>,
         <a href="https://github.com/emu-russia/psxcpu" target="_blank" rel="noopener">psxcpu</a>,
         <a href="https://github.com/emu-russia/Patterns" target="_blank" rel="noopener">Patterns</a> —
-        и «домашних» методик самого репозитория (<code>methods.md</code>, <code>hf.md</code>, <code>gds.md</code>).</p>
+        and the “homegrown” guides of this very repository (<code>methods.md</code>, <code>hf.md</code>, <code>gds.md</code>).</p>
     </blockquote>
 
     <figure>
-      <img src="../imgstore/chips_howto_1.jpg" alt="Плата с микросхемами">
-      <figcaption><em>«Изучение микросхем» в представлении нейросети. Реальность чуть более методична :)</em></figcaption>
+      <img src="../imgstore/chips_howto_1.jpg" alt="Board with chips">
+      <figcaption><em>A neural network’s idea of “studying chips”. In reality it is a bit more methodical :)</em></figcaption>
     </figure>
 
-    <p>Если завтра нам принесут <strong>новую микросхему</strong> — этот документ должен стать нашей
-      отправной точкой: пошаговый план, инструменты, типичные грабли и примеры из уже
-      разобранных чипов.</p>
+    <p>If tomorrow someone brings us a <strong>new chip</strong> — this document should become our starting
+      point: a step-by-step plan, tools, typical pitfalls, and examples from chips that have
+      already been dissected.</p>
   </section>
 
-  <!-- Зачем это нужно -->
+  <!-- Why this matters -->
   <section class="doc-section" id="motiv">
-    <h2>Зачем это нужно</h2>
-    <p>«Изучить микросхему» на языке этих проектов означает:</p>
+    <h2>Why this matters</h2>
+    <p>“Studying a chip” in the language of these projects means:</p>
     <ol>
-      <li><strong>увидеть</strong> её внутренности (фотографии слоёв кристалла);</li>
-      <li><strong>понять</strong> её структуру (карта блоков, стандартные ячейки, шины);</li>
-      <li><strong>восстановить нетлист</strong> — соединение элементов (транзисторов, вентилей, ячеек) проводниками;</li>
-      <li><strong>проверить</strong> результат (симуляция, сравнение с документацией, с реальным железом);</li>
-      <li><strong>поделиться</strong> — схемы, Verilog/HDL-модели, wiki, книги.</li>
+      <li><strong>see</strong> its internals (photographs of the die layers);</li>
+      <li><strong>understand</strong> its structure (block map, standard cells, buses);</li>
+      <li><strong>recover the netlist</strong> — the interconnection of elements (transistors, gates, cells) with conductors;</li>
+      <li><strong>verify</strong> the result (simulation, comparison with documentation and real hardware);</li>
+      <li><strong>share</strong> — schematics, Verilog/HDL models, wiki, books.</li>
     </ol>
     <blockquote class="quote">
-      <p>«Netlist: соединение модулей (стандартных ячеек) межсоединениями (проводами). Исследование
-        чипа состоит в получении его полного нетлиста» — <a href="https://github.com/emu-russia/SEGAChips#some-terminology" target="_blank" rel="noopener">SEGAChips/Readme.md</a></p>
+      <p>“Netlist: the connection of modules (standard cells) by interconnects (wires). Studying a chip
+        consists in obtaining its complete netlist” — <a href="https://github.com/emu-russia/SEGAChips#some-terminology" target="_blank" rel="noopener">SEGAChips/Readme.md</a></p>
     </blockquote>
-    <p>Важно понимать: <strong>один и тот же процесс</strong> проходит красной нитью через все репозитории,
-      но чипы у всех разные, поэтому и <em>акценты</em> разные. Общий «мотив» выглядит так:</p>
-<pre><code>  0. Контекст и цель        (зачем, что за чип, что уже известно)
-  1. Вскрытие корпуса       (термическое / химическое)
-  2. Съёмка слоёв           («сырой» набор снимков: raw dataset)
-  3. Сшивка и Master-образ  («варёный» датасет: fused image)
-  4. Трассировка            (провода → порты → ячейки → нетлист)
-  5. Библиотека ячеек       (распознавание повторов, standard cells)
-  6. Верификация            (симуляция, сверка двух представлений)
-  7. Анализ и документация  (модули, имена сигналов, wiki)
-  8. Переиспользование      (HDL, Logisim, эмуляторы, книги)</code></pre>
-    <p>Ниже каждый этап разобран: что делать, чем, на что смотреть, где споткнуться.
-      В конце — <a href="#chek-list">компактный чек-лист</a>.</p>
+    <p>It is important to understand: <strong>one and the same process</strong> runs like a red thread through all
+      the repositories, but the chips differ, and so do the <em>emphases</em>. The common “motif” looks like this:</p>
+<pre><code>   0. Контекст и цель        (зачем, что за чип, что уже известно)
+   1. Вскрытие корпуса       (термическое / химическое)
+   2. Съёмка слоёв           («сырой» набор снимков: raw dataset)
+   3. Сшивка и Master-образ  («варёный» датасет: fused image)
+   4. Трассировка            (провода → порты → ячейки → нетлист)
+   5. Библиотека ячеек       (распознавание повторов, standard cells)
+   6. Верификация            (симуляция, сверка двух представлений)
+   7. Анализ и документация  (модули, имена сигналов, wiki)
+   8. Переиспользование      (HDL, Logisim, эмуляторы, книги)</code></pre>
+    <p>Each stage is examined below: what to do, with what tools, what to look at, and where you can
+      stumble. At the end — a <a href="#chek-list">compact checklist</a>.</p>
   </section>
 
-  <!-- Ландшафт репозиториев -->
+  <!-- Repository landscape -->
   <section class="doc-section" id="landshaft">
-    <h2>Ландшафт репозиториев (кто чему учит)</h2>
+    <h2>Repository landscape (what each one teaches)</h2>
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th>Репозиторий</th><th>Что изучают</th><th>Чем полезен для воркфлоу</th></tr>
+          <tr><th>Repository</th><th>What it studies</th><th>What it offers the workflow</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><a href="https://github.com/emu-russia/chips-howto" target="_blank" rel="noopener">chips-howto</a></td>
-            <td>«домашние» методики: термическое вскрытие, съёмка, сшивка Fiji, полировка, HF, GDS</td>
-            <td>физическая часть (этапы 1–3) и форматы</td>
+            <td>“homegrown” methods: thermal decapsulation, imaging, Fiji stitching, polishing, HF, GDS</td>
+            <td>the physical side (stages 1–3) and file formats</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/breaks" target="_blank" rel="noopener">breaks</a></td>
             <td>NES: MOS 6502, Ricoh 2A03 (APU), Ricoh 2C02 (PPU)</td>
-            <td>полный жизненный цикл: wiki → транзисторы → вентили → HDL «die-perfect» → книги</td>
+            <td>the full lifecycle: wiki → transistors → gates → “die-perfect” HDL → books</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/dmgcpu" target="_blank" rel="noopener">dmgcpu</a></td>
-            <td>CPU Game Boy: ядро SM83 + SoC (PPU/APU/…)</td>
-            <td>die-perfect Verilog, терминология, верификация тест-ромами</td>
+            <td>Game Boy CPU: SM83 core + SoC (PPU/APU/…)</td>
+            <td>die-perfect Verilog, terminology, verification with test ROMs</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a></td>
-            <td>чипы SEGA MD: Arbiter YM6045/46, FM YM2612/3438, IO 315-5309, VDP, Z80/T84C</td>
-            <td>«стандартный воркфлоу», терминология, библиотеки ячеек Yamaha</td>
+            <td>SEGA MD chips: Arbiter YM6045/46, FM YM2612/3438, IO 315-5309, VDP, Z80/T84C</td>
+            <td>the “standard workflow”, terminology, Yamaha cell libraries</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/psxcpu" target="_blank" rel="noopener">psxcpu</a></td>
-            <td>CPU PlayStation: CXD8530CQ (~850K транзисторов)</td>
-            <td>как побеждать масштаб: ячейки → Patterns → мегаячейки</td>
+            <td>PlayStation CPU: CXD8530CQ (~850K transistors)</td>
+            <td>how to beat the scale: cells → Patterns → megacells</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/mappers" target="_blank" rel="noopener">mappers</a></td>
-            <td>мапперы NES/GB: MMC1, MBC1, VRC6/7, µPD775x, …</td>
-            <td>маленькие чипы: библиотека ячеек фаба, Deroute, Logisim</td>
+            <td>NES/GB mappers: MMC1, MBC1, VRC6/7, µPD775x, …</td>
+            <td>small chips: the fab’s cell library, Deroute, Logisim</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/ula" target="_blank" rel="noopener">ula</a></td>
-            <td>ZX Spectrum ULA 6C001 («море логики»)</td>
-            <td>явный процесс из 6 шагов, сверка нетлиста с HDL</td>
+            <td>ZX Spectrum ULA 6C001 (a “sea of logic”)</td>
+            <td>an explicit 6-step process, netlist-vs-HDL cross-check</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/SovietChips" target="_blank" rel="noopener">SovietChips</a></td>
-            <td>советский 580ВИ53 (предположительно клон i8253)</td>
-            <td>«витрина артефактов»: Verilog + Logisim + PDF-отчёт</td>
+            <td>the Soviet 580ВИ53 (presumably an i8253 clone)</td>
+            <td>an “artifact showcase”: Verilog + Logisim + a PDF report</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/Deroute" target="_blank" rel="noopener">Deroute</a></td>
-            <td>инструмент трассировки</td>
-            <td>этап 4: «распутывание проводов» поверх фото</td>
+            <td>the tracing tool</td>
+            <td>stage 4: “untangling wires” on top of photos</td>
           </tr>
           <tr>
             <td><a href="https://github.com/emu-russia/Patterns" target="_blank" rel="noopener">Patterns</a></td>
-            <td>инструмент поиска ячеек</td>
-            <td>этап 5: полуавтоматическая разметка стандартных ячеек</td>
+            <td>the cell-search tool</td>
+            <td>stage 5: semi-automatic annotation of standard cells</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- Единая терминология -->
+  <!-- Unified terminology -->
   <section class="doc-section" id="terminologia">
-    <h2>Единая терминология</h2>
-    <p>Прежде чем нырять в этапы — договоримся о словах (по <a href="https://github.com/emu-russia/dmgcpu" target="_blank" rel="noopener">dmgcpu</a> и <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a>):</p>
+    <h2>Unified terminology</h2>
+    <p>Before diving into the stages, let’s agree on the words (following <a href="https://github.com/emu-russia/dmgcpu" target="_blank" rel="noopener">dmgcpu</a> and <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a>):</p>
     <ul>
-      <li><strong>Кристалл / die</strong> — кремниевая пластинка внутри корпуса, объект изучения.</li>
-      <li><strong>Слой</strong> — один «этаж» кристалла: металл (обычно M1, M2), поликремний (poly),
-        диффузия/активная область (diffusion / active). Логика видна по-разному на разных слоях.</li>
-      <li><strong>Слайды</strong> — отдельные кадры микроскопа; из них <strong>сшивают</strong> общую картину.</li>
-      <li><strong>Master Dataset / Master-изображение</strong> — «изображение, по которому восстанавливается нетлист» (SEGAChips), обычно сшитая и подготовленная картинка слоя.</li>
-      <li><strong>Топология</strong> — геометрия слоёв (как нарисован кристалл).</li>
-      <li><strong>Транзисторная схема</strong> — что получается, если «прочитать» топологию на уровне транзисторов.</li>
-      <li><strong>Вентиль / стандартная ячейка (standard cell)</strong> — готовая логическая функция (NOT, NAND, DFF…), повторяющаяся по кристаллу.</li>
-      <li><strong>Нетлист (netlist)</strong> — список элементов и их соединений; итог трассировки.</li>
-      <li><strong>«Die-perfect» HDL</strong> — Verilog/HDL, повторяющий нетлист чипа максимально близко (breaks, dmgcpu).</li>
-      <li><strong>Lambda (λ)</strong> — растрово-независимая единица координат, минимальная топологическая единица техпроцесса (обычно ширина затвора).</li>
-      <li><strong>Латч / DFF / FF / DLatch</strong> — важное различие (dmgcpu): латч реагирует на уровень,
-        DFF — на фронт, «FF» — два циклически замкнутых вентиля, DLatch — динамический элемент, хранящий заряд на затворе FET (если не обновлять — «затухает»).</li>
-      <li><strong>Gate array / ULA</strong> — чип из заранее размещённых вентилей, «море логики».</li>
+      <li><strong>Die</strong> — the silicon piece inside the package, the object of study.</li>
+      <li><strong>Layer</strong> — one “floor” of the die: metal (usually M1, M2), polysilicon (poly),
+        diffusion/active region. Logic looks different on different layers.</li>
+      <li><strong>Slides</strong> — individual microscope frames; from them the whole picture is <strong>stitched</strong> together.</li>
+      <li><strong>Master Dataset / master image</strong> — “the image from which the netlist is recovered” (SEGAChips), usually a stitched and prepared picture of a layer.</li>
+      <li><strong>Topology</strong> — the geometry of the layers (how the die is drawn).</li>
+      <li><strong>Transistor schematic</strong> — what you get by “reading” the topology at the transistor level.</li>
+      <li><strong>Gate / standard cell</strong> — a ready-made logic function (NOT, NAND, DFF…), repeated across the die.</li>
+      <li><strong>Netlist</strong> — the list of elements and their connections; the outcome of tracing.</li>
+      <li><strong>“Die-perfect” HDL</strong> — Verilog/HDL that mirrors the chip’s netlist as closely as possible (breaks, dmgcpu).</li>
+      <li><strong>Lambda (λ)</strong> — a raster-independent unit of coordinates, the minimal topological unit of the process (usually the gate width).</li>
+      <li><strong>Latch / DFF / FF / DLatch</strong> — an important distinction (dmgcpu): a latch responds to a level,
+        a DFF to an edge, “FF” is two cyclically cross-coupled gates, and a DLatch is a dynamic element
+        storing charge on the gate of a FET (if not refreshed, it “decays”).</li>
+      <li><strong>Gate array / ULA</strong> — a chip of pre-placed gates, a “sea of logic”.</li>
     </ul>
   </section>
 
-  <!-- Этап 0 -->
+  <!-- Stage 0 -->
   <section class="doc-section" id="etapa-0">
-    <h2><span class="stage-num">Этап 0.</span> Контекст и цель: понять чип до вскрытия</h2>
-    <p>Самый недооценённый этап. Прежде чем жечь корпус, ответьте себе на вопросы:</p>
+    <h2><span class="stage-num">Stage 0.</span> Context and goal: understand the chip before decapping</h2>
+    <p>The most underrated stage. Before you burn the package, answer these questions for yourself:</p>
 
-    <h3>Что мы хотим получить?</h3>
+    <h3>What do we want to get?</h3>
     <ul>
-      <li><strong>Полный нетлист</strong> на уровне транзисторов/вентилей (6502 в breaks, SM83 в dmgcpu)?</li>
-      <li><strong>Нетлист на уровне стандартных ячеек</strong> (SEGA-чипы, PSX CPU)?</li>
-      <li><strong>Функциональное понимание</strong> блоков и сигналов (ULA — «вдумчивый анализ»)?</li>
-      <li><strong>Рабочую модель</strong> (Verilog/Logisim) для эмулятора?</li>
-      <li><strong>Обзор/статью</strong> («review on all the chips we could get our hands on» — SEGAChips)?</li>
+      <li><strong>A full netlist</strong> at the transistor/gate level (6502 in breaks, SM83 in dmgcpu)?</li>
+      <li><strong>A netlist at the standard-cell level</strong> (SEGA chips, PSX CPU)?</li>
+      <li><strong>A functional understanding</strong> of the blocks and signals (ULA — “thoughtful analysis”)?</li>
+      <li><strong>A working model</strong> (Verilog/Logisim) for an emulator?</li>
+      <li><strong>An overview/article</strong> (“review on all the chips we could get our hands on” — SEGAChips)?</li>
     </ul>
-    <p>От ответа зависит глубина съёмки, полировки и трассировки. Для маленького маппера
-      (MMC1 — 142 ячейки) реально дойти до транзисторов и Logisim-модели; для PSX CPU
-      (37 600 ячеек) — только до ячеечного уровня с библиотекой.</p>
+    <p>The answer determines the depth of imaging, polishing and tracing. For a small mapper
+      (MMC1 — 142 cells) it is realistic to go all the way to transistors and a Logisim model; for the
+      PSX CPU (37,600 cells) — only to the cell level with a library.</p>
 
-    <h3>Что уже известно? (разведка)</h3>
+    <h3>What is already known? (recon)</h3>
     <ol>
-      <li><strong>Даташит</strong> — «даташит не истина, а гипотеза» (mappers): сверять с ним нужно, но кристалл
-        может противоречить описанию (например, у µPD775x пады оказались InOut, а не Input).</li>
-      <li><strong>Патенты и статьи.</strong> Для ULA сигналы взяты из реверса Chris Smith
-        (zxdesign.info) и патента EP0107687B1 (Altwasser); для PSX CPU — доклад Кен Кутараги
-        на HotChips и знание, что чип сделан на базе LSI Logic CoreWare через EDA MDE/C-MDE.</li>
-      <li><strong>Чужие исследования</strong> — если чип уже кто-то изучал: dmgcpu опирался на работы
-        @msinger (схемы) и @Gekkio (gb-research); VRC7 — на siliconpr0n и родственный Yamaha OPL2.
-        «DMG-CPU — хорошо изученный чип… сделаем результат <em>дополнением</em> к известному».</li>
-      <li><strong>Датасеты сообщества</strong> — возможно, <strong>фотографировать не придётся вовсе</strong>: большие наборы
-        снимков лежат на Google Drive, siliconpr0n, у отдельных авторов
-        (<a href="https://github.com/emu-russia/psxcpu/blob/main/datasets.md" target="_blank" rel="noopener">датасеты PSX CPU</a>,
-        <a href="https://github.com/emu-russia/breaks" target="_blank" rel="noopener">6502/APU/PPU</a>,
-        <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">датасеты SEGA</a>).
-        Обязательно укажите автора снимков (кредиты!).</li>
-      <li><strong>Ревизия чипа.</strong> Чип одной серии разных ревизий может отличаться кардинально
-        (PSX CPU: «ревизии пересобраны из Verilog — трассировать заново»). Ревизию определяют
-        по маркировке корпуса (<code>L9A0048</code> → ревизия 90048) и по «татуировке» в углу кристалла.
-        В mappers ведётся целый «зоопарк» ревизий MMC1 с играми-донорами.</li>
-      <li><strong>Плата и окружение.</strong> Изучите плату, на которой стоит чип: ревизии плат, разводку,
-        обвязку — это помогает понять назначение выводов и внешних сигналов. Иногда плату
-        восстанавливают целиком: dmgcpu по схеме Gekkio восстановил нетлист материнской платы
-        DMG-CPU-06 (чип + RAM + картридж-слот + передняя панель) и использует Verilog-модель
-        платы для дизайн-верификации (<code>wiki/pcb.md</code>).</li>
+      <li><strong>Datasheet</strong> — “a datasheet is not the truth but a hypothesis” (mappers): you should cross-check
+        against it, but the die can contradict the description (e.g., on the µPD775x the pads turned
+        out to be InOut rather than Input).</li>
+      <li><strong>Patents and papers.</strong> For the ULA the signals were taken from the reverse engineering of Chris Smith
+        (zxdesign.info) and the patent EP0107687B1 (Altwasser); for the PSX CPU — from Ken Kutaragi’s
+        HotChips talk and from the knowledge that the chip was built on LSI Logic CoreWare via the MDE/C-MDE EDA flow.</li>
+      <li><strong>Research by others</strong> — if someone has already studied the chip: dmgcpu built on the work of
+        @msinger (schematics) and @Gekkio (gb-research); VRC7 — on siliconpr0n and the related Yamaha OPL2.
+        “DMG-CPU is a well-studied chip… so let’s make our result an <em>addition</em> to what is known.”</li>
+      <li><strong>Community datasets</strong> — maybe <strong>no photographing will be needed at all</strong>: large image sets
+        live on Google Drive, siliconpr0n, and with individual authors
+        (<a href="https://github.com/emu-russia/psxcpu/blob/main/datasets.md" target="_blank" rel="noopener">PSX CPU datasets</a>, <a href="https://github.com/emu-russia/breaks" target="_blank" rel="noopener">6502/APU/PPU</a>, <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGA datasets</a>).
+        Be sure to credit the author of the shots (credits!).</li>
+      <li><strong>Chip revision.</strong> Chips of one series but different revisions can differ drastically
+        (PSX CPU: “the revisions were re-synthesized from Verilog — tracing must be redone”). The revision
+        is determined from the package markings (<code>L9A0048</code> → revision 90048) and from the “tattoo” in the
+        corner of the die. In mappers there is a whole “zoo” of MMC1 revisions with donor games.</li>
+      <li><strong>The board and the environment.</strong> Study the PCB the chip sits on: board revisions, routing,
+        surrounding components — this helps to understand the purpose of the pins and external signals.
+        Sometimes the board itself is reconstructed: from Gekkio’s schematic, dmgcpu rebuilt the netlist
+        of the DMG-CPU-06 motherboard (chip + RAM + cartridge slot + front board) and uses the Verilog
+        model of the board for design verification (<code>wiki/pcb.md</code>).</li>
     </ol>
 
-    <h3>Архитектурный обзор по фото</h3>
-    <p>Ещё до трассировки полезно <strong>на глаз</strong> составить карту кристалла: где память, где логика,
-      где ячейки, где аналоговые блоки. Пример — PSX CPU: «большую часть чипа занимает «мешанина»
-      синтезированной HDL-логики (ячейки), по краям — память и регистры».</p>
+    <h3>Architectural overview from photos</h3>
+    <p>Even before tracing it is useful to sketch a map of the die <strong>by eye</strong>: where the memory is, where
+      the logic, where the cells, where the analog blocks. Example — the PSX CPU: “most of the chip is a
+      ‘jumble’ of synthesized HDL logic (cells), with memory and registers along the edges”.</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_overview.jpg" alt="Кристалл PSX CPU (CXD8530CQ), обзорный снимок">
-      <figcaption><em>Обзорный снимок PSX CPU: видно регулярные поля ячеек и «кастомные» блоки по краям. Такая
-        картинка сразу подсказывает стратегию (psxcpu).</em></figcaption>
+      <img src="../imgstore/workflow/psxcpu_overview.jpg" alt="PSX CPU die (CXD8530CQ)">
+      <figcaption><em>An overview shot of the PSX CPU: regular cell fields and “custom” blocks along the edges are
+        visible. Such a picture immediately hints at the strategy (psxcpu).</em></figcaption>
     </figure>
-    <p>Итог этапа 0 — короткая записка: чип/ревизия, цель, ссылки на документацию и датасеты,
-      ожидаемая архитектура (ячейки/кастом/память), план съёмки.</p>
+    <p>The outcome of stage 0 is a short memo: chip/revision, goal, links to documentation and datasets,
+      the expected architecture (cells/custom/memory), and an imaging plan.</p>
   </section>
 
-  <!-- Этап 1 -->
+  <!-- Stage 1 -->
   <section class="doc-section" id="etapa-1">
-    <h2><span class="stage-num">Этап 1.</span> Вскрытие корпуса (декапсуляция)</h2>
-    <p>Цель — добраться до кристалла, не повредив его. Подробные «домашние» инструкции —
-      в <a href="../methods.md">methods.md</a> и <a href="../hf.md">hf.md</a>; здесь — выжимка и место в общем процессе.</p>
+    <h2><span class="stage-num">Stage 1.</span> Opening the package (decapsulation)</h2>
+    <p>The goal is to reach the die without damaging it. Detailed “homebrew” instructions are in
+      <a href="../methods.md">methods.md</a> and <a href="../hf.md">hf.md</a>; here — the digest and its place in the overall process.</p>
 
-    <h3>Термический метод («ACID FREE», без кислот)</h3>
-    <p>Инструменты: газовая горелка, плоскогубцы, маска.</p>
+    <h3>Thermal method (“ACID FREE”, no acids)</h3>
+    <p>Tools: a gas burner, pliers, a mask.</p>
     <figure>
-      <img src="../imgstore/shop/unpackage_tools.jpg" alt="Инструменты для термического вскрытия: горелка и плоскогубцы">
+      <img src="../imgstore/shop/unpackage_tools.jpg" alt="Tools for decapping">
     </figure>
-    <p>Корпус зажимается плоскогубцами и обжигается горелкой на улице, в безлюдном месте,
-      пока пластик не превратится в серый пепел:</p>
+    <p>The package is clamped in pliers and roasted with the burner outdoors, in a deserted spot,
+      until the plastic turns into gray ash:</p>
     <figure>
-      <img src="../imgstore/shop/package_fried.jpg" alt="Обожжённый корпус микросхемы">
+      <img src="../imgstore/shop/package_fried.jpg" alt="Roasted package">
     </figure>
-    <p>Затем обугленный корпус аккуратно раздавливают — и кристалл выпадает:</p>
+    <p>Then the charred package is carefully crushed — and the die falls out:</p>
     <figure>
-      <img src="../imgstore/shop/dig.jpg" alt="Извлечение кристалла из обугленного корпуса">
+      <img src="../imgstore/shop/dig.jpg" alt="Die extraction">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
-      <p><strong>Не вдыхать дым</strong> горящего пластика — он вреден (вплоть до отёка лёгких).</p>
+      <p><strong>Do not inhale the smoke</strong> of burning plastic — it is harmful (up to pulmonary edema).</p>
     </div>
-    <p>Остатки пластика и грязь счищают <strong>ацетоном</strong> и деревянной зубочисткой (дерево не царапает
-      металл, но отлично снимает пластик).</p>
+    <p>Remaining plastic and dirt are cleaned off with <strong>acetone</strong> and a wooden toothpick (wood does not
+      scratch the metal but strips the plastic perfectly).</p>
 
-    <h3>Химическое вскрытие / проявление</h3>
-    <p>Для керамических корпусов и для <strong>проявления диффузии</strong> применяют кислоты. В репозиториях
-      встречаются: азотная кислота (съёмка PSX CPU на поликремнии делалась кислотным травлением —
-      «на фото много мусора, но всё нужное извлекается», psxcpu) и <strong>плавиковая кислота (HF)</strong> —
-      см. <a href="../hf.md">hf.md</a>. HF травит стекло и кремний и используется, например, для неравномерного
-      вытравливания, оптически проявляющего области N/P-допинга:</p>
+    <h3>Chemical decapsulation / developing</h3>
+    <p>For ceramic packages and for <strong>developing the diffusion</strong> acids are used. Across the repositories
+      you find: nitric acid (the PSX CPU shots on polysilicon were made with acid etching —
+      “there is lots of debris in the photos, but everything needed can still be extracted”, psxcpu) and
+      <strong>hydrofluoric acid (HF)</strong> — see <a href="../hf.md">hf.md</a>. HF etches glass and silicon and is used, for
+      example, for non-uniform etching that optically reveals the N/P-doped regions:</p>
     <figure>
-      <img src="../imgstore/si_hf.jpg" alt="Действие плавиковой кислоты (HF) на кремний">
+      <img src="../imgstore/si_hf.jpg" alt="Effect of HF on silicon">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
-      <p>HF <strong>смертельно опасна</strong>: незаметно впитывается в тело и связывает кальций.
-        Работать только в перчатках/напальчниках, очках, на улице или под вытяжкой, с нейтрализатором под рукой.</p>
+      <p>HF is <strong>lethal</strong>: it is absorbed into the body unnoticed and binds calcium.
+        Work only in gloves/finger cots and goggles, outdoors or under a fume hood, with a neutralizer at hand.</p>
     </div>
 
-    <h3>Правила безопасности (общие)</h3>
+    <h3>Safety rules (general)</h3>
     <ul>
-      <li>Очки, перчатки, маска/вытяжка — всегда.</li>
-      <li>Ацетон — канцероген; паста ГОИ (оксиды хрома) — мутаген; кислоты — сами понимаете.</li>
-      <li>При работе с HF удобны напальчники (см. <a href="../hf.md">hf.md</a>):</li>
+      <li>Goggles, gloves, mask/fume hood — always.</li>
+      <li>Acetone is a carcinogen; GOI paste (chromium oxides) is a mutagen; acids — you get the idea.</li>
+      <li>Finger cots are handy when working with HF (see <a href="../hf.md">hf.md</a>):</li>
     </ul>
     <figure>
-      <img src="../imgstore/finger_condoms.jpg" alt="Напальчники для работы с HF">
+      <img src="../imgstore/finger_condoms.jpg" alt="Finger cots">
     </figure>
 
-    <h3>Грабли</h3>
-    <p>Вскрытие — рискованная операция: у SEGA VDP чип <strong>повредился при вскрытии</strong>, но отломанный
-      кусок как раз содержал весь PSG — «это судьба» (SEGAChips). Даже неудачу фиксируйте: иногда
-      повреждённый экземпляр всё равно годится для изучения части чипа.</p>
+    <h3>Pitfalls</h3>
+    <p>Decapping is a risky operation: the SEGA VDP chip <strong>was damaged during decapping</strong>, but the
+      broken-off piece happened to contain the entire PSG — “it is fate” (SEGAChips). Document even the
+      failures: sometimes a damaged specimen is still good for studying part of the chip.</p>
   </section>
 
-  <!-- Этап 2 -->
+  <!-- Stage 2 -->
   <section class="doc-section" id="etapa-2">
-    <h2><span class="stage-num">Этап 2.</span> Съёмка слоёв (raw dataset)</h2>
+    <h2><span class="stage-num">Stage 2.</span> Layer imaging (raw dataset)</h2>
 
-    <h3>Оборудование</h3>
-    <p>Металлографический микроскоп (в методиках — недорогой AmScope) + камера:</p>
+    <h3>Equipment</h3>
+    <p>A metallographic microscope (in the homebrew guides — an inexpensive AmScope) plus a camera:</p>
     <figure>
-      <img src="../imgstore/shop/micro.jpg" alt="Металлографический микроскоп с камерой">
+      <img src="../imgstore/shop/micro.jpg" alt="Microscope">
     </figure>
-    <p>Практические требования (dmgcpu/chips-howto):</p>
+    <p>Practical requirements (dmgcpu/chips-howto):</p>
     <ul>
-      <li><strong>Моторизованный столик</strong> и автофокус: снимать тысячи кадров руками нереально, а случайный
-        удар по столу после 300-го слайда = пересъёмка всего прогона.</li>
-      <li><strong>Перекрытие кадров</strong> (5–25%) — иначе не сшить.</li>
-      <li>Смотреть на изображение <strong>через камеру, не в окуляры</strong>: сфокусированный свет металлографического
-        микроскопа может повредить сетчатку.</li>
+      <li><strong>Motorized stage</strong> and autofocus: shooting thousands of frames by hand is unrealistic, and a
+        random knock of the table after the 300th slide means reshooting the entire run.</li>
+      <li><strong>Frame overlap</strong> (5–25%) — otherwise you cannot stitch.</li>
+      <li>Watch the image <strong>through the camera, not the eyepieces</strong>: the focused light of a metallographic
+        microscope can damage your retina.</li>
     </ul>
 
-    <h3>Слои и порядок съёмки</h3>
-    <p>Кристалл многослоен. Типичный порядок для CMOS с двумя слоями металла (PSX CPU, dmgcpu):</p>
+    <h3>Layers and shooting order</h3>
+    <p>The die is multi-layered. A typical order for CMOS with two metal layers (PSX CPU, dmgcpu):</p>
     <ol>
-      <li>сфотографировать верхний металл (M2);</li>
-      <li><strong>снять слой</strong> — отполировать (или стравливать) и сфотографировать следующий (M1);</li>
-      <li>далее — поликремний (poly) и активная область (diffusion) — на этом слое видно транзисторы;</li>
-      <li>для проявления диффузии иногда нужно <strong>кислотное</strong> протравливание (HF/азотная).</li>
+      <li>photograph the top metal (M2);</li>
+      <li><strong>remove the layer</strong> — polish (or etch) it away and photograph the next one (M1);</li>
+      <li>then — polysilicon (poly) and the active region (diffusion) — transistors are visible on this layer;</li>
+      <li>to develop the diffusion, an <strong>acid</strong> etch is sometimes needed (HF/nitric).</li>
     </ol>
-    <p>Снятие слоёв — <strong>полировка</strong> (шлифовка). Оборудование: дремель, паста ГОИ, клей «Момент»,
-      предметное стекло:</p>
+    <p>Layer removal is <strong>polishing</strong> (lapping). Equipment: a Dremel, GOI paste, “Moment” glue,
+      a microscope slide:</p>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/shop/dremel.jpg" alt="Дремель для полировки">
+        <img src="../imgstore/shop/dremel.jpg" alt="Dremel">
       </figure>
       <figure>
-        <img src="../imgstore/shop/paste_goi.jpg" alt="Паста ГОИ">
+        <img src="../imgstore/shop/paste_goi.jpg" alt="GOI paste">
       </figure>
       <figure>
-        <img src="../imgstore/shop/glued_chip.jpg" alt="Чип, приклеенный к предметному стеклу">
+        <img src="../imgstore/shop/glued_chip.jpg" alt="Chip glued to a slide">
       </figure>
     </div>
-    <p>Совет из методов: чип приклеивают на «бугорки» клея, чтобы он держался с боков; сеансы
-      полировки по 5–10 секунд с контролем под микроскопом; опыт позволяет снимать слои по
-      50–100 нм — этого достаточно для старых чипов.</p>
+    <p>A tip from the homebrew guides: the chip is glued onto “bumps” of adhesive so that it is held from
+      the sides; polishing sessions of 5–10 seconds with checks under the microscope; with experience you
+      can remove layers 50–100 nm at a time — enough for old chips.</p>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
-      <p>Защищайте глаза — частицы пасты и осколки разлетаются.</p>
+      <p>Protect your eyes — paste particles and shards fly around.</p>
     </div>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Результат неудачной полировки PSX CPU">
-      <figcaption><em>«Lapping disaster» (psxcpu): правые ряды ячеек сошлифовали сразу «до мяса», и части M1
-        пришлось доснимать отдельно. Полируйте осторожно и контролируйте процесс.</em></figcaption>
+      <img src="../imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Result of a failed polishing">
+      <figcaption><em>“Lapping disaster” (psxcpu): the right-hand rows of cells were ground straight down “to the meat”,
+        and parts of M1 had to be imaged separately afterwards. Polish carefully and keep the process under control.</em></figcaption>
     </figure>
 
-    <h3>Организация датасета</h3>
-    <p>«Сырые» снимки — это папка со слайдами (в PSX CPU — «over-100500 slides»). Сразу заводите
-      документ <code>datasets.md</code> в духе <a href="https://github.com/emu-russia/psxcpu/blob/main/datasets.md" target="_blank" rel="noopener">psxcpu/datasets.md</a>
-      и <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a>: таблица «что за набор, какой слой/увеличение,
-      кто снимал, где лежит, какие дефекты» («много волос», «грязь», «расфокус, зато виден M1»).
-      Большие изображения в git <strong>не кладут</strong> — только ссылки на Google Drive/внешние хранилища.</p>
+    <h3>Dataset organization</h3>
+    <p>The “raw” shots are a folder of slides (in PSX CPU — “over-100500 slides”). Set up a <code>datasets.md</code>
+      document right away, in the spirit of <a href="https://github.com/emu-russia/psxcpu/blob/main/datasets.md" target="_blank" rel="noopener">psxcpu/datasets.md</a>
+      and <a href="https://github.com/emu-russia/SEGAChips" target="_blank" rel="noopener">SEGAChips</a>: a table of “which set it is, which layer/magnification,
+      who shot it, where it is stored, what defects it has” (“lots of hairs”, “dirt”, “out of focus, but M1 is visible”).
+      Large images are <strong>not</strong> put into git — only links to Google Drive/external storage.</p>
   </section>
 
-  <!-- Этап 3 -->
+  <!-- Stage 3 -->
   <section class="doc-section" id="etapa-3">
-    <h2><span class="stage-num">Этап 3.</span> Сшивка и подготовка Master-изображения</h2>
+    <h2><span class="stage-num">Stage 3.</span> Stitching and preparing the Master image</h2>
 
-    <h3>Сшивка слайдов</h3>
-    <p>Стандартный инструмент — <strong>Fiji (ImageJ)</strong>: <code>Plugins → Stitching → Grid/Collection stitching</code>.
-      Слайды обычно снимают «змейкой»; настройки — размер сетки, перекрытие, шаблон имён (<code>{iiii}.jpg</code>):</p>
+    <h3>Stitching the slides</h3>
+    <p>The standard tool is <strong>Fiji (ImageJ)</strong>: <code>Plugins → Stitching → Grid/Collection stitching</code>.
+      Slides are usually shot in a “snake” order; the settings are the grid size, overlap, filename
+      pattern (<code>{iiii}.jpg</code>):</p>
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th>Порядок «змейкой»</th><th>Настройки</th><th>Результат</th></tr>
+          <tr><th>“Snake” order</th><th>Settings</th><th>Result</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td><img class="thumb" src="../imgstore/shop/order1.jpg" alt="Порядок съёмки слайдов «змейкой»"></td>
-            <td><img class="thumb" src="../imgstore/shop/options.jpg" alt="Настройки сшивки Grid/Collection stitching"></td>
-            <td><img class="thumb" src="../imgstore/shop/fused.jpg" alt="Сшитый результат (fused image)"></td>
+            <td><img class="thumb" src="../imgstore/shop/order1.jpg" alt="Snake order of shooting slides"></td>
+            <td><img class="thumb" src="../imgstore/shop/options.jpg" alt="Grid/Collection stitching options"></td>
+            <td><img class="thumb" src="../imgstore/shop/fused.jpg" alt="Fused result image"></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p>Если автосшивка не удаётся (плохое/неровное перекрытие) — запасной вариант <a href="https://hugin.sourceforge.io/" target="_blank" rel="noopener">Hugin</a>,
-      но он трудозатратен (методы chips-howto/dmgcpu).</p>
+    <p>If auto-stitching fails (poor/uneven overlap) — the fallback is <a href="https://hugin.sourceforge.io/" target="_blank" rel="noopener">Hugin</a>,
+      but it is labor-intensive (the homebrew guides of chips-howto/dmgcpu).</p>
 
-    <h3>Подготовка «мастер-изображения»</h3>
-    <p>Дальше картинку доводят до состояния, пригодного для трассировки:</p>
+    <h3>Preparing the “master image”</h3>
+    <p>Next, the picture is refined to a state suitable for tracing:</p>
     <ul>
-      <li><strong>Уменьшение/масштаб</strong>: для ULA исходный снимок уменьшили в 4 раза — «топология не требует
-        большого разрешения», и частично <strong>восстановили маски</strong>, получив мастер <code>ZX_ULA_sm.jpg</code>.</li>
-      <li><strong>Сшивка по зонам</strong>: в psxcpu отдельно сшивали «длинные сосиски» — ряды ячеек с M1, чтобы
-        удобнее смотреть межсоединения внутри рядов; поликремний с ячейками — отдельно
-        («Poly Stitched»); для распознавания ячеек картинку нарезали на зоны (<code>active_sequenced</code>).</li>
-      <li><strong>Единая система координат</strong>: мастер-изображение служит общей «подложкой» для всех
-        инструментов (Deroute, Patterns).</li>
+      <li><strong>Downscaling/scale</strong>: for the ULA the original shot was reduced 4× — “the topology does not
+        require high resolution” — and the masks were partially <strong>restored</strong>, producing the master <code>ZX_ULA_sm.jpg</code>.</li>
+      <li><strong>Zone-wise stitching</strong>: in psxcpu, the “long sausages” — the cell rows with M1 — were stitched
+        separately to make it easier to examine the interconnects inside the rows; the polysilicon with
+        the cells — separately (“Poly Stitched”); for cell recognition the image was cut into zones (<code>active_sequenced</code>).</li>
+      <li><strong>A single coordinate system</strong>: the master image serves as the common “backdrop” for all tools (Deroute, Patterns).</li>
     </ul>
-    <p>Примеры мастер-изображений:</p>
+    <p>Examples of master images:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_m2_fused.jpg" alt="Мастер-датасет M2 PSX CPU">
-      <figcaption><em>Сшитый слой металла M2 PSX CPU — общая система координат для трассировки (psxcpu).</em></figcaption>
+      <img src="../imgstore/workflow/psxcpu_m2_fused.jpg" alt="PSX CPU M2 master dataset">
+      <figcaption><em>The stitched M2 metal layer of the PSX CPU — the common coordinate system for tracing (psxcpu).</em></figcaption>
     </figure>
     <figure>
-      <img src="../imgstore/workflow/segachips_fj3002_fused.jpg" alt="Fused-изображение FJ3002">
-      <figcaption><em>Маленький чип целиком после сшивки — FJ3002 (SEGAChips).</em></figcaption>
+      <img src="../imgstore/workflow/segachips_fj3002_fused.jpg" alt="FJ3002 fused image">
+      <figcaption><em>A small chip in full after stitching — FJ3002 (SEGAChips).</em></figcaption>
     </figure>
-    <p>Итог этапа — <strong>Master Dataset</strong>: «изображение, по которому восстанавливается нетлист»
-      (терминология SEGAChips). Его кладут в облако, ссылку — в <code>datasets.md</code>.</p>
+    <p>The outcome of the stage is a <strong>Master Dataset</strong>: “the image from which the netlist is recovered”
+      (SEGAChips terminology). It is uploaded to the cloud, and the link goes into <code>datasets.md</code>.</p>
   </section>
 
-  <!-- Этап 4 -->
+  <!-- Stage 4 -->
   <section class="doc-section" id="etapa-4">
-    <h2><span class="stage-num">Этап 4.</span> Трассировка и восстановление нетлиста</h2>
-    <p>Самый трудоёмкий этап — «распутывание проводов». Канонические описания процесса:</p>
+    <h2><span class="stage-num">Stage 4.</span> Tracing and netlist recovery</h2>
+    <p>The most labor-intensive stage — “untangling the wires”. Canonical descriptions of the process:</p>
 
-    <p class="lead-in">«Стандартный воркфлоу изучения чипов» (SEGAChips, <a href="https://github.com/emu-russia/SEGAChips/blob/main/VDP/PSG/Readme.md" target="_blank" rel="noopener">VDP/PSG/Readme.md</a>):</p>
+    <p class="lead-in">“The standard chip-study workflow” (SEGAChips, <a href="https://github.com/emu-russia/SEGAChips/blob/main/VDP/PSG/Readme.md" target="_blank" rel="noopener">VDP/PSG/Readme.md</a>):</p>
     <ol>
-      <li>обвести (оттрассировать) провода;</li>
-      <li>снять верхние слои металла;</li>
-      <li>изучить стандартные ячейки, встречающиеся в этой области;</li>
-      <li>добавить ячейки и соединить все порты;</li>
-      <li>собрать схему в Logisim/HDL;</li>
-      <li>изучить выводы (pads) — «бонус».</li>
+      <li>outline (trace) the wires;</li>
+      <li>remove the upper metal layers;</li>
+      <li>study the standard cells found in this area;</li>
+      <li>add the cells and connect all the ports;</li>
+      <li>assemble the schematic in Logisim/HDL;</li>
+      <li>study the pads — “a bonus”.</li>
     </ol>
 
-    <p class="lead-in">Пять шагов восстановления нетлиста (dmgcpu, <a href="https://github.com/emu-russia/dmgcpu/blob/main/netlist/Readme.md" target="_blank" rel="noopener">netlist/Readme.md</a>):</p>
+    <p class="lead-in">Five steps of netlist recovery (dmgcpu, <a href="https://github.com/emu-russia/dmgcpu/blob/main/netlist/Readme.md" target="_blank" rel="noopener">netlist/Readme.md</a>):</p>
     <ol>
-      <li><strong>Получить master dataset</strong>; большую картинку чипа режут на модули и нетлист каждого
-        модуля восстанавливают отдельно («естественный процесс модульного реверса»).</li>
-      <li><strong>Разметить порты модуля</strong> (виасы <code>ViasInput</code>/<code>ViasOutput</code>/<code>ViasInout</code>):
+      <li><strong>Obtain the master dataset</strong>; the large image of the chip is cut into modules and the netlist
+        of each module is recovered separately (“a natural process of modular reverse engineering”).</li>
+      <li><strong>Mark the module’s ports</strong> (vias <code>ViasInput</code>/<code>ViasOutput</code>/<code>ViasInout</code>):
         <figure>
-          <img src="../imgstore/workflow/dmgcpu_deroute_ports.png" alt="Порты модуля в Deroute">
+          <img src="../imgstore/workflow/dmgcpu_deroute_ports.png" alt="Module ports in Deroute">
         </figure>
       </li>
-      <li><strong>Разложить ячейки модуля</strong> (удобно копипастом, <code>Ctrl+C</code>/<code>Ctrl+V</code>).</li>
-      <li><strong>Соединить проводами</strong> — «самое интересное»:
+      <li><strong>Place the module’s cells</strong> (copy-paste, <code>Ctrl+C</code>/<code>Ctrl+V</code>, is convenient).</li>
+      <li><strong>Connect with wires</strong> — “the most interesting part”:
         <figure>
-          <img src="../imgstore/workflow/dmgcpu_deroute_wires.png" alt="Межсоединения в Deroute">
+          <img src="../imgstore/workflow/dmgcpu_deroute_wires.png" alt="Interconnects in Deroute">
         </figure>
       </li>
-      <li><strong>Экспорт в Verilog</strong> — и схему модуля можно получить в любой EDA
-        (в проектах использовали Xilinx PlanAhead: «грузим верилог — она сама рисует схему»).</li>
+      <li><strong>Export to Verilog</strong> — then the module’s schematic can be obtained in any EDA
+        (the projects used Xilinx PlanAhead: “we load the Verilog, and it draws the schematic itself”).</li>
     </ol>
-    <p>Полезная практика из mappers: нетлист экспортируют <strong>на двух уровнях</strong> — весь чип целиком
-      и иерархический, по-ячеечный (<code>mmc1.v</code> + <code>mmc1_cells.v</code>): так проще вычитывать ошибки
-      трассировки и «привязывать» схему обратно к фото.</p>
-    <p>SEGAChips для крупных чипов использует <strong>гибридный подход</strong>: межблочные соединения («крупными
-      мазками») размечают в Photoshop по картам соединений (<code>rails</code>), шинам сразу дают имена,
-      которые затем вносят в HDL; соединения же внутри доменов ячеек трассируют в Deroute —
-      для каждого домена свой XMLZ-проект с выгрузкой готового Verilog (<code>Z80/netlist/Readme.md</code>).</p>
+    <p>A useful practice from mappers: the netlist is exported <strong>at two levels</strong> — the whole chip and a
+      hierarchical per-cell one (<code>mmc1.v</code> + <code>mmc1_cells.v</code>): this makes tracing errors easier to spot and
+      the schematic easier to map back onto the photo.</p>
+    <p>For large chips, SEGAChips uses a <strong>hybrid approach</strong>: inter-block connections (“broad strokes”)
+      are marked up in Photoshop over the interconnect maps (<code>rails</code>), the buses get names right away,
+      which later go into the HDL by hand; the connections inside cell domains, on the other hand, are
+      traced in Deroute — every domain has its own XMLZ project with a ready Verilog export
+      (<code>Z80/netlist/Readme.md</code>).</p>
 
-    <h3>Инструмент: Deroute</h3>
-    <p><a href="https://github.com/emu-russia/Deroute" target="_blank" rel="noopener">Deroute</a> — «инструмент для распутывания проводов»
-      от chip-исследователей для chip-исследователей. Это векторный редактор поверх фото:</p>
+    <h3>Tool: Deroute</h3>
+    <p><a href="https://github.com/emu-russia/Deroute" target="_blank" rel="noopener">Deroute</a> — “a tool for untangling wires”
+      by chip researchers for chip researchers. It is a vector editor on top of the photo:</p>
     <ul>
-      <li>загружается фоновое изображение (<code>File → Load Image</code>);</li>
-      <li>рисуются <strong>сущности</strong>: виасы (контакты; 7 типов, включая <code>ViasPower</code>/<code>ViasGround</code> — они несут
-        семантику логических 1/0 и не трассируются), провода (<code>WireInterconnect</code>/<code>WirePower</code>/<code>WireGround</code>),
-        <strong>стандартные ячейки</strong> (NOT, NAND, MUX, DFF…), <strong>блоки</strong> (регистровые файлы, память),
-        регионы-аннотации, слои-группы;</li>
-      <li>координаты хранятся в <strong>лямбда-единицах</strong> — разметка не зависит от разрешения фото;</li>
-      <li><strong>Traverse</strong> (F10–F12) расширяет выделение вдоль соединённых проводов и сквозь ячейки —
-        «распутывание»; глубина ограничивается <code>TierMax</code>, нежелательные типы — чёрным списком;</li>
-      <li>авто-помощь: маршрутизатор провода A* между двумя виасами (обходит ячейки), слияние
-        коллинеарных проводов, удаление мелких/неортогональных, поиск пересечений;</li>
-      <li>результат сохраняется как <strong>XML/.xmlz</strong> (сжатый XML — удобно версионировать в git) и
-        <strong>экспортируется в Verilog RTL</strong>.</li>
+      <li>a background image is loaded (<code>File → Load Image</code>);</li>
+      <li><strong>entities</strong> are drawn: vias (contacts; 7 types, including <code>ViasPower</code>/<code>ViasGround</code> — they carry
+        the semantics of logical 1/0 and are not traced), wires (<code>WireInterconnect</code>/<code>WirePower</code>/<code>WireGround</code>),
+        <strong>standard cells</strong> (NOT, NAND, MUX, DFF…), <strong>blocks</strong> (register files, memory),
+        annotation regions, layer groups;</li>
+      <li>coordinates are stored in <strong>lambda units</strong> — the annotation does not depend on the photo’s resolution;</li>
+      <li><strong>Traverse</strong> (F10–F12) extends the selection along connected wires and through cells —
+        the “untangling”; the depth is limited by <code>TierMax</code>, unwanted types go to a blacklist;</li>
+      <li>auto-assistance: an A* wire router between two vias (routes around cells), merging of collinear
+        wires, removal of small/non-orthogonal ones, intersection search;</li>
+      <li>the result is saved as <strong>XML/.xmlz</strong> (compressed XML — convenient to version in git) and
+        <strong>exported to Verilog RTL</strong>.</li>
     </ul>
     <figure>
-      <img src="../imgstore/workflow/deroute_main_window.png" alt="Главное окно Deroute">
-      <figcaption><em>Deroute: холст поверх фото, режимы сущностей, дерево иерархии.</em></figcaption>
+      <img src="../imgstore/workflow/deroute_main_window.png" alt="Deroute main window">
+      <figcaption><em>Deroute: a canvas over the photo, entity modes, the hierarchy tree.</em></figcaption>
     </figure>
-    <p>Полуавтоматика: между двумя виасами провод можно проложить <strong>маршрутизатором (A*)</strong> — он
-      обходит ячейки и регионы, как стены:</p>
+    <p>Semi-automation: a wire between two vias can be laid out by the <strong>A* router</strong> — it goes around
+      cells and regions as if they were walls:</p>
     <figure>
-      <img src="../imgstore/workflow/deroute_wire_routing.png" alt="Маршрутизация провода (A*) в Deroute">
-      <figcaption><em>Deroute: Wire Router (A*) прокладывает соединение между выбранными виасами в обход препятствий.</em></figcaption>
+      <img src="../imgstore/workflow/deroute_wire_routing.png" alt="Wire routing (A*)">
+      <figcaption><em>Deroute: the Wire Router (A*) draws a connection between the selected vias, avoiding obstacles.</em></figcaption>
     </figure>
-    <p>Приём для больших чипов (psxcpu): человек ставит крайние виасы, а <strong>провод дорисовывает
-      скрипт/автоматика</strong> — полуавтоматическая трассировка:</p>
+    <p>A trick for large chips (psxcpu): a human places the endpoint vias, and the <strong>wire is finished by a
+      script/automation</strong> — semi-automatic tracing:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_deroute_method.png" alt="Полуавтоматическая трассировка в Deroute">
-      <figcaption><em>Метод из psxcpu: виасы по краям дорожки, проводник между ними достраивается (полу)автоматически.</em></figcaption>
+      <img src="../imgstore/workflow/psxcpu_deroute_method.png" alt="Semi-automatic tracing">
+      <figcaption><em>The method from psxcpu: vias at the ends of a track, the conductor between them is completed (semi-)automatically.</em></figcaption>
     </figure>
-    <p>Советы из мануала и практики:</p>
+    <p>Tips from the manual and from practice:</p>
     <ul>
-      <li><strong>называйте ячейки и провода сразу</strong> — экспорт в Verilog зависит от имён (<code>Label</code>);</li>
-      <li>не рисуйте питание/землю как обычные провода — используйте семантические типы;</li>
-      <li>периодически <code>Ctrl+S</code>: сцена — текстовый файл, можно коммитить;</li>
-      <li>для тысяч сущностей используйте слои/группы, дерево иерархии, миникарту, локатор;</li>
-      <li>Deroute (модуль Collab + сервер CollabMCP) позволяет <strong>трассировать нескольким людям и
-        AI-агентам одновременно</strong> на общем холсте.</li>
+      <li><strong>name cells and wires right away</strong> — the Verilog export depends on the names (<code>Label</code>);</li>
+      <li>do not draw power/ground as ordinary wires — use the semantic types;</li>
+      <li>hit <code>Ctrl+S</code> periodically: the scene is a text file, it can be committed;</li>
+      <li>for thousands of entities use layers/groups, the hierarchy tree, the minimap, the locator;</li>
+      <li>Deroute (the Collab module + the CollabMCP server) lets <strong>several people and AI agents trace
+        simultaneously</strong> on a shared canvas.</li>
     </ul>
     <blockquote class="quote">
-      <p>Историческая справка: в первых проектах (breaks, ранний dmgcpu) «обводку» делали прямо в
-        Photoshop, а нетлист рисовали вручную; появление Deroute (и Patterns для ячеек) сильно
-        ускорило процесс. Сейчас Deroute — общий инструмент семейства emu-russia.</p>
+      <p>Historical note: in the first projects (breaks, early dmgcpu) the “outlining” was done directly in
+        Photoshop, and the netlist was drawn by hand; the arrival of Deroute (and of Patterns for cells)
+        greatly accelerated the process. Today Deroute is the common tool of the emu-russia family.</p>
     </blockquote>
   </section>
 
-  <!-- Этап 5 -->
+  <!-- Stage 5 -->
   <section class="doc-section" id="etapa-5">
-    <h2><span class="stage-num">Этап 5.</span> Стандартные ячейки и библиотеки (Patterns)</h2>
-    <p>Чипы бывают двух «сортов» с точки зрения трассировки:</p>
+    <h2><span class="stage-num">Stage 5.</span> Standard cells and libraries (Patterns)</h2>
+    <p>From the tracing point of view, chips come in two “kinds”:</p>
     <ul>
-      <li><strong>Кастомная («hand-made») топология</strong> — UPD775x, память, аналоговые блоки: каждый транзистор
-        уникален, работаем на транзисторном уровне (breaks, dmgcpu, mappers).</li>
-      <li><strong>Стандартные ячейки</strong> — чип синтезирован из библиотеки: один и тот же «кирпичик»
-        (NOT, 3-NAND, 22-AOI, DFF…) повторяется сотни и тысячи раз рядами
-        (питание/земля вдоль рядов по M1, M2 — перпендикулярно; соседние ряды зеркальны).
-        PSX CPU: <strong>~37 600 экземпляров, но лишь ~150 типов</strong> (psxcpu); SEGA/Yamaha — свои библиотеки
-        («двухэтажные» ячейки YM6xxx); мапперы SHARP MMC1/MBC1 — общая библиотека фаба.</li>
+      <li><strong>Custom (“hand-made”) topology</strong> — UPD775x, memory, analog blocks: every transistor is unique,
+        work happens at the transistor level (breaks, dmgcpu, mappers).</li>
+      <li><strong>Standard cells</strong> — the chip was synthesized from a library: the same “brick”
+        (NOT, 3-NAND, 22-AOI, DFF…) repeats hundreds and thousands of times in rows
+        (power/ground run along the rows on M1, M2 — perpendicular to them; neighboring rows are mirrored).
+        PSX CPU: <strong>~37,600 instances, but only ~150 types</strong> (psxcpu); SEGA/Yamaha have their own libraries
+        (“two-story” YM6xxx cells); the SHARP MMC1/MBC1 mappers share the fab’s library.</li>
     </ul>
-    <p>Если чип ячеечный — <strong>не трассируйте каждую ячейку</strong>. Один раз расшифруйте тип
-      (по диффузии/поликремнию, числу p/n-транзисторов), а дальше опознавайте и помечайте экземпляры.</p>
+    <p>If the chip is cell-based — <strong>do not trace every cell</strong>. Decode the type once (from
+      diffusion/polysilicon, the number of p/n transistors), then identify and label the instances.</p>
 
-    <h3>Инструмент: Patterns</h3>
-    <p><a href="https://github.com/emu-russia/Patterns" target="_blank" rel="noopener">Patterns</a> — «утилита для поиска стандартных ячеек на
-      исходной картинке», полуавтоматическая разметка:</p>
+    <h3>Tool: Patterns</h3>
+    <p><a href="https://github.com/emu-russia/Patterns" target="_blank" rel="noopener">Patterns</a> — “a utility for finding standard cells on the
+      source image”, semi-automatic annotation:</p>
     <ul>
-      <li>слева — фото с наложенными рамками-паттернами, справа — <strong>библиотека паттернов</strong>:
+      <li>on the left — the photo with overlaid pattern frames, on the right — the <strong>pattern library</strong>:
         <figure>
-          <img src="../imgstore/workflow/patterns_workspace.png" alt="Рабочая среда Patterns">
+          <img src="../imgstore/workflow/patterns_workspace.png" alt="Patterns workspace">
         </figure>
       </li>
-      <li>исходной картинке назначается параметр <strong>Lambda</strong> (размер минимальной топологической
-        единицы), и размеры считаются в лямбдах, а не пикселях; <strong>Delta</strong> — допуск погрешности,
-        по нему фильтруются кандидаты из БД под размер рамки:
+      <li>the source image is assigned a <strong>Lambda</strong> parameter (the size of the minimal topological
+        unit), and the sizes are measured in lambdas rather than pixels; <strong>Delta</strong> is the error tolerance,
+        and the DB candidates matching the frame size are filtered by it:
         <figure>
-          <img src="../imgstore/workflow/patterns_lambda_delta.png" alt="Параметры Lambda и Delta в Patterns">
+          <img src="../imgstore/workflow/patterns_lambda_delta.png" alt="Lambda/Delta">
         </figure>
       </li>
-      <li>при выделении рамки программа показывает только подходящие по размеру ячейки из БД —
-        человек подтверждает тип «глазами», добавляет рамку с именем (с учётом <code>Flip</code>/<code>Mirror</code>,
-        двойной клик меняет ориентацию);</li>
-      <li>библиотека — текстовый файл <code>patterns_db.txt</code> плюс jpg-картинки ячеек:</li>
+      <li>when a frame is drawn, the program shows only the size-matching cells from the DB —
+        a human confirms the type “by eye” and adds a frame with a name (accounting for <code>Flip</code>/<code>Mirror</code>;
+        a double click changes the orientation);</li>
+      <li>the library is a text file <code>patterns_db.txt</code> plus jpg images of the cells:</li>
     </ul>
 <pre><code># Pattern Syntax:
 # pattern name, source_lambda, pcount, ncount, image_path
 pattern NOT1, 8.0, 1, 1, "patterns_db/NOT1.jpg"
 pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
-    <p><code>pcount</code>/<code>ncount</code> — число p/n-транзисторов (электрическая проверка типа);</p>
+    <p><code>pcount</code>/<code>ncount</code> — the number of p/n transistors (an electrical check of the type);</p>
     <ul>
-      <li>координаты+имена размещённых ячеек <strong>экспортируются в XML формата Deroute</strong> — следующий
-        инструмент конвейера сразу знает, где и какая ячейка стоит;</li>
-      <li>состояние среды сохраняется в <code>.wrk</code> (вместе с БД), есть нумерация рядов
-        (горизонтальная/вертикальная) для адресации «часть/ряд/место».</li>
+      <li>the coordinates + names of the placed cells are <strong>exported to XML in the Deroute format</strong> — the
+        next tool in the pipeline immediately knows where and which cell is placed;</li>
+      <li>the workspace state is saved in <code>.wrk</code> (together with the DB); there is row numbering
+        (horizontal/vertical) for “part/row/place” addressing.</li>
     </ul>
-    <p>Примеры ячеек из комплектной БД (это база PSX CPU, она же лежит в
+    <p>Example cells from the bundled DB (this is the PSX CPU database, the same one stored in
       <code>psxcpu/cells/PatternsPSXCPU/</code>):</p>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/patterns_db_NOT1.jpg" alt="Ячейка NOT1 из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_NOT1.jpg" alt="Cells from the library: NOT1">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_3NAND.jpg" alt="Ячейка 3-NAND из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_3NAND.jpg" alt="3-NAND cell from the library">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_22AOI.jpg" alt="Ячейка 22-AOI из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_22AOI.jpg" alt="22-AOI cell from the library">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_DFF.jpg" alt="Ячейка DFF из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_DFF.jpg" alt="DFF cell from the library">
       </figure>
     </div>
-    <p><em>Слева направо: NOT1 (инвертор), 3-NAND (3-входовой), 22-AOI = ~((A&amp;B)|(C&amp;D)) — нотация «число
-      входов в группе + операция внутри/между группами», DFF. Суффиксы 2X…6X — «сила» (драйв) ячейки.</em></p>
-    <p>Итог разметки — «карта ячеек»: фотография с поименованными экземплярами и номерами рядов
-      (адресация «часть/ряд/место»), на которую потом опирается трассировка в Deroute:</p>
+    <p><em>Left to right: NOT1 (inverter), 3-NAND (3-input), 22-AOI = ~((A&amp;B)|(C&amp;D)) — the notation is
+      “number of inputs per group + operation within/between groups”, DFF. The 2X…6X suffixes denote the
+      “strength” (drive) of the cell.</em></p>
+    <p>The outcome of the annotation is a <strong>cell map</strong>: a photograph with named instances and row numbers
+      (addressing by “part/row/place”), which later guides the tracing in Deroute:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_cells_map.jpg" alt="Карта ячеек PSX CPU">
-      <figcaption><em>Карта ячеек части кристалла PSX CPU: каждый прямоугольник — экземпляр ячейки с именем типа
-        (psxcpu, инструмент Patterns).</em></figcaption>
+      <img src="../imgstore/workflow/psxcpu_cells_map.jpg" alt="PSX CPU cell map">
+      <figcaption><em>Cell map of a PSX CPU part: every rectangle is a cell instance with its type name
+        (psxcpu, the Patterns tool).</em></figcaption>
     </figure>
-    <p><strong>Мегаячейки</strong> (psxcpu): когда в чипе есть крупные повторяющиеся блоки (память, регистровые
-      массивы, блоки видеодекодера), их называют «мегаячейками». Достаточно разобрать <strong>один
-      представитель каждого типа</strong> — остальные экземпляры отличаются лишь размерами; назначение
-      сверяют по ёмкости и окружению (например, блок на 768 байт у PSX CPU оказался RGB-макроблоком
-      MDEC). На PSX CPU таких мегаблоков ~16 штук трёх типов — приём экономит месяцы работы.</p>
-    <p>Библиотеки ячеек <strong>переиспользуются</strong>: библиотека фаба SHARP обслуживает и MMC1, и MBC1;
-      у SEGA под каждый звуковой чип — своя (<code>Arbiter/ArbPatterns</code>, <code>VDP/PSG/PatternsForPSG</code>),
-      в SEGAChips выделены даже общие библиотеки Yamaha (<code>YM_Cells</code>, <code>YM6_Cells</code>).</p>
+    <p><strong>Megacells</strong> (psxcpu): when the chip contains large repeating blocks (memory, register arrays,
+      video-decoder blocks), they are called “megacells”. You only need to dissect <strong>one representative of
+      each type</strong> — the other instances differ only in size; their purpose is cross-checked against the
+      capacity and surroundings (e.g., a 768-byte block in the PSX CPU turned out to be the MDEC RGB
+      macroblock). The PSX CPU has ~16 such megablocks of three types — this trick saves months of work.</p>
+    <p>Cell libraries are <strong>reused</strong>: the SHARP fab library serves both MMC1 and MBC1;
+      SEGA has its own for each sound chip (<code>Arbiter/ArbPatterns</code>, <code>VDP/PSG/PatternsForPSG</code>),
+      and SEGAChips even singled out common Yamaha libraries (<code>YM_Cells</code>, <code>YM6_Cells</code>).</p>
 
-    <h3>Чтение ячейки по топологии</h3>
-    <p>Для ячеек одного фаба действуют закономерности (SEGAChips, psxcpu, mappers):</p>
+    <h3>Reading a cell from its topology</h3>
+    <p>For cells of one fab, regularities hold (SEGAChips, psxcpu, mappers):</p>
     <ul>
-      <li>карманы N/P и <strong>симметрия</strong>: ячейки часто зеркальны по вертикали/горизонтали
-        (группы симметрий), между рядами «перевёрнуты» на 180° (питание/земля идут зигзагом);</li>
-      <li>«двойники»: топологически похожие, но разные функции (NOT2 похож на NAND2X; у Yamaha
-        nand и nor выглядят одинаково, отличаясь только отражением сверху-вниз).
-        <strong>Правило-ловушка</strong>: в одном ряду не бывает и NORM-, и FLIP-ячеек — если встретились обе,
-        одна распознана неверно;</li>
-      <li>на каждую ячейку заводят <strong>тройку картинок</strong>: топология + транзисторная схема + логическая
-        модель (стандарт mappers и SEGAChips):</li>
+      <li>N/P wells and <strong>symmetry</strong>: cells are often mirrored vertically/horizontally
+        (symmetry groups), and are “flipped” by 180° between rows (power/ground run in a zigzag);</li>
+      <li>“twins”: topologically similar but functionally different cells (NOT2 looks like NAND2X; in Yamaha,
+        nand and nor look identical, differing only by a top-to-bottom reflection).
+        <strong>A trap rule</strong>: in a single row there are never both NORM and FLIP cells — if you encounter both,
+        one of them was identified incorrectly;</li>
+      <li>for every cell a <strong>triplet of pictures</strong> is kept: topology + transistor schematic + logic
+        model (the standard of mappers and SEGAChips):</li>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/mappers_22aoi_topo.jpg" alt="Ячейка 22-AOI: топология (фото)">
+        <img src="../imgstore/workflow/mappers_22aoi_topo.jpg" alt="22-AOI cell: topology">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/mappers_22aoi_tran.jpg" alt="Ячейка 22-AOI: транзисторная схема">
+        <img src="../imgstore/workflow/mappers_22aoi_tran.jpg" alt="22-AOI cell: transistors">
       </figure>
     </div>
-    <p><em>Формат «тройки» (mappers, VRC6): слева — топология ячейки с фото, справа — её транзисторная схема.
-      Третья картинка (Logisim-модель) обычно идёт следом.</em></p>
-    <p>Отдельный приём для регулярных матриц (breaks, 6502/APU/PPU): <strong>декодеры, PLA и подобные
-      матрицы читают прямо с топологии как битовые маски</strong> — наличие транзистора на пересечении
-      строки и столбца означает «1» в таблице истинности/микрокоде. Так структура «расшифровывается»
-      сразу, без трассировки каждого транзистора.</p>
+    <p><em>The “triplet” format (mappers, VRC6): on the left — the cell’s topology from the photo, on the right —
+      its transistor schematic. The third picture (the Logisim model) usually follows.</em></p>
+    <p>A separate trick for regular arrays (breaks, 6502/APU/PPU): <strong>decoders, PLAs and similar matrices
+      are read straight off the topology as bit masks</strong> — a transistor present at the crossing of a row
+      and a column means “1” in the truth table/microcode. This way the structure is “decoded” at once,
+      without tracing each transistor.</p>
 
-    <h3>Когда Patterns нужен?</h3>
-    <p>Ориентир: <strong>от сотен экземпляров ячеек</strong> и десятков типов — ручная трассировка каждой ячейки
-      становится бессмысленной. Подготовка библиотеки трудоёмка («весьма увлекательный процесс,
-      особенно когда у вас 100+ ячеек» — SEGAChips PSG), поэтому окупается массовостью. Для
-      кастомных участков (память, аналоговые блоки, «мешанина» N/P) Patterns избыточен — там Deroute
-      и транзисторный разбор вручную.</p>
+    <h3>When is Patterns needed?</h3>
+    <p>A guideline: from <strong>hundreds of cell instances</strong> and dozens of types onward, tracing each cell
+      manually becomes pointless. Preparing the library is labor-intensive (“a very fascinating process,
+      especially when you have 100+ cells” — SEGAChips PSG), so it pays off through scale. For custom
+      areas (memory, analog blocks, N/P “jumbles”) Patterns is redundant — there it is Deroute and
+      manual transistor-level analysis.</p>
   </section>
 
-  <!-- Этап 6 -->
+  <!-- Stage 6 -->
   <section class="doc-section" id="etapa-6">
-    <h2><span class="stage-num">Этап 6.</span> Верификация</h2>
-    <p>Восстановленный нетлист — это <em>гипотеза</em>, которую нужно проверять. Приёмы из проектов:</p>
+    <h2><span class="stage-num">Stage 6.</span> Verification</h2>
+    <p>A recovered netlist is a <em>hypothesis</em> that needs to be checked. Techniques from the projects:</p>
 
-    <h3>Схема из HDL «бесплатно»</h3>
-    <p>Экспортированный из Deroute Verilog скармливают EDA (Xilinx PlanAhead) — она сама рисует
-      принципиальную схему. Это одновременно и «читаемый результат», и проверка связности:</p>
+    <h3>A schematic from HDL “for free”</h3>
+    <p>The Verilog exported from Deroute is fed to an EDA (Xilinx PlanAhead), and it draws the
+      schematic by itself. This is both a “readable result” and a connectivity check:</p>
     <figure>
-      <img src="../imgstore/workflow/mappers_mbc1_planahead.png" alt="Схема MBC1, синтезированная PlanAhead">
-      <figcaption><em>MBC1: восстановленный Verilog → PlanAhead → готовая схема (mappers).</em></figcaption>
+      <img src="../imgstore/workflow/mappers_mbc1_planahead.png" alt="MBC1 schematic synthesized by PlanAhead">
+      <figcaption><em>MBC1: recovered Verilog → PlanAhead → a ready schematic (mappers).</em></figcaption>
     </figure>
     <figure>
-      <img src="../imgstore/workflow/ula_top_schematic.png" alt="Схема верхнего модуля ULA">
-      <figcaption><em>Фрагмент схемы ULA (ula): так выглядят модули после авто-отрисовки EDA.</em></figcaption>
+      <img src="../imgstore/workflow/ula_top_schematic.png" alt="ULA top-module schematic">
+      <figcaption><em>A fragment of the ULA schematic (ula): this is how the modules look after the EDA auto-drawing.</em></figcaption>
     </figure>
 
-    <h3>Симуляция</h3>
+    <h3>Simulation</h3>
     <ul>
-      <li><strong>Icarus Verilog + GTKWave</strong> — стандарт семейства: нетлист + тестбенч + векторы <code>.mem</code>,
-        смотрим волны, сравниваем с ожидаемым поведением (mappers: симулировали известную фичу MMC1
-        «ignored-second-write»).</li>
-      <li><strong>Тест-ромы и эталонные эмуляторы</strong>: dmgcpu гонял тесты blargg <code>cpu_instrs</code>, сравнивал трассы
-        с эталон-эмулятором gameroy и работами Gekkio; результат — Verilog ядра SM83, проходящий
-        известные тесты.</li>
-      <li><strong>Сверка «нетлист против HDL»</strong> — фирменный приём <a href="https://github.com/emu-russia/ula" target="_blank" rel="noopener">ula</a>:
-        в репозитории живут ДВА представления одного чипа (плоский нетлист и модульный HDL),
-        и их сравнивают:
+      <li><strong>Icarus Verilog + GTKWave</strong> — the family standard: netlist + testbench + <code>.mem</code> vectors,
+        watch the waveforms, compare with the expected behavior (mappers: simulated the known MMC1
+        “ignored-second-write” feature).</li>
+      <li><strong>Test ROMs and reference emulators</strong>: dmgcpu ran blargg’s <code>cpu_instrs</code> tests and compared traces
+        with the gameroy reference emulator and with Gekkio’s work; the result — Verilog of the SM83 core
+        that passes the known tests.</li>
+      <li><strong>Netlist-vs-HDL cross-check</strong> — the signature technique of <a href="https://github.com/emu-russia/ula" target="_blank" rel="noopener">ula</a>:
+        the repository hosts TWO representations of one chip (a flat netlist and a modular HDL),
+        and they are compared:
         <ol>
-          <li><em>статически</em> — структурная эквивалентность: для каждого вентиля совпадают тип и список
-            соединённых сетей (после учёта переименований-алиасов). Для ULA: 519 общих вентилей
-            идентичны, 142 «лишних» в нетлисте — ровно RS-латы, свёрнутые в HDL в примитив;</li>
-          <li><em>динамически</em> — две раздельные симуляции с одинаковым стимулом и <strong>офлайн-дифф</strong> логов
-            по каждому фронту (из-за багов iverilog совместная элаборация вешалась);</li>
-          <li>важно: для RS-петель задают явную семантику неизвестного состояния (X→0/1), иначе
-            симуляция «залипает» в X; динамические узлы и BusKeeper тоже требуют аккуратной модели.</li>
+          <li><em>statically</em> — structural equivalence: for every gate, the type and the list of connected
+            nets match (after accounting for renames/aliases). For the ULA: 519 shared gates are identical,
+            and the 142 “extra” gates in the netlist are exactly the RS latches folded into a primitive in the HDL;</li>
+          <li><em>dynamically</em> — two separate simulations with the same stimulus and an <strong>offline diff</strong> of the
+            logs at every edge (because of iverilog bugs, joint elaboration used to hang);</li>
+          <li>importantly: for RS loops an explicit semantics of the unknown state must be set (X→0/1),
+            otherwise the simulation “sticks” in X; dynamic nodes and BusKeepers also need careful modeling.</li>
         </ol>
       </li>
-      <li><strong>Logisim/Logisim-Evolution</strong> — исполняемые модели для проверки и демонстрации логики
-        (мапперы: <code>MMC1A Logisim 2.7.1.circ</code>, сводный проект по всем мапперам).</li>
-      <li><strong>Реальное железо как эталон</strong>: psxcpu сверял поведение схем с «чёрным ящиком» — на реальной
-        консоли гонялись сотни контрольных векторов (nocash), так нашли недокументированные
-        округления и отбрасывание битов.</li>
-      <li><strong>Многоуровневая проверка</strong> (breaks): по-модульные unit-тесты HDL + полные функциональные
-        тесты (например Klaus) с чётким критерием успеха («зависание на адресе X»); стенды на
-        <strong>реальных дампах игр</strong> — видео/звуковые «плееры»; сверка с независимыми нетлистами
-        (visual6502), прогон нетлиста на <strong>FPGA</strong> (для 6502 — симуляции BigEd с 6502.org) и измерения
-        реального железа (осциллограф); медленные сигналы (LFO) в тестах искусственно ускоряют.</li>
-      <li><strong>«Die-perfect» HDL</strong>: breaks/dmgcpu доводят Verilog до максимального соответствия нетлисту
-        чипа — тогда симуляция HDL эквивалентна симуляции чипа:</li>
+      <li><strong>Logisim/Logisim-Evolution</strong> — executable models for checking and demonstrating the logic
+        (mappers: <code>MMC1A Logisim 2.7.1.circ</code>, a combined project covering all the mappers).</li>
+      <li><strong>Real hardware as a reference</strong>: psxcpu cross-checked the behavior of the schematics against a
+        “black box” — hundreds of test vectors were run on a real console (nocash); this is how
+        undocumented roundings and bit truncations were found.</li>
+      <li><strong>Multi-level verification</strong> (breaks): per-module HDL unit tests + full functional tests
+        (e.g., Klaus) with a clear success criterion (“a hang at address X”); rigs on <strong>real game dumps</strong> —
+        video/audio “players”; cross-checks against independent netlists (visual6502), running the netlist
+        on an <strong>FPGA</strong> (for the 6502 — BigEd’s simulations from 6502.org) and measurements
+        of real hardware (oscilloscope); slow signals (LFO) are artificially sped up in the tests.</li>
+      <li><strong>“Die-perfect” HDL</strong>: breaks/dmgcpu bring the Verilog to the closest possible match with the
+        chip’s netlist — then simulating the HDL is equivalent to simulating the chip:</li>
     </ul>
     <figure>
-      <img src="../imgstore/workflow/breaks_chip_perfect_approach.png" alt="Подход «die-perfect»: HDL максимально повторяет нетлист чипа">
-      <figcaption><em>Иллюстрация подхода breaks: HDL максимально повторяет нетлист исходного чипа.</em></figcaption>
+      <img src="../imgstore/workflow/breaks_chip_perfect_approach.png" alt="The die-perfect approach">
+      <figcaption><em>An illustration of the breaks approach: the HDL mirrors the netlist of the original chip as closely as possible.</em></figcaption>
     </figure>
 
-    <h3>Честность — часть верификации</h3>
-    <p>Во всех репозиториях открыто помечают неясное: <code>TBD</code>, <code>looks like…</code>, «It looks very much like
-      some kind of core… but not yet exact», файлы-заглушки, знаки вопроса в именах
-      (<code>ROM2QuestionQuestionMark.md</code>). Неясное не замалчивают — его фиксируют, чтобы вернуться позже.</p>
+    <h3>Honesty is part of verification</h3>
+    <p>All the repositories openly flag the unclear: <code>TBD</code>, “looks like…”, “It looks very much like
+      some kind of core… but not yet exact”, stub files, question marks in names
+      (<code>ROM2QuestionQuestionMark.md</code>). The unclear is not hushed up — it is recorded so that one can
+      return to it later.</p>
   </section>
 
-  <!-- Этап 7 -->
+  <!-- Stage 7 -->
   <section class="doc-section" id="etapa-7">
-    <h2><span class="stage-num">Этап 7.</span> Анализ, именование и документация</h2>
-    <p>Нетлист сам по себе — «спагетти» из тысяч вентилей. Чтобы он стал знанием:</p>
+    <h2><span class="stage-num">Stage 7.</span> Analysis, naming and documentation</h2>
+    <p>A netlist on its own is “spaghetti” of thousands of gates. To turn it into knowledge:</p>
 
-    <h3>Декомпозиция на модули</h3>
+    <h3>Decomposition into modules</h3>
     <ul>
-      <li>Плоский нетлист <strong>дробят на функциональные подмодули</strong> (ULA: плоский нетлист 661 вентиля →
-        19 модулей: clkgen, hcounter, vcounter, latches…; dmgcpu: SoC на части — CPU, PPU, APU,
-        arbiter, MMIO…; psxcpu: по блокам — GTE, MDEC, DMAC, …).</li>
-      <li>Сквозная нумерация «фото ↔ нетлист ↔ HDL ↔ документация» (вентили <code>gNNN</code>, сети <code>wNNN</code>)
-        позволяет в любой момент вернуться от схемы к конкретному месту на кристалле.</li>
-      <li>Карты-локаторы блоков на фото — «куда смотреть»:</li>
+      <li>The flat netlist is <strong>split into functional submodules</strong> (ULA: a flat netlist of 661 gates →
+        19 modules: clkgen, hcounter, vcounter, latches…; dmgcpu: the SoC into parts — CPU, PPU, APU,
+        arbiter, MMIO…; psxcpu: by blocks — GTE, MDEC, DMAC, …).</li>
+      <li>End-to-end numbering “photo ↔ netlist ↔ HDL ↔ documentation” (gates <code>gNNN</code>, nets <code>wNNN</code>)
+        lets you return from a schematic to a concrete spot on the die at any moment.</li>
+      <li>Block locator maps on the photo — “where to look”:</li>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/breaks_6502_locator.jpg" alt="Карта-локатор блоков 6502">
+        <img src="../imgstore/workflow/breaks_6502_locator.jpg" alt="6502 block locator map">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/breaks_2a03g_labels.png" alt="Подписанный слой кристалла 2A03">
+        <img src="../imgstore/workflow/breaks_2a03g_labels.png" alt="Labeled 2A03 die layer">
       </figure>
     </div>
-    <p><em>Слева: локатор блоков MOS 6502 (breaks). Справа: слой кристалла 2A03 с подписями — так
-      карта блоков выглядит в документации.</em></p>
+    <p><em>On the left: the MOS 6502 block locator (breaks). On the right: a 2A03 die layer with labels — this
+      is how the block map looks in the documentation.</em></p>
 
-    <h3>Имена сигналов</h3>
+    <h3>Signal names</h3>
     <ul>
-      <li>Имена берут из документации/патентов/чужих реверсов, где возможно (ULA — сигналы Chris Smith).</li>
-      <li>Принят <code>snake_case</code>; <strong>не увлекайтесь переименованиями</strong>: «frequent renaming contributes to
-        various errors… renaming a signal does not make it work differently» (dmgcpu).</li>
-      <li><strong>Живой словарь сигналов</strong> (breaks): соглашения именования, фиксация полярностей, таблицы
-        переименований «было → стало». В реверсе имена появляются раньше понимания (в breaks в своё
-        время жили сигналы LOL/WTF/BAKA, а «OMFG» оказался «OAM Mode Four») — история переименований
-        экономит часы будущих споров. При переименовании сигнала обновление идёт <strong>по всей цепочке</strong>:
-        маски → схемы (Logisim) → страницы wiki → переводы (breaks описывает эту процедуру явно).</li>
-      <li>Заведите словарь терминов (см. <a href="#terminologia">раздел «Терминология»</a>) — dmgcpu явно
-        определяет Latch/DFF/FF/DLatch, mappers — адресные пространства памяти, SEGAChips — netlist/lambda.</li>
+      <li>Where possible, names are taken from documentation/patents/other people’s reverse engineering
+        (ULA — Chris Smith’s signals).</li>
+      <li><code>snake_case</code> is the convention; <strong>do not get carried away with renaming</strong>: “frequent renaming
+        contributes to various errors… renaming a signal does not make it work differently” (dmgcpu).</li>
+      <li><strong>A living signal dictionary</strong> (breaks): naming conventions, fixed polarities, “was → became”
+        renaming tables. In reverse engineering, names appear before understanding (breaks once hosted
+        signals LOL/WTF/BAKA, and “OMFG” turned out to be “OAM Mode Four”) — the renaming history saves
+        hours of future disputes. When a signal is renamed, the update propagates <strong>through the whole
+        chain</strong>: masks → schematics (Logisim) → wiki pages → translations (breaks describes this
+        procedure explicitly).</li>
+      <li>Keep a glossary of terms (see the <a href="#terminologia">Terminology section</a>) — dmgcpu explicitly
+        defines Latch/DFF/FF/DLatch, mappers define memory address spaces, SEGAChips — netlist/lambda.</li>
     </ul>
 
-    <h3>«Неудобные» темы и аналоговые эффекты</h3>
-    <p>Всё, что ломает наивную синхронную цифровую модель, выносят в отдельные явные страницы с
-      предупреждениями для HDL-разработчиков (breaks): циклы и обратные связи («уроборосы»), анализ
-      по полутактам, dead-time, floating-шины. Аналоговые/физические эффекты документируются отдельно:
-      ёмкость шины PPU → рекомендация Transparent Latch/BusKeeper; ЦАП остаётся за бортом цифрового
-      HDL — вместо него стабы и отдельная расчётная модель с оговоркой о точности; задержки тактовой
-      схемы — отдельная страница. Динамические элементы (DLatch) и «предзаряд» шин требуют аккуратного
-      моделирования и в симуляции (см. <a href="#etapa-6">этап 6</a>).</p>
+    <h3>“Uncomfortable” topics and analog effects</h3>
+    <p>Everything that breaks the naive synchronous digital model is moved onto separate, explicit pages
+      with warnings for HDL developers (breaks): loops and feedback (“ouroboroses”), half-cycle analysis,
+      dead-time, floating buses. Analog/physical effects are documented separately: the PPU bus
+      capacitance → recommendation of a Transparent Latch/BusKeeper; the DAC stays outside the digital
+      HDL — instead, stubs and a separate calculation model with an accuracy disclaimer; clock-scheme
+      delays — a separate page. Dynamic elements (DLatch) and bus “precharge” also need careful modeling
+      in simulation (see stage 6).</p>
 
-    <h3>Структура «папки чипа»</h3>
-    <p>Проверенная временем раскладка (mappers, SEGAChips, dmgcpu):</p>
+    <h3>Structure of the “chip folder”</h3>
+    <p>A time-tested layout (mappers, SEGAChips, dmgcpu):</p>
 <pre><code>CHIP/
   Readme.md        — сводка: ревизия, техпроцесс, что сделано, ссылки на датасеты
   datasets.md      — откуда фото, кто снимал, дефекты
@@ -1148,168 +1157,177 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
   logisim/         — исполняемые модели (.circ)
   icarus/ (hdl/)   — симуляция: тестбенчи, векторы, волны
   imgstore/        — картинки для wiki (в git — только небольшие)</code></pre>
-    <p>Результаты оформляют и как wiki по блокам (breaks — целая wiki на 6502/APU/PPU с DeepL-переводом
-      на английский; dmgcpu — <code>wiki/</code>; SEGAChips — <code>PSG_WikiRus/</code>/<code>PSG_WikiEng/</code>), и как «книги»
-      (breaks собирает wiki в PDF-книги и выпускает релизы), и как <strong>аннотированные фото</strong>
-      («Back from HDL» — найденный нетлист накладывают на снимок кристалла):</p>
+    <p>The results are also presented as block-wise wikis (breaks — an entire wiki on the 6502/APU/PPU
+      with a DeepL translation into English; dmgcpu — <code>wiki/</code>; SEGAChips — <code>PSG_WikiRus/</code>/<code>PSG_WikiEng/</code>),
+      as “books” (breaks compiles the wiki into PDF books and publishes releases), and as <strong>annotated photos</strong>
+      (“Back from HDL” — the recovered netlist is overlaid on the die shot):</p>
     <figure>
-      <img src="../imgstore/workflow/dmgcpu_die_netlist.png" alt="Кристалл DMG-CPU с восстановленным нетлистом">
-      <figcaption><em>DMG-CPU: поверх снимка кристалла — восстановленная схема. Такая «обратная привязка» помогает
-        вычитывать ошибки трассировки (dmgcpu).</em></figcaption>
+      <img src="../imgstore/workflow/dmgcpu_die_netlist.png" alt="Die with the recovered netlist">
+      <figcaption><em>DMG-CPU: the recovered schematic overlaid on the die shot. Such “reverse mapping” helps to spot
+        tracing errors (dmgcpu).</em></figcaption>
     </figure>
   </section>
 
-  <!-- Этап 8 -->
+  <!-- Stage 8 -->
   <section class="doc-section" id="etapa-8">
-    <h2><span class="stage-num">Этап 8.</span> Переиспользование и экосистема</h2>
-    <p>Результаты реверса живут дальше:</p>
+    <h2><span class="stage-num">Stage 8.</span> Reuse and ecosystem</h2>
+    <p>The results of the reverse engineering live on:</p>
     <ul>
-      <li><strong>Verilog/HDL-модели</strong> — «die-perfect» нетлисты (breaks, dmgcpu, SEGAChips, ula) и учебные
-        модели (SovietChips: <code>wr_edge.v</code> с тестбенчем и <code>.bat</code>-запуском Icarus).</li>
-      <li><strong>Logisim-схемы</strong> — soviet 580ВИ53 лежит в репо как <code>vi53.circ</code>; у мапперов — сводные
-        Logisim-проекты по всем изученным чипам.</li>
-      <li><strong>Эмуляторы</strong> — полный цикл breaks завершился эмулятором <a href="https://github.com/emu-russia/breaknes" target="_blank" rel="noopener">Breaknes</a>
-        на уровне логических вентилей; netlist dmgcpu симулируется и проверяется тест-ромами.</li>
-      <li><strong>Библиотеки ячеек</strong> кочуют между проектами: база PSX CPU — в Patterns (как демо), Sharp-база —
-        общая для MMC1/MBC1; psxcpu хранит готовые воркспейсы Patterns рядом с БД.</li>
-      <li><strong>Книги и релизы</strong>: breaks публикует «6502 Core Book», «APU Book», «PPU Book» (releases).
-        Книги — снапшоты вики и живут «отдельной жизнью» («contents may differ from the Wiki, so be
-        careful»): при обновлении схем выходят новые ревизии книг с release-тегами.</li>
-      <li><strong>Машинный перевод</strong> — отдельной папкой (breaks: <code>BreakingNESWiki_DeepL</code>), с приглашением
-        сообщества «очеловечить» перевод (тот же приём в SEGAChips и ula: RU/EN-версии wiki).</li>
-      <li><strong>Скрипты против рутины</strong>: нарезка больших изображений (TopoShredder), конвертация дампов
-        (bin2mem), генерация таблиц — всё, что можно автоматизировать, автоматизируют; PSD-исходники
-        масок хранят в облаке для воспроизводимости (breaks, dmgcpu: папка <code>Scripts/</code>).</li>
-      <li><strong>Атрибуция</strong>: везде указывают авторов фото (zeptobars, 4e71, anonymous…), чужие работы
-        (msinger, Gekkio, Chris Smith, visual6502, siliconpr0n) и лицензии (обычно CC0).</li>
+      <li><strong>Verilog/HDL models</strong> — “die-perfect” netlists (breaks, dmgcpu, SEGAChips, ula) and educational
+        models (SovietChips: <code>wr_edge.v</code> with a testbench and a <code>.bat</code> launch of Icarus).</li>
+      <li><strong>Logisim schematics</strong> — the Soviet 580ВИ53 lives in the repo as <code>vi53.circ</code>; the mappers have
+        combined Logisim projects for all the studied chips.</li>
+      <li><strong>Emulators</strong> — the full breaks cycle ended in the <a href="https://github.com/emu-russia/breaknes" target="_blank" rel="noopener">Breaknes</a>
+        emulator at the logic-gate level; the dmgcpu netlist is simulated and checked with test ROMs.</li>
+      <li><strong>Cell libraries</strong> travel between projects: the PSX CPU database is in Patterns (as a demo), the
+        Sharp database is shared by MMC1/MBC1; psxcpu keeps ready-made Patterns workspaces next to the DB.</li>
+      <li><strong>Books and releases</strong>: breaks publishes the “6502 Core Book”, “APU Book”, “PPU Book” (releases).
+        The books are snapshots of the wiki and live a “life of their own” (“contents may differ from the
+        Wiki, so be careful”): when the schematics are updated, new revisions of the books are released
+        with release tags.</li>
+      <li><strong>Machine translation</strong> — in a separate folder (breaks: <code>BreakingNESWiki_DeepL</code>), with an
+        invitation to the community to “humanize” the translation (the same trick in SEGAChips and ula:
+        RU/EN versions of the wiki).</li>
+      <li><strong>Scripts against routine</strong>: slicing of large images (TopoShredder), conversion of dumps
+        (bin2mem), table generation — everything that can be automated is automated; PSD sources of masks
+        are kept in the cloud for reproducibility (breaks, dmgcpu: the <code>Scripts/</code> folder).</li>
+      <li><strong>Attribution</strong>: everywhere the photo authors (zeptobars, 4e71, anonymous…) are credited, as are
+        the works of others (msinger, Gekkio, Chris Smith, visual6502, siliconpr0n) and the licenses (usually CC0).</li>
     </ul>
 
-    <h3>Как росла экосистема (короткая история)</h3>
+    <h3>How the ecosystem grew (a short history)</h3>
     <ul>
-      <li>Проекты emu-russia выросли из обсуждений на форуме (forum.emu-russia.net, psxdev.ru и др.);
-        большая часть документации писалась сразу в wiki-репозиториях.</li>
-      <li>Порядок изучения обычно идёт от «сердца» к периферии или от простого к сложному: в breaks —
-        6502 → APU → PPU (ядро 6502 в «урезанном» виде входит в 2A03); в dmgcpu — от ядра SM83 к целому
-        SoC; в mappers — от «самого ванильного» MBC1 к зоопарку ревизий.</li>
-      <li>Общие инструменты (Deroute, Patterns) со временем <strong>выделились в отдельные репозитории</strong>,
-        а эмуляторы — тоже (breaknes); библиотеки ячеек и датасеты переиспользуются между проектами.</li>
-      <li>Методики «физической» части (вскрытие, съёмка, сшивка, полировка) общие: английский перевод
-        методов chips-howto лежит в wiki dmgcpu, «стандартный воркфлоу» SEGAChips повторяет те же шаги.</li>
-      <li>Результаты зрелых проектов оформляются как «исследование завершено» + архив для доводки схем
-        и переноса их в HDL (breaks).</li>
+      <li>The emu-russia projects grew out of forum discussions (forum.emu-russia.net, psxdev.ru, and others);
+        most of the documentation was written straight into the wiki repositories.</li>
+      <li>The study order usually runs from the “heart” to the periphery, or from the simple to the complex:
+        in breaks — 6502 → APU → PPU (the 6502 core enters the 2A03 in a “trimmed” form); in dmgcpu — from
+        the SM83 core to the whole SoC; in mappers — from the “most vanilla” MBC1 to the zoo of revisions.</li>
+      <li>The shared tools (Deroute, Patterns) were over time <strong>split off into separate repositories</strong>, and
+        the emulators too (breaknes); cell libraries and datasets are reused across projects.</li>
+      <li>The methods of the “physical” part (decapsulation, imaging, stitching, polishing) are shared: the
+        English translation of the chips-howto methods lives in the dmgcpu wiki, and the SEGAChips
+        “standard workflow” repeats the same steps.</li>
+      <li>The results of mature projects are formalized as “research complete” plus an archive for refining
+        schematics and porting them to HDL (breaks).</li>
     </ul>
-    <p>Совет: заводите репозиторий результата <strong>сразу</strong> и пополняйте по ходу — так же, как это
-      сделано в перечисленных проектах. Через пару месяцев «сырые» данные без контекста превратятся
-      в бесполезный мусор, а wiki-структура с датасетами останется ценностью.</p>
+    <p>Advice: create the repository of results <strong>right away</strong> and keep adding to it as you go — the same
+      way it was done in the projects listed above. In a couple of months, “raw” data without context will
+      turn into useless garbage, while the wiki structure with datasets will retain its value.</p>
   </section>
 
-  <!-- Чек-лист нового чипа -->
+  <!-- Checklist for a new chip -->
   <section class="doc-section" id="chek-list">
-    <h2>Чек-лист нового чипа</h2>
+    <h2>Checklist for a new chip</h2>
     <ul class="checklist">
-      <li><input type="checkbox" disabled><span><strong>0. Контекст</strong>: назначение, маркировка/ревизия, даташит, патенты, чужие реверсы.
-        Есть ли готовые датасеты? Какая архитектура ожидается (ячейки/кастом/память)?</span></li>
-      <li><input type="checkbox" disabled><span><strong>Цель</strong>: полный нетлист? ячеечный нетлист? модель? обзор? — записана.</span></li>
-      <li><input type="checkbox" disabled><span><strong>1. Вскрытие</strong>: термическое или химическое; ТБ (очки, перчатки, вытяжка).</span></li>
-      <li><input type="checkbox" disabled><span><strong>2. Съёмка</strong>: слои M2/M1/poly/diff, моторизация, перекрытие кадров, контроль полировки.</span></li>
-      <li><input type="checkbox" disabled><span><strong>3. Master-образ</strong>: сшивка (Fiji), подготовка (масштаб, маски, зоны), хранение +
-        <code>datasets.md</code> с кредитами.</span></li>
-      <li><input type="checkbox" disabled><span><strong>4. Трассировка</strong>: порты → ячейки → провода (Deroute), экспорт Verilog,
-        сохранение <code>.xmlz</code>.</span></li>
-      <li><input type="checkbox" disabled><span><strong>5. Ячейки</strong>: если чип ячеечный — библиотека (<code>patterns_db.txt</code> + картинки),
-        разметка Patterns, экспорт XML в Deroute.</span></li>
-      <li><input type="checkbox" disabled><span><strong>6. Верификация</strong>: симуляция (Icarus), схема из HDL (EDA), сверка с даташитом/эталоном;
-        честные пометки <code>TBD</code>.</span></li>
-      <li><input type="checkbox" disabled><span><strong>7. Документация</strong>: папка чипа по шаблону, декомпозиция на модули, имена сигналов,
-        wiki/книга, аннотированное фото.</span></li>
-      <li><input type="checkbox" disabled><span><strong>8. Переиспользование</strong>: HDL/Logisim/эмулятор, ссылки и кредиты, лицензия.</span></li>
+      <li><input type="checkbox" disabled><span><strong>0. Context</strong>: purpose, markings/revision, datasheet, patents, other people’s reverse engineering.
+        Are there ready-made datasets? What architecture is expected (cells/custom/memory)?</span></li>
+      <li><input type="checkbox" disabled><span><strong>Goal</strong>: a full netlist? a cell-level netlist? a model? an overview? — written down.</span></li>
+      <li><input type="checkbox" disabled><span><strong>1. Decapsulation</strong>: thermal or chemical; safety (goggles, gloves, fume hood).</span></li>
+      <li><input type="checkbox" disabled><span><strong>2. Imaging</strong>: layers M2/M1/poly/diff, motorization, frame overlap, polishing control.</span></li>
+      <li><input type="checkbox" disabled><span><strong>3. Master image</strong>: stitching (Fiji), preparation (scale, masks, zones), storage +
+        <code>datasets.md</code> with credits.</span></li>
+      <li><input type="checkbox" disabled><span><strong>4. Tracing</strong>: ports → cells → wires (Deroute), Verilog export,
+        saving <code>.xmlz</code>.</span></li>
+      <li><input type="checkbox" disabled><span><strong>5. Cells</strong>: if the chip is cell-based — a library (<code>patterns_db.txt</code> + images),
+        Patterns annotation, XML export into Deroute.</span></li>
+      <li><input type="checkbox" disabled><span><strong>6. Verification</strong>: simulation (Icarus), schematic from HDL (EDA), cross-check against the
+        datasheet/reference; honest <code>TBD</code> marks.</span></li>
+      <li><input type="checkbox" disabled><span><strong>7. Documentation</strong>: chip folder per the template, decomposition into modules, signal names,
+        wiki/book, annotated photo.</span></li>
+      <li><input type="checkbox" disabled><span><strong>8. Reuse</strong>: HDL/Logisim/emulator, references and credits, license.</span></li>
     </ul>
   </section>
 
-  <!-- Карта этап -> инструмент -> пример -->
+  <!-- Stage -> tool -> example map -->
   <section class="doc-section" id="karta">
-    <h2>Карта «этап → инструмент → пример»</h2>
+    <h2>“Stage → tool → example” map</h2>
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th>Этап</th><th>Инструменты</th><th>Репозиторий-пример</th><th>Артефакт</th></tr>
+          <tr><th>Stage</th><th>Tools</th><th>Example repository</th><th>Artifact</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>0. Контекст</td>
-            <td>даташиты, патенты, форумы, siliconpr0n</td>
+            <td>0. Context</td>
+            <td>datasheets, patents, forums, siliconpr0n</td>
             <td>psxcpu, ula, mappers</td>
-            <td>заметка о чипе/ревизии</td>
+            <td>chip/revision memo</td>
           </tr>
           <tr>
-            <td>1. Вскрытие</td>
-            <td>горелка, HF/азотная, ацетон</td>
+            <td>1. Decapsulation</td>
+            <td>burner, HF/nitric, acetone</td>
             <td>chips-howto (<code>methods.md</code>, <code>hf.md</code>), SEGAChips</td>
-            <td>кристалл</td>
+            <td>die</td>
           </tr>
           <tr>
-            <td>2. Съёмка</td>
-            <td>металлографический микроскоп, моторизация, полировка</td>
+            <td>2. Imaging</td>
+            <td>metallographic microscope, motorization, polishing</td>
             <td>chips-howto, dmgcpu, psxcpu</td>
-            <td>raw dataset (слайды)</td>
+            <td>raw dataset (slides)</td>
           </tr>
           <tr>
-            <td>3. Сшивка</td>
+            <td>3. Stitching</td>
             <td>Fiji/ImageJ, Hugin</td>
             <td>chips-howto, psxcpu, SEGAChips</td>
             <td>Master Dataset (fused)</td>
           </tr>
           <tr>
-            <td>4. Трассировка</td>
-            <td><strong>Deroute</strong> (+Photoshop на старте)</td>
+            <td>4. Tracing</td>
+            <td><strong>Deroute</strong> (+Photoshop early on)</td>
             <td>dmgcpu, SEGAChips, mappers, ula, psxcpu</td>
             <td><code>.xmlz</code>, Verilog</td>
           </tr>
           <tr>
-            <td>5. Ячейки</td>
+            <td>5. Cells</td>
             <td><strong>Patterns</strong></td>
             <td>psxcpu, SEGAChips (ArbPatterns/PSG), mappers (Sharp)</td>
             <td><code>patterns_db</code>, <code>.wrk</code>, XML</td>
           </tr>
           <tr>
-            <td>6. Верификация</td>
-            <td>Icarus/GTKWave, PlanAhead, Logisim, тест-ромы</td>
+            <td>6. Verification</td>
+            <td>Icarus/GTKWave, PlanAhead, Logisim, test ROMs</td>
             <td>ula, dmgcpu, mappers, breaks</td>
-            <td>волны, схемы, диффы</td>
+            <td>waveforms, schematics, diffs</td>
           </tr>
           <tr>
-            <td>7. Анализ/доки</td>
-            <td>wiki, locator-карты, книги</td>
+            <td>7. Analysis/docs</td>
+            <td>wiki, locator maps, books</td>
             <td>breaks, dmgcpu, SEGAChips, ula</td>
-            <td>wiki/книги, аннотации</td>
+            <td>wiki/books, annotations</td>
           </tr>
           <tr>
-            <td>8. Переиспользование</td>
-            <td>Verilog, Logisim, эмуляторы</td>
+            <td>8. Reuse</td>
+            <td>Verilog, Logisim, emulators</td>
             <td>SovietChips, breaks (Breaknes), mappers</td>
-            <td>HDL/модели/эмуляторы</td>
+            <td>HDL/models/emulators</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <p class="doc-closing"><em>Составлено по материалам репозиториев emu-russia и их документации. Английская версия:
-    <a href="../specs/workflow.en.md">workflow.en.md</a>. Обсуждение задачи —
+  <p class="doc-closing"><em>Compiled from the materials of the emu-russia repositories and their documentation. The Russian
+    version: <a href="../specs/workflow.ru.md">workflow.ru.md</a>. Task discussion —
     <a href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">issue #8</a>.</em></p>
 </main>
 
-<!-- ============ Подвал ============ -->
+<!-- ============ Footer ============ -->
 <footer class="site-footer">
   <div class="container">
-    <p>Материал подготовлен по репозиториям <strong>emu-russia</strong>; см.
-      <a href="../specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) и
+    <p>Prepared from the <strong>emu-russia</strong> repositories; see
+      <a href="../specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) and
       <a href="../specs/workflow.en.md">specs/workflow.en.md</a> (EN).</p>
-    <p>Страница предназначена для размещения на <strong>GitHub Pages</strong> (папка <code>docs/</code>) —
-      одностраничный HTML-вариант методического документа «Workflow исследования микросхем», без внешних зависимостей.</p>
-    <p class="small">© emu-russia · chips-howto · Исходная разметка: <code>specs/workflow.ru.md</code> ·
-      Обсуждение: <a href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">GitHub issue #8</a></p>
-    <a class="to-top" href="#top">↑ К началу страницы</a>
+    <p>HTML versions: <a href="index.html">index.html</a> (English) ·
+      <a href="index_ru.html">index_ru.html</a> (Russian). Markdown sources:
+      <a href="../specs/workflow.en.md">workflow.en.md</a> ·
+      <a href="../specs/workflow.ru.md">workflow.ru.md</a>.</p>
+    <p>This single-file page is intended for <strong>GitHub Pages</strong> hosting and references the images with relative
+      paths (<code>../imgstore/...</code>), so the site must be deployed <strong>from the repository root</strong>
+      (Settings → Pages → Deploy from a branch → branch <code>main</code>, folder <code>/</code>) rather than from the <code>docs/</code> folder —
+      the pages then live at <code>https://&lt;user&gt;.github.io/chips-howto/docs/</code>.</p>
+    <p class="small">© emu-russia · chips-howto · Source markup: <code>specs/workflow.en.md</code> ·
+      Discussion: <a href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">GitHub issue #8</a></p>
+    <a class="to-top" href="#top">↑ Back to top</a>
   </div>
 </footer>
 
@@ -1324,7 +1342,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     try {
       var s = localStorage.getItem(KEY);
       if (s === "light" || s === "dark") { return s; }
-    } catch (e) { /* localStorage недоступен — игнорируем */ }
+    } catch (e) { /* localStorage unavailable — ignore */ }
     return null;
   }
 
@@ -1335,10 +1353,10 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
   function apply(theme) {
     root.setAttribute("data-theme", theme);
     if (btn) {
-      btn.textContent = theme === "dark" ? "☀️ Светлая" : "🌙 Тёмная";
+      btn.textContent = theme === "dark" ? "☀️ Light" : "🌙 Dark";
       btn.setAttribute("aria-label", theme === "dark"
-        ? "Включить светлую тему"
-        : "Включить тёмную тему");
+        ? "Switch to light theme"
+        : "Switch to dark theme");
     }
   }
 
