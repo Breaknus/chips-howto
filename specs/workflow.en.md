@@ -127,6 +127,11 @@ PSX CPU (37,600 cells) — only to the cell level with a library.
    (PSX CPU: "the revisions were re-synthesized from Verilog — tracing must be redone"). The revision
    is determined from the package markings (`L9A0048` → revision 90048) and from the "tattoo" in the
    corner of the die. In mappers there is a whole "zoo" of MMC1 revisions with donor games.
+6. **The board and the environment.** Study the PCB the chip sits on: board revisions, routing,
+   surrounding components — this helps to understand the purpose of the pins and external signals.
+   Sometimes the board itself is reconstructed: from Gekkio's schematic, dmgcpu rebuilt the netlist
+   of the DMG-CPU-06 motherboard (chip + RAM + cartridge slot + front board) and uses the Verilog
+   model of the board for design verification (`wiki/pcb.md`).
 
 ### Architectural overview from photos
 
