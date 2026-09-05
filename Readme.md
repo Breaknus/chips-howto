@@ -18,9 +18,9 @@
 - [docs/index.html](/docs/index.html) — HTML-версия для GitHub Pages, **на английском** (основная; лендинг с плитками и переключателем тёмной/светлой темы)
 - [docs/index_ru.html](/docs/index_ru.html) — HTML-версия **на русском** (дополнительная; со ссылкой на английскую)
 
-> **GitHub Pages**: страницы `docs/index.html` и `docs/index_ru.html` ссылаются на картинки
-> относительными путями (`../imgstore/...`), поэтому публиковать сайт нужно **с корня репозитория**
-> (Settings → Pages → Deploy from a branch → ветка `main`, папка `/`), а не из папки `/docs`.
-> Тогда сайт будет доступен по адресу вида `https://<user>.github.io/chips-howto/docs/`
-> (английская версия — `index.html`, русская — `index_ru.html`).
+> **GitHub Pages**: страницы в `docs/` **самодостаточны** — нужные картинки продублированы в
+> `docs/imgstore/` и подключаются относительными путями (`imgstore/...`), поэтому папку `docs/`
+> можно публиковать как есть: Settings → Pages → Deploy from a branch → ветка `main`, папка `/docs`.
+> Тогда английская (основная) версия будет по адресу `https://<user>.github.io/chips-howto/`,
+> русская — `https://<user>.github.io/chips-howto/index_ru.html`.
 > Локально файлы тоже можно просто открыть в браузере — картинки подхватятся.

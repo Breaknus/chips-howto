@@ -363,8 +363,8 @@
       a step-by-step plan, tools, typical pitfalls, and examples from chips that have already been dissected.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="index_ru.html" hreflang="ru">🇷🇺 Русская версия</a>
-      <a class="btn" href="../specs/workflow.en.md">📄 English (Markdown)</a>
-      <a class="btn" href="../specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
+      <a class="btn" href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.en.md">📄 English (Markdown)</a>
+      <a class="btn" href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
       <a class="btn" href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">🐞 GitHub issue #8</a>
       <a class="btn" href="https://github.com/emu-russia/chips-howto" target="_blank" rel="noopener">📦 chips-howto repository</a>
     </div>
@@ -458,7 +458,7 @@
   <!-- Introduction -->
   <section class="doc-section" id="vvedenie" aria-label="Introduction">
     <p><em>This is the English version of the document. The Russian original is
-      <a href="../specs/workflow.ru.md">workflow.ru.md</a>.</em></p>
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.ru.md">workflow.ru.md</a>.</em></p>
     <blockquote class="quote">
       <p>The general workflow for studying integrated circuits, distilled from the
         <a href="https://github.com/emu-russia" target="_blank" rel="noopener">emu-russia</a> projects:
@@ -475,7 +475,7 @@
     </blockquote>
 
     <figure>
-      <img src="../imgstore/chips_howto_1.jpg" alt="Board with chips">
+      <img src="imgstore/chips_howto_1.jpg" alt="Board with chips">
       <figcaption><em>A neural network’s idea of “studying chips”. In reality it is a bit more methodical :)</em></figcaption>
     </figure>
 
@@ -649,7 +649,7 @@
       the logic, where the cells, where the analog blocks. Example — the PSX CPU: “most of the chip is a
       ‘jumble’ of synthesized HDL logic (cells), with memory and registers along the edges”.</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_overview.jpg" alt="PSX CPU die (CXD8530CQ)">
+      <img src="imgstore/workflow/psxcpu_overview.jpg" alt="PSX CPU die (CXD8530CQ)">
       <figcaption><em>An overview shot of the PSX CPU: regular cell fields and “custom” blocks along the edges are
         visible. Such a picture immediately hints at the strategy (psxcpu).</em></figcaption>
     </figure>
@@ -661,21 +661,21 @@
   <section class="doc-section" id="etapa-1">
     <h2><span class="stage-num">Stage 1.</span> Opening the package (decapsulation)</h2>
     <p>The goal is to reach the die without damaging it. Detailed “homebrew” instructions are in
-      <a href="../methods.md">methods.md</a> and <a href="../hf.md">hf.md</a>; here — the digest and its place in the overall process.</p>
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/methods.md">methods.md</a> and <a href="https://github.com/emu-russia/chips-howto/blob/main/hf.md">hf.md</a>; here — the digest and its place in the overall process.</p>
 
     <h3>Thermal method (“ACID FREE”, no acids)</h3>
     <p>Tools: a gas burner, pliers, a mask.</p>
     <figure>
-      <img src="../imgstore/shop/unpackage_tools.jpg" alt="Tools for decapping">
+      <img src="imgstore/shop/unpackage_tools.jpg" alt="Tools for decapping">
     </figure>
     <p>The package is clamped in pliers and roasted with the burner outdoors, in a deserted spot,
       until the plastic turns into gray ash:</p>
     <figure>
-      <img src="../imgstore/shop/package_fried.jpg" alt="Roasted package">
+      <img src="imgstore/shop/package_fried.jpg" alt="Roasted package">
     </figure>
     <p>Then the charred package is carefully crushed — and the die falls out:</p>
     <figure>
-      <img src="../imgstore/shop/dig.jpg" alt="Die extraction">
+      <img src="imgstore/shop/dig.jpg" alt="Die extraction">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
@@ -688,10 +688,10 @@
     <p>For ceramic packages and for <strong>developing the diffusion</strong> acids are used. Across the repositories
       you find: nitric acid (the PSX CPU shots on polysilicon were made with acid etching —
       “there is lots of debris in the photos, but everything needed can still be extracted”, psxcpu) and
-      <strong>hydrofluoric acid (HF)</strong> — see <a href="../hf.md">hf.md</a>. HF etches glass and silicon and is used, for
+      <strong>hydrofluoric acid (HF)</strong> — see <a href="https://github.com/emu-russia/chips-howto/blob/main/hf.md">hf.md</a>. HF etches glass and silicon and is used, for
       example, for non-uniform etching that optically reveals the N/P-doped regions:</p>
     <figure>
-      <img src="../imgstore/si_hf.jpg" alt="Effect of HF on silicon">
+      <img src="imgstore/si_hf.jpg" alt="Effect of HF on silicon">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
@@ -703,10 +703,10 @@
     <ul>
       <li>Goggles, gloves, mask/fume hood — always.</li>
       <li>Acetone is a carcinogen; GOI paste (chromium oxides) is a mutagen; acids — you get the idea.</li>
-      <li>Finger cots are handy when working with HF (see <a href="../hf.md">hf.md</a>):</li>
+      <li>Finger cots are handy when working with HF (see <a href="https://github.com/emu-russia/chips-howto/blob/main/hf.md">hf.md</a>):</li>
     </ul>
     <figure>
-      <img src="../imgstore/finger_condoms.jpg" alt="Finger cots">
+      <img src="imgstore/finger_condoms.jpg" alt="Finger cots">
     </figure>
 
     <h3>Pitfalls</h3>
@@ -722,7 +722,7 @@
     <h3>Equipment</h3>
     <p>A metallographic microscope (in the homebrew guides — an inexpensive AmScope) plus a camera:</p>
     <figure>
-      <img src="../imgstore/shop/micro.jpg" alt="Microscope">
+      <img src="imgstore/shop/micro.jpg" alt="Microscope">
     </figure>
     <p>Practical requirements (dmgcpu/chips-howto):</p>
     <ul>
@@ -745,13 +745,13 @@
       a microscope slide:</p>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/shop/dremel.jpg" alt="Dremel">
+        <img src="imgstore/shop/dremel.jpg" alt="Dremel">
       </figure>
       <figure>
-        <img src="../imgstore/shop/paste_goi.jpg" alt="GOI paste">
+        <img src="imgstore/shop/paste_goi.jpg" alt="GOI paste">
       </figure>
       <figure>
-        <img src="../imgstore/shop/glued_chip.jpg" alt="Chip glued to a slide">
+        <img src="imgstore/shop/glued_chip.jpg" alt="Chip glued to a slide">
       </figure>
     </div>
     <p>A tip from the homebrew guides: the chip is glued onto “bumps” of adhesive so that it is held from
@@ -762,7 +762,7 @@
       <p>Protect your eyes — paste particles and shards fly around.</p>
     </div>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Result of a failed polishing">
+      <img src="imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Result of a failed polishing">
       <figcaption><em>“Lapping disaster” (psxcpu): the right-hand rows of cells were ground straight down “to the meat”,
         and parts of M1 had to be imaged separately afterwards. Polish carefully and keep the process under control.</em></figcaption>
     </figure>
@@ -790,9 +790,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><img class="thumb" src="../imgstore/shop/order1.jpg" alt="Snake order of shooting slides"></td>
-            <td><img class="thumb" src="../imgstore/shop/options.jpg" alt="Grid/Collection stitching options"></td>
-            <td><img class="thumb" src="../imgstore/shop/fused.jpg" alt="Fused result image"></td>
+            <td><img class="thumb" src="imgstore/shop/order1.jpg" alt="Snake order of shooting slides"></td>
+            <td><img class="thumb" src="imgstore/shop/options.jpg" alt="Grid/Collection stitching options"></td>
+            <td><img class="thumb" src="imgstore/shop/fused.jpg" alt="Fused result image"></td>
           </tr>
         </tbody>
       </table>
@@ -812,11 +812,11 @@
     </ul>
     <p>Examples of master images:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_m2_fused.jpg" alt="PSX CPU M2 master dataset">
+      <img src="imgstore/workflow/psxcpu_m2_fused.jpg" alt="PSX CPU M2 master dataset">
       <figcaption><em>The stitched M2 metal layer of the PSX CPU — the common coordinate system for tracing (psxcpu).</em></figcaption>
     </figure>
     <figure>
-      <img src="../imgstore/workflow/segachips_fj3002_fused.jpg" alt="FJ3002 fused image">
+      <img src="imgstore/workflow/segachips_fj3002_fused.jpg" alt="FJ3002 fused image">
       <figcaption><em>A small chip in full after stitching — FJ3002 (SEGAChips).</em></figcaption>
     </figure>
     <p>The outcome of the stage is a <strong>Master Dataset</strong>: “the image from which the netlist is recovered”
@@ -844,13 +844,13 @@
         of each module is recovered separately (“a natural process of modular reverse engineering”).</li>
       <li><strong>Mark the module’s ports</strong> (vias <code>ViasInput</code>/<code>ViasOutput</code>/<code>ViasInout</code>):
         <figure>
-          <img src="../imgstore/workflow/dmgcpu_deroute_ports.png" alt="Module ports in Deroute">
+          <img src="imgstore/workflow/dmgcpu_deroute_ports.png" alt="Module ports in Deroute">
         </figure>
       </li>
       <li><strong>Place the module’s cells</strong> (copy-paste, <code>Ctrl+C</code>/<code>Ctrl+V</code>, is convenient).</li>
       <li><strong>Connect with wires</strong> — “the most interesting part”:
         <figure>
-          <img src="../imgstore/workflow/dmgcpu_deroute_wires.png" alt="Interconnects in Deroute">
+          <img src="imgstore/workflow/dmgcpu_deroute_wires.png" alt="Interconnects in Deroute">
         </figure>
       </li>
       <li><strong>Export to Verilog</strong> — then the module’s schematic can be obtained in any EDA
@@ -883,19 +883,19 @@
         <strong>exported to Verilog RTL</strong>.</li>
     </ul>
     <figure>
-      <img src="../imgstore/workflow/deroute_main_window.png" alt="Deroute main window">
+      <img src="imgstore/workflow/deroute_main_window.png" alt="Deroute main window">
       <figcaption><em>Deroute: a canvas over the photo, entity modes, the hierarchy tree.</em></figcaption>
     </figure>
     <p>Semi-automation: a wire between two vias can be laid out by the <strong>A* router</strong> — it goes around
       cells and regions as if they were walls:</p>
     <figure>
-      <img src="../imgstore/workflow/deroute_wire_routing.png" alt="Wire routing (A*)">
+      <img src="imgstore/workflow/deroute_wire_routing.png" alt="Wire routing (A*)">
       <figcaption><em>Deroute: the Wire Router (A*) draws a connection between the selected vias, avoiding obstacles.</em></figcaption>
     </figure>
     <p>A trick for large chips (psxcpu): a human places the endpoint vias, and the <strong>wire is finished by a
       script/automation</strong> — semi-automatic tracing:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_deroute_method.png" alt="Semi-automatic tracing">
+      <img src="imgstore/workflow/psxcpu_deroute_method.png" alt="Semi-automatic tracing">
       <figcaption><em>The method from psxcpu: vias at the ends of a track, the conductor between them is completed (semi-)automatically.</em></figcaption>
     </figure>
     <p>Tips from the manual and from practice:</p>
@@ -936,14 +936,14 @@
     <ul>
       <li>on the left — the photo with overlaid pattern frames, on the right — the <strong>pattern library</strong>:
         <figure>
-          <img src="../imgstore/workflow/patterns_workspace.png" alt="Patterns workspace">
+          <img src="imgstore/workflow/patterns_workspace.png" alt="Patterns workspace">
         </figure>
       </li>
       <li>the source image is assigned a <strong>Lambda</strong> parameter (the size of the minimal topological
         unit), and the sizes are measured in lambdas rather than pixels; <strong>Delta</strong> is the error tolerance,
         and the DB candidates matching the frame size are filtered by it:
         <figure>
-          <img src="../imgstore/workflow/patterns_lambda_delta.png" alt="Lambda/Delta">
+          <img src="imgstore/workflow/patterns_lambda_delta.png" alt="Lambda/Delta">
         </figure>
       </li>
       <li>when a frame is drawn, the program shows only the size-matching cells from the DB —
@@ -966,16 +966,16 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
       <code>psxcpu/cells/PatternsPSXCPU/</code>):</p>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/patterns_db_NOT1.jpg" alt="Cells from the library: NOT1">
+        <img src="imgstore/workflow/patterns_db_NOT1.jpg" alt="Cells from the library: NOT1">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_3NAND.jpg" alt="3-NAND cell from the library">
+        <img src="imgstore/workflow/patterns_db_3NAND.jpg" alt="3-NAND cell from the library">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_22AOI.jpg" alt="22-AOI cell from the library">
+        <img src="imgstore/workflow/patterns_db_22AOI.jpg" alt="22-AOI cell from the library">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/patterns_db_DFF.jpg" alt="DFF cell from the library">
+        <img src="imgstore/workflow/patterns_db_DFF.jpg" alt="DFF cell from the library">
       </figure>
     </div>
     <p><em>Left to right: NOT1 (inverter), 3-NAND (3-input), 22-AOI = ~((A&amp;B)|(C&amp;D)) — the notation is
@@ -984,7 +984,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     <p>The outcome of the annotation is a <strong>cell map</strong>: a photograph with named instances and row numbers
       (addressing by “part/row/place”), which later guides the tracing in Deroute:</p>
     <figure>
-      <img src="../imgstore/workflow/psxcpu_cells_map.jpg" alt="PSX CPU cell map">
+      <img src="imgstore/workflow/psxcpu_cells_map.jpg" alt="PSX CPU cell map">
       <figcaption><em>Cell map of a PSX CPU part: every rectangle is a cell instance with its type name
         (psxcpu, the Patterns tool).</em></figcaption>
     </figure>
@@ -1011,10 +1011,10 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/mappers_22aoi_topo.jpg" alt="22-AOI cell: topology">
+        <img src="imgstore/workflow/mappers_22aoi_topo.jpg" alt="22-AOI cell: topology">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/mappers_22aoi_tran.jpg" alt="22-AOI cell: transistors">
+        <img src="imgstore/workflow/mappers_22aoi_tran.jpg" alt="22-AOI cell: transistors">
       </figure>
     </div>
     <p><em>The “triplet” format (mappers, VRC6): on the left — the cell’s topology from the photo, on the right —
@@ -1041,11 +1041,11 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     <p>The Verilog exported from Deroute is fed to an EDA (Xilinx PlanAhead), and it draws the
       schematic by itself. This is both a “readable result” and a connectivity check:</p>
     <figure>
-      <img src="../imgstore/workflow/mappers_mbc1_planahead.png" alt="MBC1 schematic synthesized by PlanAhead">
+      <img src="imgstore/workflow/mappers_mbc1_planahead.png" alt="MBC1 schematic synthesized by PlanAhead">
       <figcaption><em>MBC1: recovered Verilog → PlanAhead → a ready schematic (mappers).</em></figcaption>
     </figure>
     <figure>
-      <img src="../imgstore/workflow/ula_top_schematic.png" alt="ULA top-module schematic">
+      <img src="imgstore/workflow/ula_top_schematic.png" alt="ULA top-module schematic">
       <figcaption><em>A fragment of the ULA schematic (ula): this is how the modules look after the EDA auto-drawing.</em></figcaption>
     </figure>
 
@@ -1084,7 +1084,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
         chip’s netlist — then simulating the HDL is equivalent to simulating the chip:</li>
     </ul>
     <figure>
-      <img src="../imgstore/workflow/breaks_chip_perfect_approach.png" alt="The die-perfect approach">
+      <img src="imgstore/workflow/breaks_chip_perfect_approach.png" alt="The die-perfect approach">
       <figcaption><em>An illustration of the breaks approach: the HDL mirrors the netlist of the original chip as closely as possible.</em></figcaption>
     </figure>
 
@@ -1111,10 +1111,10 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="../imgstore/workflow/breaks_6502_locator.jpg" alt="6502 block locator map">
+        <img src="imgstore/workflow/breaks_6502_locator.jpg" alt="6502 block locator map">
       </figure>
       <figure>
-        <img src="../imgstore/workflow/breaks_2a03g_labels.png" alt="Labeled 2A03 die layer">
+        <img src="imgstore/workflow/breaks_2a03g_labels.png" alt="Labeled 2A03 die layer">
       </figure>
     </div>
     <p><em>On the left: the MOS 6502 block locator (breaks). On the right: a 2A03 die layer with labels — this
@@ -1162,7 +1162,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
       as “books” (breaks compiles the wiki into PDF books and publishes releases), and as <strong>annotated photos</strong>
       (“Back from HDL” — the recovered netlist is overlaid on the die shot):</p>
     <figure>
-      <img src="../imgstore/workflow/dmgcpu_die_netlist.png" alt="Die with the recovered netlist">
+      <img src="imgstore/workflow/dmgcpu_die_netlist.png" alt="Die with the recovered netlist">
       <figcaption><em>DMG-CPU: the recovered schematic overlaid on the die shot. Such “reverse mapping” helps to spot
         tracing errors (dmgcpu).</em></figcaption>
     </figure>
@@ -1307,7 +1307,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
   </section>
 
   <p class="doc-closing"><em>Compiled from the materials of the emu-russia repositories and their documentation. The Russian
-    version: <a href="../specs/workflow.ru.md">workflow.ru.md</a>. Task discussion —
+    version: <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.ru.md">workflow.ru.md</a>. Task discussion —
     <a href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">issue #8</a>.</em></p>
 </main>
 
@@ -1315,12 +1315,12 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
 <footer class="site-footer">
   <div class="container">
     <p>Prepared from the <strong>emu-russia</strong> repositories; see
-      <a href="../specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) and
-      <a href="../specs/workflow.en.md">specs/workflow.en.md</a> (EN).</p>
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) and
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.en.md">specs/workflow.en.md</a> (EN).</p>
     <p>HTML versions: <a href="index.html">index.html</a> (English) ·
       <a href="index_ru.html">index_ru.html</a> (Russian). Markdown sources:
-      <a href="../specs/workflow.en.md">workflow.en.md</a> ·
-      <a href="../specs/workflow.ru.md">workflow.ru.md</a>.</p>
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.en.md">workflow.en.md</a> ·
+      <a href="https://github.com/emu-russia/chips-howto/blob/main/specs/workflow.ru.md">workflow.ru.md</a>.</p>
     <p>This single-file page is intended for <strong>GitHub Pages</strong> hosting and references the images with relative
       paths (<code>../imgstore/...</code>), so the site must be deployed <strong>from the repository root</strong>
       (Settings → Pages → Deploy from a branch → branch <code>main</code>, folder <code>/</code>) rather than from the <code>docs/</code> folder —
