@@ -7,3 +7,20 @@
 ![chips_howto_1](/imgstore/chips_howto_1.jpg)
 
 (Так в представлении нейросети выглядит изучение микросхем).
+
+## Содержание
+
+- [methods.md](/methods.md) — методы исследования (термическое вскрытие, съёмка, сшивка, полировка, восстановление топологии и нетлиста, ACID FREE)
+- [hf.md](/hf.md) — плавиковая кислота: методики и техника безопасности
+- [gds.md](/gds.md) — формат GDSII для описания топологии
+- [specs/workflow.ru.md](/specs/workflow.ru.md) — **общий workflow изучения микросхем** (русский)
+- [specs/workflow.en.md](/specs/workflow.en.md) — the same in English (chip research workflow)
+- [docs/index.html](/docs/index.html) — HTML-версия для GitHub Pages, **на английском** (основная; лендинг с плитками и переключателем тёмной/светлой темы)
+- [docs/index_ru.html](/docs/index_ru.html) — HTML-версия **на русском** (дополнительная; со ссылкой на английскую)
+
+> **GitHub Pages**: страницы `docs/index.html` и `docs/index_ru.html` ссылаются на картинки
+> относительными путями (`../imgstore/...`), поэтому публиковать сайт нужно **с корня репозитория**
+> (Settings → Pages → Deploy from a branch → ветка `main`, папка `/`), а не из папки `/docs`.
+> Тогда сайт будет доступен по адресу вида `https://<user>.github.io/chips-howto/docs/`
+> (английская версия — `index.html`, русская — `index_ru.html`).
+> Локально файлы тоже можно просто открыть в браузере — картинки подхватятся.
