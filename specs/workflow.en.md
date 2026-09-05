@@ -64,7 +64,7 @@ stumble. At the end — a [compact checklist](#checklist-for-a-new-chip).
 | [psxcpu](https://github.com/emu-russia/psxcpu) | PlayStation CPU: CXD8530CQ (~850K transistors) | how to beat the scale: cells → Patterns → megacells |
 | [mappers](https://github.com/emu-russia/mappers) | NES/GB mappers: MMC1, MBC1, VRC6/7, µPD775x, … | small chips: the fab's cell library, Deroute, Logisim |
 | [ula](https://github.com/emu-russia/ula) | ZX Spectrum ULA 6C001 (a "sea of logic") | an explicit 6-step process, netlist-vs-HDL cross-check |
-| [SovietChips](https://github.com/emu-russia/SovietChips) | the Soviet 580ВИ53 (an i8253 clone) | an "artifact showcase": Verilog + Logisim + a PDF report |
+| [SovietChips](https://github.com/emu-russia/SovietChips) | the Soviet 580ВИ53 (presumably an i8253 clone) | an "artifact showcase": Verilog + Logisim + a PDF report |
 | [Deroute](https://github.com/emu-russia/Deroute) | the tracing tool | stage 4: "untangling wires" on top of photos |
 | [Patterns](https://github.com/emu-russia/Patterns) | the cell-search tool | stage 5: semi-automatic annotation of standard cells |
 

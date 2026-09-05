@@ -62,7 +62,7 @@
 | [psxcpu](https://github.com/emu-russia/psxcpu) | CPU PlayStation: CXD8530CQ (~850K транзисторов) | как побеждать масштаб: ячейки → Patterns → мегаячейки |
 | [mappers](https://github.com/emu-russia/mappers) | мапперы NES/GB: MMC1, MBC1, VRC6/7, µPD775x, … | маленькие чипы: библиотека ячеек фаба, Deroute, Logisim |
 | [ula](https://github.com/emu-russia/ula) | ZX Spectrum ULA 6C001 («море логики») | явный процесс из 6 шагов, сверка нетлиста с HDL |
-| [SovietChips](https://github.com/emu-russia/SovietChips) | советский 580ВИ53 (клон i8253) | «витрина артефактов»: Verilog + Logisim + PDF-отчёт |
+| [SovietChips](https://github.com/emu-russia/SovietChips) | советский 580ВИ53 (предположительно клон i8253) | «витрина артефактов»: Verilog + Logisim + PDF-отчёт |
 | [Deroute](https://github.com/emu-russia/Deroute) | инструмент трассировки | этап 4: «распутывание проводов» поверх фото |
 | [Patterns](https://github.com/emu-russia/Patterns) | инструмент поиска ячеек | этап 5: полуавтоматическая разметка стандартных ячеек |
 
