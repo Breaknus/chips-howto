@@ -73,6 +73,9 @@ understanding" in emulators (see [dmgcpu](https://github.com/emu-russia/dmgcpu),
 
 **Deliverable:** stated goal, reference list, terminology dictionary.
 
+**⚠ Pitfalls:** missing references lead to self-invented signal names; terminology fights
+(latch/DFF/FF, PRG/CHR) started after tracing begins eat weeks.
+
 ---
 
 ## Step 1. Chip and dataset acquisition
@@ -87,6 +90,10 @@ understanding" in emulators (see [dmgcpu](https://github.com/emu-russia/dmgcpu),
 3. Decide on the reference image — the **Master Dataset** from which the netlist will be reconstructed.
 
 **Deliverable:** the chip (or someone's dataset), recorded revision, imaging plan.
+
+**⚠ Pitfalls (psxcpu):** a wrong-revision die voids weeks: early SCPH-1000 had the old
+architecture (3 metal layers) while the study targets `90048`; newer revisions are "rebuilt"
+from verilog — tracing comparison across revisions is meaningless.
 
 ---
 
@@ -104,6 +111,10 @@ hood, protect eyes and hands (see the warnings in methods.md and hf.md).
 
 **Deliverable:** a clean die on a glass slide.
 
+**⚠ Pitfalls:** burnt plastic fumes cause pulmonary edema — outdoors/fume hood only;
+acetone is a carcinogen; HF binds calcium — finger cots, mask, calcium at hand;
+do not stare into eyepieces for long — light reflects off the die into the retina.
+
 ---
 
 ## Step 3. Dataset imaging
@@ -118,6 +129,12 @@ From [methods.md](/methods.md):
    lap1-4 in [dmgcpu](https://github.com/emu-russia/dmgcpu)).
 
 **Deliverable:** slide sets `0001.jpg ... NNNN.jpg` per layer.
+
+**⚠ Pitfalls (psxcpu):** skipping part of the die in a rush ("right three columns ground
+to the bone" — lapping disaster) = holes in the netlist forever; dirty post-etch datasets
+are still usable, gaps are not. Focus is a tradeoff: sharp M2 does not see through to M1,
+defocus shows M1 but loses detail — shoot both. The 20x M1 lap turned out "practically
+useless", only 50x was usable.
 
 ---
 
@@ -136,6 +153,10 @@ From [methods.md](/methods.md):
 |---|---|
 | ZX Spectrum ULA | ![ula6c001](/imgstore/workflow/ula6c001.png) |
 | PSX CPU overview | ![psxcpu](/imgstore/workflow/psxcpu_overview.jpg) |
+| Stitched M2 | ![m2](/imgstore/workflow/psx_m2_fused.jpg) |
+
+**⚠ Pitfalls:** if Fiji does not converge, fix imaging overlap/scale consistency first —
+redoing a lap is cheaper than manual fitting in Hugin.
 
 ---
 
@@ -149,6 +170,10 @@ From [methods.md](/methods.md):
    M1/M2/Poly in [psxcpu](https://github.com/emu-russia/psxcpu)).
 
 **Deliverable:** complete image set of all die layers.
+
+**⚠ Pitfalls:** chromium oxides from GOI paste are mutagens; over-polishing eats the layer
+("lapping disaster" right edge in psxcpu) — one extra short session beats one long one;
+glue the die to the slide firmly or it wanders off during polishing.
 
 ---
 
@@ -172,6 +197,10 @@ For standard-cell chips (nearly everything after the 70s) build the **cell catal
 
 **Deliverable:** `cells.md` + pattern database (patterns_db).
 
+**⚠ Pitfalls:** dummies/fillers exist and must be recognized (psxcpu FILLER cell),
+but do not "delete everything": in ula peripheral inverters are excluded from the main
+netlist, yet one peripheral-cell inverter is genuinely used by the designers in /AE.
+
 ---
 
 ## Step 7. Netlist extraction (Deroute)
@@ -190,6 +219,11 @@ Practical tracing order (from dmgcpu/psxcpu/mappers histories):
 
 **Deliverable:** netlist (XML) — modules connected by wires.
 
+**⚠ Pitfalls:** set Lambda once (psxcpu: Lambda 6.0, Vias 2, Wire 3) — rescaling breaks
+already-placed entities; draw only the outermost vias, mark intermediate ones `x` so
+dog-legs do not break wire restoration; power/grounds raise false warnings (Deroute #106),
+bidir ports are not floaters (#88).
+
 ---
 
 ## Step 8. Verilog export
@@ -199,6 +233,11 @@ the goal is to replicate the original, not to synthesize). See the pipeline in
 [ula](https://github.com/emu-russia/ula): netlist -> verilog -> EDA.
 
 **Deliverable:** `chip.v` with original nets.
+
+**⚠ Pitfalls:** HDL and netlist diverge in primitive semantics (2-input NOR in the model
+vs the cell library — the ula report); unconnected ports only surface at compile time
+(dmgcpu: "Cell not:g2 port x not connected fixed"); floater buses hang without a bus keeper
+that exists physically in the original (STAT on the internal DL bus, dmgcpu).
 
 ---
 
@@ -210,6 +249,9 @@ Xilinx PlanAhead draws the schematic from Verilog by itself
 [dmgcpu](https://github.com/emu-russia/dmgcpu)).
 
 **Deliverable:** a readable schematic for analysis.
+
+**⚠ Pitfalls:** the EDA schematic is flat and noisy — decompose first (step 10),
+read carefully after.
 
 ---
 
@@ -240,6 +282,11 @@ Xilinx PlanAhead draws the schematic from Verilog by itself
 
 **Deliverable:** module analyses, signal dictionaries, waveforms.
 
+**⚠ Pitfalls:** signal renaming is an atomic pass over wiki+HDL+tran at once
+(breaks: "PPU Signal rename Wave1" — three PRs in one day); "Renaming a signal does not
+make it work differently" (dmgcpu); early eyeball naming breeds false From/Where To rows
+that get rewritten later (dmgcpu #330/#363).
+
 ---
 
 ## Step 11. Verification
@@ -256,6 +303,10 @@ Xilinx PlanAhead draws the schematic from Verilog by itself
   bus (buskeeper/STAT fix in dmgcpu).
 
 **Deliverable:** confirmed netlist + open-questions list.
+
+**⚠ Pitfalls:** naive co-simulation can hang (Icarus hangs in ula) — build a separate
+comparison flow; honest "unverified" beats pretty claims (DMC+OAM in breaks);
+corner case: reading a register while it changes (STAT AND-effect, dmgcpu).
 
 ---
 
@@ -274,6 +325,10 @@ Xilinx PlanAhead draws the schematic from Verilog by itself
   MBC1 in mappers as a cross-reference for the dmgcpu PPU and vice versa.
 
 **Deliverable:** a reproducible study that another human (or agent) can redo.
+
+**⚠ Pitfalls:** edit LLM boilerplate down to a businesslike style (dmgcpu #363); sections
+from different sources duplicate — mark duplicates immediately ("everything will fall into
+place over time", psxcpu); a progress table (dmgcpu wiki) turns chaos into a plan.
 
 ---
 
