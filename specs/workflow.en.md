@@ -484,6 +484,11 @@ For cells of one fab, regularities hold (SEGAChips, psxcpu, mappers):
 *The "triplet" format (mappers, VRC6): on the left — the cell's topology from the photo, on the right —
 its transistor schematic. The third picture (the Logisim model) usually follows.*
 
+A separate trick for regular arrays (breaks, 6502/APU/PPU): **decoders, PLAs and similar matrices
+are read straight off the topology as bit masks** — a transistor present at the crossing of a row
+and a column means "1" in the truth table/microcode. This way the structure is "decoded" at once,
+without tracing each transistor.
+
 ### When is Patterns needed?
 
 A guideline: from **hundreds of cell instances** and dozens of types onward, tracing each cell
@@ -536,7 +541,8 @@ schematic by itself. This is both a "readable result" and a connectivity check:
   undocumented roundings and bit truncations were found.
 - **Multi-level verification** (breaks): per-module HDL unit tests + full functional tests
   (e.g., Klaus) with a clear success criterion ("a hang at address X"); rigs on **real game dumps** —
-  video/audio "players"; cross-checks against independent netlists (visual6502) and measurements
+  video/audio "players"; cross-checks against independent netlists (visual6502), running the netlist
+  on an **FPGA** (for the 6502 — BigEd's simulations from 6502.org) and measurements
   of real hardware (oscilloscope); slow signals (LFO) are artificially sped up in the tests.
 - **"Die-perfect" HDL**: breaks/dmgcpu bring the Verilog to the closest possible match with the
   chip's netlist — then simulating the HDL is equivalent to simulating the chip:
