@@ -16,3 +16,9 @@
 - [specs/workflow.ru.md](/specs/workflow.ru.md) — **общий workflow изучения микросхем** (русский)
 - [specs/workflow.en.md](/specs/workflow.en.md) — the same in English (chip research workflow)
 - [docs/index.html](/docs/index.html) — HTML-версия для GitHub Pages (лендинг с плитками и переключателем тёмной/светлой темы)
+
+> **GitHub Pages**: страница `docs/index.html` ссылается на картинки относительными путями
+> (`../imgstore/...`), поэтому публиковать сайт нужно **с корня репозитория**
+> (Settings → Pages → Deploy from a branch → ветка `main`, папка `/`), а не из папки `/docs`.
+> Тогда сайт будет доступен по адресу вида `https://<user>.github.io/chips-howto/docs/`.
+> Локально файл тоже можно просто открыть в браузере — картинки подхватятся.

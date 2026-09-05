@@ -361,8 +361,8 @@
     <p>Если завтра нам принесут <strong>новую микросхему</strong> — этот документ должен стать нашей отправной точкой:
       пошаговый план, инструменты, типичные грабли и примеры из уже разобранных чипов.</p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="/specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
-      <a class="btn" href="/specs/workflow.en.md">🌐 English (Markdown)</a>
+      <a class="btn btn-primary" href="../specs/workflow.ru.md">📄 Русская версия (Markdown)</a>
+      <a class="btn" href="../specs/workflow.en.md">🌐 English (Markdown)</a>
       <a class="btn" href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">🐞 GitHub issue #8</a>
       <a class="btn" href="https://github.com/emu-russia/chips-howto" target="_blank" rel="noopener">📦 Репозиторий chips-howto</a>
     </div>
@@ -471,7 +471,7 @@
     </blockquote>
 
     <figure>
-      <img src="/imgstore/chips_howto_1.jpg" alt="Плата с микросхемами">
+      <img src="../imgstore/chips_howto_1.jpg" alt="Плата с микросхемами">
       <figcaption><em>«Изучение микросхем» в представлении нейросети. Реальность чуть более методична :)</em></figcaption>
     </figure>
 
@@ -645,7 +645,7 @@
       где ячейки, где аналоговые блоки. Пример — PSX CPU: «большую часть чипа занимает «мешанина»
       синтезированной HDL-логики (ячейки), по краям — память и регистры».</p>
     <figure>
-      <img src="/imgstore/workflow/psxcpu_overview.jpg" alt="Кристалл PSX CPU (CXD8530CQ), обзорный снимок">
+      <img src="../imgstore/workflow/psxcpu_overview.jpg" alt="Кристалл PSX CPU (CXD8530CQ), обзорный снимок">
       <figcaption><em>Обзорный снимок PSX CPU: видно регулярные поля ячеек и «кастомные» блоки по краям. Такая
         картинка сразу подсказывает стратегию (psxcpu).</em></figcaption>
     </figure>
@@ -657,21 +657,21 @@
   <section class="doc-section" id="etapa-1">
     <h2><span class="stage-num">Этап 1.</span> Вскрытие корпуса (декапсуляция)</h2>
     <p>Цель — добраться до кристалла, не повредив его. Подробные «домашние» инструкции —
-      в <a href="/methods.md">methods.md</a> и <a href="/hf.md">hf.md</a>; здесь — выжимка и место в общем процессе.</p>
+      в <a href="../methods.md">methods.md</a> и <a href="../hf.md">hf.md</a>; здесь — выжимка и место в общем процессе.</p>
 
     <h3>Термический метод («ACID FREE», без кислот)</h3>
     <p>Инструменты: газовая горелка, плоскогубцы, маска.</p>
     <figure>
-      <img src="/imgstore/shop/unpackage_tools.jpg" alt="Инструменты для термического вскрытия: горелка и плоскогубцы">
+      <img src="../imgstore/shop/unpackage_tools.jpg" alt="Инструменты для термического вскрытия: горелка и плоскогубцы">
     </figure>
     <p>Корпус зажимается плоскогубцами и обжигается горелкой на улице, в безлюдном месте,
       пока пластик не превратится в серый пепел:</p>
     <figure>
-      <img src="/imgstore/shop/package_fried.jpg" alt="Обожжённый корпус микросхемы">
+      <img src="../imgstore/shop/package_fried.jpg" alt="Обожжённый корпус микросхемы">
     </figure>
     <p>Затем обугленный корпус аккуратно раздавливают — и кристалл выпадает:</p>
     <figure>
-      <img src="/imgstore/shop/dig.jpg" alt="Извлечение кристалла из обугленного корпуса">
+      <img src="../imgstore/shop/dig.jpg" alt="Извлечение кристалла из обугленного корпуса">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
@@ -684,10 +684,10 @@
     <p>Для керамических корпусов и для <strong>проявления диффузии</strong> применяют кислоты. В репозиториях
       встречаются: азотная кислота (съёмка PSX CPU на поликремнии делалась кислотным травлением —
       «на фото много мусора, но всё нужное извлекается», psxcpu) и <strong>плавиковая кислота (HF)</strong> —
-      см. <a href="/hf.md">hf.md</a>. HF травит стекло и кремний и используется, например, для неравномерного
+      см. <a href="../hf.md">hf.md</a>. HF травит стекло и кремний и используется, например, для неравномерного
       вытравливания, оптически проявляющего области N/P-допинга:</p>
     <figure>
-      <img src="/imgstore/si_hf.jpg" alt="Действие плавиковой кислоты (HF) на кремний">
+      <img src="../imgstore/si_hf.jpg" alt="Действие плавиковой кислоты (HF) на кремний">
     </figure>
     <div class="callout warn">
       <span class="ico" aria-hidden="true">⚠️</span>
@@ -699,10 +699,10 @@
     <ul>
       <li>Очки, перчатки, маска/вытяжка — всегда.</li>
       <li>Ацетон — канцероген; паста ГОИ (оксиды хрома) — мутаген; кислоты — сами понимаете.</li>
-      <li>При работе с HF удобны напальчники (см. <a href="/hf.md">hf.md</a>):</li>
+      <li>При работе с HF удобны напальчники (см. <a href="../hf.md">hf.md</a>):</li>
     </ul>
     <figure>
-      <img src="/imgstore/finger_condoms.jpg" alt="Напальчники для работы с HF">
+      <img src="../imgstore/finger_condoms.jpg" alt="Напальчники для работы с HF">
     </figure>
 
     <h3>Грабли</h3>
@@ -718,7 +718,7 @@
     <h3>Оборудование</h3>
     <p>Металлографический микроскоп (в методиках — недорогой AmScope) + камера:</p>
     <figure>
-      <img src="/imgstore/shop/micro.jpg" alt="Металлографический микроскоп с камерой">
+      <img src="../imgstore/shop/micro.jpg" alt="Металлографический микроскоп с камерой">
     </figure>
     <p>Практические требования (dmgcpu/chips-howto):</p>
     <ul>
@@ -741,13 +741,13 @@
       предметное стекло:</p>
     <div class="fig-row">
       <figure>
-        <img src="/imgstore/shop/dremel.jpg" alt="Дремель для полировки">
+        <img src="../imgstore/shop/dremel.jpg" alt="Дремель для полировки">
       </figure>
       <figure>
-        <img src="/imgstore/shop/paste_goi.jpg" alt="Паста ГОИ">
+        <img src="../imgstore/shop/paste_goi.jpg" alt="Паста ГОИ">
       </figure>
       <figure>
-        <img src="/imgstore/shop/glued_chip.jpg" alt="Чип, приклеенный к предметному стеклу">
+        <img src="../imgstore/shop/glued_chip.jpg" alt="Чип, приклеенный к предметному стеклу">
       </figure>
     </div>
     <p>Совет из методов: чип приклеивают на «бугорки» клея, чтобы он держался с боков; сеансы
@@ -758,7 +758,7 @@
       <p>Защищайте глаза — частицы пасты и осколки разлетаются.</p>
     </div>
     <figure>
-      <img src="/imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Результат неудачной полировки PSX CPU">
+      <img src="../imgstore/workflow/psxcpu_lapping_disaster.jpg" alt="Результат неудачной полировки PSX CPU">
       <figcaption><em>«Lapping disaster» (psxcpu): правые ряды ячеек сошлифовали сразу «до мяса», и части M1
         пришлось доснимать отдельно. Полируйте осторожно и контролируйте процесс.</em></figcaption>
     </figure>
@@ -785,9 +785,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><img class="thumb" src="/imgstore/shop/order1.jpg" alt="Порядок съёмки слайдов «змейкой»"></td>
-            <td><img class="thumb" src="/imgstore/shop/options.jpg" alt="Настройки сшивки Grid/Collection stitching"></td>
-            <td><img class="thumb" src="/imgstore/shop/fused.jpg" alt="Сшитый результат (fused image)"></td>
+            <td><img class="thumb" src="../imgstore/shop/order1.jpg" alt="Порядок съёмки слайдов «змейкой»"></td>
+            <td><img class="thumb" src="../imgstore/shop/options.jpg" alt="Настройки сшивки Grid/Collection stitching"></td>
+            <td><img class="thumb" src="../imgstore/shop/fused.jpg" alt="Сшитый результат (fused image)"></td>
           </tr>
         </tbody>
       </table>
@@ -808,11 +808,11 @@
     </ul>
     <p>Примеры мастер-изображений:</p>
     <figure>
-      <img src="/imgstore/workflow/psxcpu_m2_fused.jpg" alt="Мастер-датасет M2 PSX CPU">
+      <img src="../imgstore/workflow/psxcpu_m2_fused.jpg" alt="Мастер-датасет M2 PSX CPU">
       <figcaption><em>Сшитый слой металла M2 PSX CPU — общая система координат для трассировки (psxcpu).</em></figcaption>
     </figure>
     <figure>
-      <img src="/imgstore/workflow/segachips_fj3002_fused.jpg" alt="Fused-изображение FJ3002">
+      <img src="../imgstore/workflow/segachips_fj3002_fused.jpg" alt="Fused-изображение FJ3002">
       <figcaption><em>Маленький чип целиком после сшивки — FJ3002 (SEGAChips).</em></figcaption>
     </figure>
     <p>Итог этапа — <strong>Master Dataset</strong>: «изображение, по которому восстанавливается нетлист»
@@ -840,13 +840,13 @@
         модуля восстанавливают отдельно («естественный процесс модульного реверса»).</li>
       <li><strong>Разметить порты модуля</strong> (виасы <code>ViasInput</code>/<code>ViasOutput</code>/<code>ViasInout</code>):
         <figure>
-          <img src="/imgstore/workflow/dmgcpu_deroute_ports.png" alt="Порты модуля в Deroute">
+          <img src="../imgstore/workflow/dmgcpu_deroute_ports.png" alt="Порты модуля в Deroute">
         </figure>
       </li>
       <li><strong>Разложить ячейки модуля</strong> (удобно копипастом, <code>Ctrl+C</code>/<code>Ctrl+V</code>).</li>
       <li><strong>Соединить проводами</strong> — «самое интересное»:
         <figure>
-          <img src="/imgstore/workflow/dmgcpu_deroute_wires.png" alt="Межсоединения в Deroute">
+          <img src="../imgstore/workflow/dmgcpu_deroute_wires.png" alt="Межсоединения в Deroute">
         </figure>
       </li>
       <li><strong>Экспорт в Verilog</strong> — и схему модуля можно получить в любой EDA
@@ -878,19 +878,19 @@
         <strong>экспортируется в Verilog RTL</strong>.</li>
     </ul>
     <figure>
-      <img src="/imgstore/workflow/deroute_main_window.png" alt="Главное окно Deroute">
+      <img src="../imgstore/workflow/deroute_main_window.png" alt="Главное окно Deroute">
       <figcaption><em>Deroute: холст поверх фото, режимы сущностей, дерево иерархии.</em></figcaption>
     </figure>
     <p>Полуавтоматика: между двумя виасами провод можно проложить <strong>маршрутизатором (A*)</strong> — он
       обходит ячейки и регионы, как стены:</p>
     <figure>
-      <img src="/imgstore/workflow/deroute_wire_routing.png" alt="Маршрутизация провода (A*) в Deroute">
+      <img src="../imgstore/workflow/deroute_wire_routing.png" alt="Маршрутизация провода (A*) в Deroute">
       <figcaption><em>Deroute: Wire Router (A*) прокладывает соединение между выбранными виасами в обход препятствий.</em></figcaption>
     </figure>
     <p>Приём для больших чипов (psxcpu): человек ставит крайние виасы, а <strong>провод дорисовывает
       скрипт/автоматика</strong> — полуавтоматическая трассировка:</p>
     <figure>
-      <img src="/imgstore/workflow/psxcpu_deroute_method.png" alt="Полуавтоматическая трассировка в Deroute">
+      <img src="../imgstore/workflow/psxcpu_deroute_method.png" alt="Полуавтоматическая трассировка в Deroute">
       <figcaption><em>Метод из psxcpu: виасы по краям дорожки, проводник между ними достраивается (полу)автоматически.</em></figcaption>
     </figure>
     <p>Советы из мануала и практики:</p>
@@ -931,14 +931,14 @@
     <ul>
       <li>слева — фото с наложенными рамками-паттернами, справа — <strong>библиотека паттернов</strong>:
         <figure>
-          <img src="/imgstore/workflow/patterns_workspace.png" alt="Рабочая среда Patterns">
+          <img src="../imgstore/workflow/patterns_workspace.png" alt="Рабочая среда Patterns">
         </figure>
       </li>
       <li>исходной картинке назначается параметр <strong>Lambda</strong> (размер минимальной топологической
         единицы), и размеры считаются в лямбдах, а не пикселях; <strong>Delta</strong> — допуск погрешности,
         по нему фильтруются кандидаты из БД под размер рамки:
         <figure>
-          <img src="/imgstore/workflow/patterns_lambda_delta.png" alt="Параметры Lambda и Delta в Patterns">
+          <img src="../imgstore/workflow/patterns_lambda_delta.png" alt="Параметры Lambda и Delta в Patterns">
         </figure>
       </li>
       <li>при выделении рамки программа показывает только подходящие по размеру ячейки из БД —
@@ -961,16 +961,16 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
       <code>psxcpu/cells/PatternsPSXCPU/</code>):</p>
     <div class="fig-row">
       <figure>
-        <img src="/imgstore/workflow/patterns_db_NOT1.jpg" alt="Ячейка NOT1 из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_NOT1.jpg" alt="Ячейка NOT1 из библиотеки Patterns">
       </figure>
       <figure>
-        <img src="/imgstore/workflow/patterns_db_3NAND.jpg" alt="Ячейка 3-NAND из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_3NAND.jpg" alt="Ячейка 3-NAND из библиотеки Patterns">
       </figure>
       <figure>
-        <img src="/imgstore/workflow/patterns_db_22AOI.jpg" alt="Ячейка 22-AOI из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_22AOI.jpg" alt="Ячейка 22-AOI из библиотеки Patterns">
       </figure>
       <figure>
-        <img src="/imgstore/workflow/patterns_db_DFF.jpg" alt="Ячейка DFF из библиотеки Patterns">
+        <img src="../imgstore/workflow/patterns_db_DFF.jpg" alt="Ячейка DFF из библиотеки Patterns">
       </figure>
     </div>
     <p><em>Слева направо: NOT1 (инвертор), 3-NAND (3-входовой), 22-AOI = ~((A&amp;B)|(C&amp;D)) — нотация «число
@@ -978,7 +978,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     <p>Итог разметки — «карта ячеек»: фотография с поименованными экземплярами и номерами рядов
       (адресация «часть/ряд/место»), на которую потом опирается трассировка в Deroute:</p>
     <figure>
-      <img src="/imgstore/workflow/psxcpu_cells_map.jpg" alt="Карта ячеек PSX CPU">
+      <img src="../imgstore/workflow/psxcpu_cells_map.jpg" alt="Карта ячеек PSX CPU">
       <figcaption><em>Карта ячеек части кристалла PSX CPU: каждый прямоугольник — экземпляр ячейки с именем типа
         (psxcpu, инструмент Patterns).</em></figcaption>
     </figure>
@@ -1005,10 +1005,10 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="/imgstore/workflow/mappers_22aoi_topo.jpg" alt="Ячейка 22-AOI: топология (фото)">
+        <img src="../imgstore/workflow/mappers_22aoi_topo.jpg" alt="Ячейка 22-AOI: топология (фото)">
       </figure>
       <figure>
-        <img src="/imgstore/workflow/mappers_22aoi_tran.jpg" alt="Ячейка 22-AOI: транзисторная схема">
+        <img src="../imgstore/workflow/mappers_22aoi_tran.jpg" alt="Ячейка 22-AOI: транзисторная схема">
       </figure>
     </div>
     <p><em>Формат «тройки» (mappers, VRC6): слева — топология ячейки с фото, справа — её транзисторная схема.
@@ -1035,11 +1035,11 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     <p>Экспортированный из Deroute Verilog скармливают EDA (Xilinx PlanAhead) — она сама рисует
       принципиальную схему. Это одновременно и «читаемый результат», и проверка связности:</p>
     <figure>
-      <img src="/imgstore/workflow/mappers_mbc1_planahead.png" alt="Схема MBC1, синтезированная PlanAhead">
+      <img src="../imgstore/workflow/mappers_mbc1_planahead.png" alt="Схема MBC1, синтезированная PlanAhead">
       <figcaption><em>MBC1: восстановленный Verilog → PlanAhead → готовая схема (mappers).</em></figcaption>
     </figure>
     <figure>
-      <img src="/imgstore/workflow/ula_top_schematic.png" alt="Схема верхнего модуля ULA">
+      <img src="../imgstore/workflow/ula_top_schematic.png" alt="Схема верхнего модуля ULA">
       <figcaption><em>Фрагмент схемы ULA (ula): так выглядят модули после авто-отрисовки EDA.</em></figcaption>
     </figure>
 
@@ -1078,7 +1078,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
         чипа — тогда симуляция HDL эквивалентна симуляции чипа:</li>
     </ul>
     <figure>
-      <img src="/imgstore/workflow/breaks_chip_perfect_approach.png" alt="Подход «die-perfect»: HDL максимально повторяет нетлист чипа">
+      <img src="../imgstore/workflow/breaks_chip_perfect_approach.png" alt="Подход «die-perfect»: HDL максимально повторяет нетлист чипа">
       <figcaption><em>Иллюстрация подхода breaks: HDL максимально повторяет нетлист исходного чипа.</em></figcaption>
     </figure>
 
@@ -1104,10 +1104,10 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
     </ul>
     <div class="fig-row">
       <figure>
-        <img src="/imgstore/workflow/breaks_6502_locator.jpg" alt="Карта-локатор блоков 6502">
+        <img src="../imgstore/workflow/breaks_6502_locator.jpg" alt="Карта-локатор блоков 6502">
       </figure>
       <figure>
-        <img src="/imgstore/workflow/breaks_2a03g_labels.png" alt="Подписанный слой кристалла 2A03">
+        <img src="../imgstore/workflow/breaks_2a03g_labels.png" alt="Подписанный слой кристалла 2A03">
       </figure>
     </div>
     <p><em>Слева: локатор блоков MOS 6502 (breaks). Справа: слой кристалла 2A03 с подписями — так
@@ -1153,7 +1153,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
       (breaks собирает wiki в PDF-книги и выпускает релизы), и как <strong>аннотированные фото</strong>
       («Back from HDL» — найденный нетлист накладывают на снимок кристалла):</p>
     <figure>
-      <img src="/imgstore/workflow/dmgcpu_die_netlist.png" alt="Кристалл DMG-CPU с восстановленным нетлистом">
+      <img src="../imgstore/workflow/dmgcpu_die_netlist.png" alt="Кристалл DMG-CPU с восстановленным нетлистом">
       <figcaption><em>DMG-CPU: поверх снимка кристалла — восстановленная схема. Такая «обратная привязка» помогает
         вычитывать ошибки трассировки (dmgcpu).</em></figcaption>
     </figure>
@@ -1295,7 +1295,7 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
   </section>
 
   <p class="doc-closing"><em>Составлено по материалам репозиториев emu-russia и их документации. Английская версия:
-    <a href="/specs/workflow.en.md">workflow.en.md</a>. Обсуждение задачи —
+    <a href="../specs/workflow.en.md">workflow.en.md</a>. Обсуждение задачи —
     <a href="https://github.com/emu-russia/chips-howto/issues/8" target="_blank" rel="noopener">issue #8</a>.</em></p>
 </main>
 
@@ -1303,8 +1303,8 @@ pattern nDFF, 4.0, 12, 12, "patterns_db/nDFF.jpg"</code></pre>
 <footer class="site-footer">
   <div class="container">
     <p>Материал подготовлен по репозиториям <strong>emu-russia</strong>; см.
-      <a href="/specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) и
-      <a href="/specs/workflow.en.md">specs/workflow.en.md</a> (EN).</p>
+      <a href="../specs/workflow.ru.md">specs/workflow.ru.md</a> (RU) и
+      <a href="../specs/workflow.en.md">specs/workflow.en.md</a> (EN).</p>
     <p>Страница предназначена для размещения на <strong>GitHub Pages</strong> (папка <code>docs/</code>) —
       одностраничный HTML-вариант методического документа «Workflow исследования микросхем», без внешних зависимостей.</p>
     <p class="small">© emu-russia · chips-howto · Исходная разметка: <code>specs/workflow.ru.md</code> ·
