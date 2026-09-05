@@ -1,0 +1,14 @@
+{
+  "name": "chips-howto-guide",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Build the independent bilingual chip research guide",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "marked": "17.0.5"
+  }
+}

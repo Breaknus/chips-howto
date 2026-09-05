@@ -1,0 +1,273 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>From silicon to a verifiable model</title><script>try { const s=localStorage.getItem('theme'); const t=(s==='dark'||s==='light')?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); document.documentElement.dataset.theme=t; if(t==='dark') document.documentElement.classList.add('dark'); } catch (_) {}</script><link rel="stylesheet" href="assets/style.css"></head><body class=""><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header"><a class="brand" href="index.html">Silicon → model</a><nav class="site-nav" aria-label="Site navigation"><a href="workflow.en.html">Guide</a><a href="illustrations.html">Images</a><a href="workflow.ru.html">Русский</a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Change colour theme">☾ Dark</button></nav></header><main id="main-content"><div class="article-page"><div class="article-head"><div class="eyebrow">Independent guide</div><p>Seven stages from source image to a reproducible conclusion.</p><nav class="section-nav" aria-label="Guide sections"><a href="#route">Route</a><a href="#dossier">Dossier</a><a href="#dataset">Dataset</a><a href="#cells">Library</a><a href="#netlist">Netlist</a><a href="#model">Model</a><a href="#validation">Validation</a><a href="#publication">Publication</a><a href="#checklist">Checklist</a><a href="#evidence">Sources and history</a></nav></div><article class="prose"><h1>From silicon to a verifiable model</h1>
+<p>A practical chip research guide drawn from nine emu-russia projects.</p>
+<p><a href="workflow.ru.html">Русский</a> · <a href="#route">Route</a> · <a href="#dossier">Stages</a> · <a href="#checklist">Checklist</a> · <a href="#evidence">Sources and history</a></p>
+<p>The purpose of research is to produce something another person can check: locate an element in an image, trace its connections, run a model, and understand the limits of its accuracy. Reconstructing an entire chip is not always necessary. For the first pass, choose a small block with clear inputs and an observable output.</p>
+<p>This is an independent synthesis of documentation, artifacts, and selected commits from <strong>breaks, SEGAChips, dmgcpu, Deroute, mappers, SovietChips, ula, psxcpu, and Patterns</strong>, inspected on 5 September 2026. The readiness criteria are this guide&#39;s recommendations; project examples have source links. We did not run their HDL or perform hardware experiments. A commit date or title establishes publication history, not a successful test run today.</p>
+<p><a id="route"></a></p>
+<h2>The route: seven deliverables instead of one large promise</h2>
+<table>
+<thead>
+<tr>
+<th>Deliverable</th>
+<th>What remains after the work</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>01. Dossier</td>
+<td>Exact specimen and revision, research question, block boundary, reference</td>
+</tr>
+<tr>
+<td>02. Dataset</td>
+<td>Original frames, checked master, layer alignment, defect map</td>
+</tr>
+<tr>
+<td>03. Library</td>
+<td>Confirmed elements with ports, functions, and orientation rules</td>
+</tr>
+<tr>
+<td>04. Netlist</td>
+<td>Annotations and structural connections linked to image coordinates</td>
+</tr>
+<tr>
+<td>05. Model</td>
+<td>Primitive library, executable circuit, testbench, and run conditions</td>
+</tr>
+<tr>
+<td>06. Validation</td>
+<td>Expected and observed behavior, discrepancies, and coverage limits</td>
+</tr>
+<tr>
+<td>07. Publication</td>
+<td>A reproducible package with sources, licenses, and open questions</td>
+</tr>
+</tbody></table>
+<p>The main path is <strong>dossier → dataset → library ↔ netlist → model ↔ validation → publication</strong>. Document decisions from day one. On cell-based chips, instance annotation and tracing are iterative; on custom layouts, transistor reconstruction may precede recognition of logic. Test the first module before completing the entire die.</p>
+<p>Choose your starting point:</p>
+<ul>
+<li><strong>Suitable images exist:</strong> check revision and quality and start with the dataset. Decapsulation is not a mandatory stage.</li>
+<li><strong>A netlist or HDL exists:</strong> check its provenance and start with a small test; return to images when results disagree.</li>
+<li><strong>Only the chip is available:</strong> prepare a dossier and an imaging plan, including acceptable specimen losses.</li>
+<li><strong>Repeated cell rows:</strong> investigate types and orientations first. <strong>Irregular logic, memory, or analog circuits:</strong> separate the regions and choose the required detail for each.</li>
+</ul>
+<p>Always distinguish four states: <strong>visible in a photo</strong>, <strong>reconstructed from a photo</strong>, <strong>inferred from function</strong>, and <strong>confirmed by a specific test</strong>. A note saying “looks like NAND” must not silently become a confirmed library cell.</p>
+<p><a id="dossier"></a></p>
+<h2>01. Dossier: define the object and question</h2>
+<p><strong>Input:</strong> a chip specimen or published material about it.</p>
+<ol>
+<li>Photograph the package markings and record the donor, board revision, and pin orientation. When using someone else&#39;s images, preserve the original specimen description.</li>
+<li>Collect the datasheet, pinout, patents, related-chip research, and dataset links. Separate direct knowledge about this revision from assumptions transferred by analogy.</li>
+<li>Define a testable question: for example, reconstruct a mapper register write or explain a clock divider. Name the output signals and how you will obtain a reference.</li>
+<li>Mark suspected memory, regular logic, analog regions, pads, and the first module boundary on an overview image. Label provisional names as hypotheses.</li>
+</ol>
+<p><a href="images/breaks-locator.jpg"><img src="images/breaks-locator.jpg" alt="Map of functional blocks on the 6502"></a></p>
+<p><em>The 6502 map from <a href="https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/BreakingNESWiki/imgstore/6502/6502_locator.jpg">breaks</a> links a functional description to a location on silicon. The selected source does not identify an individual creator for this illustration.</em></p>
+<p>Scale determines strategy. <a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/MBC1/Readme.md">MBC1</a> describes a SHARP gate array with 43 cells, making the entire chip manageable. In <a href="https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/cells/Readme.md">psxcpu</a>, cataloging types and mapping a large number of instances is a separate task. Treat a related foundry&#39;s library as a candidate set: a shared manufacturer alone does not confirm pinout or function.</p>
+<p><strong>Output:</strong> a <code>README.md</code> containing the dossier and first-module map.</p>
+<p><strong>Ready to proceed when:</strong> revision, scope, expected result, and available reference are clear. If the revision is unknown, say so and keep different specimens&#39; data separate.</p>
+<p><a id="dataset"></a></p>
+<h2>02. Dataset: preserve what cannot be photographed again</h2>
+<p><strong>Input:</strong> existing images or a specimen preparation and imaging plan.</p>
+<p>Start by assessing published data. <a href="https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/datasets.md">psxcpu/datasets.md</a> distinguishes original frames from stitched images, layers, focus conditions, and defects. Such a register is more useful than a single link to a huge image.</p>
+<p>For each set, record the specimen, layer, creator/source, usage conditions, original filenames, dimensions, scale, frame order, processing date, and checksums. Master coordinates, rotation, and mirroring must be unambiguous. Keep originals separate from retouching, reconstructed masks, and annotations. Large files may live in external storage, with a verified copy and a manifest in Git.</p>
+<h3>Acquiring and aligning images</h3>
+<p>The original <a href="https://github.com/emu-russia/chips-howto/blob/a96d0b2f78975db32f33fc00f62c384ec6102f31/methods.md">chips-howto methods</a> and <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/wiki/methods.md">dmgcpu methods</a> describe metallographic imaging, overlapping frames, Fiji stitching, and successive layer exposure. For a new dataset:</p>
+<ol>
+<li>Image a small trial region. Check whether the required contacts and conductor boundaries can be resolved.</li>
+<li>Tune step size, overlap, focus, and lighting on that trial and record the settings. An overlap value from someone else&#39;s example does not validate your optics or surface.</li>
+<li>In Fiji, use <code>Plugins → Stitching → Grid/Collection stitching</code> with the actual grid and filename order. First check a small region containing both horizontal and vertical seams.</li>
+<li>Inspect seams for continuous conductors and duplicated contacts. Save stitching settings and transformations between layers.</li>
+<li>Before removing the next layer, confirm that the current layer has been fully photographed and the backup opens. Trace uncertain areas while they can still be imaged again.</li>
+</ol>
+<p><a href="images/psx-metal.jpg"><img src="images/psx-metal.jpg" alt="Stitched M2 layer of the PlayStation CPU"></a></p>
+<p><em>A reduced M2 master from <a href="https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/imgstore/m2_Fused_sm.jpg">psxcpu</a>. The dataset register credits Mikhail (@zeptobars) and an anonymous decapper for different sets; a single creator of this particular derived image has not been established.</em></p>
+<h3>Specimen preparation and losses</h3>
+<p>Decapsulation and layer removal are irreversible. Choosing thermal, mechanical, or chemical preparation requires suitable facilities and operator training; acid-free does not mean hazard-free. For this guide, the preparation deliverable is an imageable layer, rather than a particular homebrew recipe.</p>
+<p>HF can cause severe systemic poisoning and injuries with delayed pain. Handling it requires an equipped laboratory, an approved procedure, compatible protective equipment, and an emergency response plan; a dust mask or finger cots are not adequate protection. Suspected exposure requires immediate professional medical attention. See <a href="https://wwwn.cdc.gov/TSP/MMG/MMGDetails.aspx?mmgid=1142&toxid=250">CDC/ATSDR</a>. For solvents and abrasives, consult the specific product&#39;s safety data sheet; for example, <a href="https://www.cdc.gov/niosh/npg/npgd0004.html">NIOSH</a> identifies acetone&#39;s flammability, irritation, and central nervous system effects. Old research notes do not replace a current safety procedure.</p>
+<p><a href="images/sega-damage.png"><img src="images/sega-damage.png" alt="Damaged VDP die retaining the PSG region"></a></p>
+<p><em>In <a href="https://github.com/emu-russia/SEGAChips/blob/1b378b45c8f0a88501ba593cc480dc5159149a8d/VDP/PSG/Readme.md">SEGAChips/VDP/PSG</a>, a damaged die retained an accessible PSG region. The <a href="https://github.com/emu-russia/SEGAChips/blob/1b378b45c8f0a88501ba593cc480dc5159149a8d/VDP/PSG/imgstore/vdp-damaged-chip.png">source illustration</a> shows why usable data coverage should be described separately from the condition of the entire specimen.</em></p>
+<p>The PSX register records loss of part of M1 during polishing and a separate imaging session. For such events, record coordinates, layer, missing information, and the replacement dataset. If a region is reconstructed from another revision or symmetry, label the hypothesis and its origin.</p>
+<p><strong>Output:</strong> <code>datasets.md</code>, original frames, a master for each required layer, and alignment and defect maps.</p>
+<p><strong>Ready when:</strong> another contributor can open the same data, align the layers, and locate every excluded region. An unreadable area remains an open question.</p>
+<p><a id="cells"></a></p>
+<h2>03. Library: understand an element before annotating it everywhere</h2>
+<p><strong>Input:</strong> aligned layers and a map of regular and custom regions.</p>
+<p>For cells, record a stable type ID, topology, transistor schematic, logical function, ports and supplies, permitted reflections, and the basis for confidence. For storage elements, add clocking, control polarity, and storage state. For analog regions, define the model boundary instead of replacing the circuit with a logic gate.</p>
+<p><a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/SharpGateArray/cells.md">SharpGateArray</a> presents cells at different description levels; <code>buf2</code> is explicitly marked unconfirmed. This is useful practice: an unknown cell should remain unknown even after being copied to a hundred instances. In <a href="https://github.com/emu-russia/SEGAChips/blob/1b378b45c8f0a88501ba593cc480dc5159149a8d/YM6_Cells/cells.md">YM6_Cells</a>, two-story cell geometry imposes its own orientation rules; do not generalize them to every CMOS chip.</p>
+<h3>What Patterns does</h3>
+<p><a href="https://github.com/emu-russia/Patterns/blob/6dd2badffa8d5422da66b78d20b7330df30ec5c4/UserManual/patterns_english.md">Patterns</a> helps match a selected rectangle to a library. Lambda and Delta account for scale and dimensional tolerance. The user selects the type and orientation; matching dimensions do not prove electrical function.</p>
+<p><a href="images/patterns-scale.png"><img src="images/patterns-scale.png" alt="Scale and tolerance settings in Patterns"></a></p>
+<p><em>Lambda/Delta from the <a href="https://github.com/emu-russia/Patterns/blob/6dd2badffa8d5422da66b78d20b7330df30ec5c4/imgstore/lambda_delta.png">Patterns manual</a>. Check scale against several known cells and save it with the workspace.</em></p>
+<p>Working sequence:</p>
+<ol>
+<li>Analyze one clearly visible example of a type, checking all available layers and supply connections.</li>
+<li>Verify its function and ports from a transistor schematic or an independent description. A similar silhouette is only a candidate.</li>
+<li>Add the type to <code>patterns_db.txt</code> and the library images; mark anything unconfirmed.</li>
+<li>Annotate instances, checking reflections, rows, boundaries, and unusual variants.</li>
+<li>Save the <code>.wrk</code> with the source image and library; check that it opens from another directory. Export coordinates and names as XML for Deroute.</li>
+</ol>
+<p>For custom layouts, reconstruct transistors and connections in small regions instead of building a catalog of repeats. Interpret polysilicon crossing an active region in the context of the process and available layers, rather than treating a picture as a universal stencil.</p>
+<p><strong>Output:</strong> a library and instance map, or a transistor-level description of the selected region.</p>
+<p><strong>Ready when:</strong> every used type has a defined function, ports, orientation, and confidence status; exceptions are listed rather than disguised as standard cells.</p>
+<p><a id="netlist"></a></p>
+<h2>04. Netlist: recover connections with a path back to the image</h2>
+<p><strong>Input:</strong> a master image, element library, and module boundary.</p>
+<p>Use the concrete sequence in <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/netlist/Readme.md">dmgcpu/netlist</a>: prepare the region&#39;s master, annotate ports, place elements, trace interconnects, and export Verilog. Agree on module ports before its internals, so independently reconstructed fragments can be joined.</p>
+<p><a href="images/dmg-ports.png"><img src="images/dmg-ports.png" alt="DMG-CPU module ports annotated in Deroute"></a></p>
+<p><em>Input, output, and bidirectional ports in the <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/imgstore/shop/netlist2.png">dmgcpu example</a>. Direction comes from the circuit, not the contact&#39;s position in an image.</em></p>
+<p>In <a href="https://github.com/emu-russia/Deroute/blob/86950a9466f6df8a60ac6c306f60cda4abdb07f0/UserManual/DerouteUserManual.md">Deroute</a>, annotations overlay an image. Module ports use <code>ViasInput</code>, <code>ViasOutput</code>, and <code>ViasInout</code>; elements and conductors are connected in an editable scene. Keep XML/XMLZ next to the export. Do not retain only Verilog: it does not replace geometric annotation.</p>
+<p>Check connections at every layer transition. Lines crossing visually without a contact are not connected; even an apparently obvious bus must be traced to its consumers. Record coordinates and a crop for each uncertain location. Power, ground, and bidirectional nets require appropriate semantics rather than arbitrarily assigning a single driver.</p>
+<p>Use stable instance and net IDs. Add human-readable names as mappings to them. <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/Readme.md">dmgcpu</a> identifies frequent renaming as a source of errors; when a name changes, update ports, model, documentation, and the mapping together.</p>
+<p><strong>Export is not verification.</strong> <a href="https://github.com/emu-russia/Deroute/blob/86950a9466f6df8a60ac6c306f60cda4abdb07f0/Deroute/GetVerilog.cs">Deroute/GetVerilog.cs</a> checks some anomalies, including unconnected ports and certain invalid nets. These checks cannot prove that annotations match the photograph. Preserve export diagnostics and explain every warning left unresolved.</p>
+<p><strong>Output:</strong> module annotations, structural Verilog, a port/ID table, and a record of uncertain connections.</p>
+<p><strong>Ready when:</strong> the selected module can be exported again, its elements located in the image, and all boundary ports checked. An unresolved connection prevents claiming a complete netlist for that region, but does not prevent publishing an honestly labeled intermediate result.</p>
+<p><a id="model"></a></p>
+<h2>05. Model: make the hypothesis executable</h2>
+<p><strong>Input:</strong> a structural netlist, cell definitions, and a chosen scenario.</p>
+<p>Preserve a structural version before introducing functional modules and descriptive names. The die-perfect goal in <a href="https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/HDL/Readme.md">breaks</a> aims to keep HDL close to recovered structure; it is a direction of work, not a certificate of electrical equivalence.</p>
+<ol>
+<li>Define primitives: combinational logic, latches, flip-flops, bidirectional connections, and memory. Identify stubs.</li>
+<li>Record assumptions: initial state, reset, time units, clocking, X/Z, delays, and charge storage. Do not replace every unknown with zero merely to obtain an attractive waveform.</li>
+<li>Create a first-module testbench with an expected result written beforehand. Make clear what observation would disprove the model.</li>
+<li>Record tool versions, the complete source list, and the command relative to the project root. Preserve the exit status, log, and VCD when useful.</li>
+<li>Generate a schematic from HDL for reading and comparison. Record its source commit when regenerating it: a derived image can lag behind code.</li>
+</ol>
+<p><a href="images/mbc1-schematic.png"><img src="images/mbc1-schematic.png" alt="MBC1 schematic generated from HDL"></a></p>
+<p><em>The schematic from <a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/MBC1/netlist/mbc1_design.png">mappers/MBC1</a> is a useful view of the connections. Its presence alone does not mean tests passed.</em></p>
+<p>Files in <code>.circ</code> format help with interactive exploration; Verilog and testbenches support repeatable checks. Choose the representation for the research question. Producing every kind of model is not required.</p>
+<p><strong>Output:</strong> a runnable model package with explicit assumptions and one meaningful test.</p>
+<p><strong>Ready when:</strong> a clean run reproduces the claimed result or a documented discrepancy. Successful compilation establishes only that the selected source set builds.</p>
+<p><a id="validation"></a></p>
+<h2>06. Validation: look for where the model fails</h2>
+<p><strong>Input:</strong> a model, testbench, and independent basis for expected behavior.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What it establishes</th>
+<th>What it does not establish</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Photo ↔ annotation</td>
+<td>Correct reading of selected elements and contacts</td>
+<td>Behavior in every mode</td>
+</tr>
+<tr>
+<td>Structural comparison</td>
+<td>Element types, ports, and connections after alias mapping</td>
+<td>Equivalence of different storage/state models</td>
+</tr>
+<tr>
+<td>Stimulus-based simulation</td>
+<td>Behavior in that scenario under stated assumptions</td>
+<td>Analog accuracy or untested scenarios</td>
+</tr>
+<tr>
+<td>Reference trace or hardware</td>
+<td>Agreement of observed signals in a particular experiment</td>
+<td>Correctness of all internal circuitry</td>
+</tr>
+</tbody></table>
+<p>Start with a control scenario, then examine transitions: reset, reads/writes, counter boundaries, consecutive accesses, and bus direction changes. <a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/MMC1/icarus/Readme.md">MMC1/icarus</a> provides a concrete second-consecutive-write suppression example. Such a test is more useful than a demonstration in which an output merely toggles.</p>
+<h3>The ULA lesson: identical wiring does not establish identical dynamics</h3>
+<p>The <a href="https://github.com/emu-russia/ula/blob/7fafd3939c181559ce3d2932773ea987a33c2bb4/docs/hdl-vs-netlist-verification.md">ula report</a> found 519 common gates matching statically; another 142 netlist gates correspond to latches folded into HDL primitives. However, the HDL remained in X in the reported run, and an experiment with changed unknown-state semantics did not complete the dynamic equivalence proof. The authors described Icarus hangs and proposed separate simulations with identical stimuli followed by a log diff. This is a <strong>proposed strategy</strong>, not a completed check.</p>
+<p><a href="images/ula-schematic.png"><img src="images/ula-schematic.png" alt="Top-level ULA model schematic"></a></p>
+<p><em>The <a href="https://github.com/emu-russia/ula/blob/7fafd3939c181559ce3d2932773ea987a33c2bb4/hdl/ula_top.png">ula/hdl schematic</a>. A clear hierarchical view aids analysis, but validation status comes from a report, not an image.</em></p>
+<p>When comparing two models, provide identical inputs, startup states, and observed signals. Define allowed phase alignment, X/Z handling, and comparison exclusions separately. Arbitrarily discarding initial cycles can conceal a reset bug. If the simulator hangs, the result is “validation incomplete”; retain the command, version, and a minimal reproducer.</p>
+<p>For each discrepancy, decide where to return: images/alignment, cell library, a conductor, a modeling assumption, or the reference. After a correction, repeat the test that exposed it and related scenarios. The report should distinguish a fixed error from an effect still under investigation.</p>
+<p><strong>Output:</strong> a scenario table with expected and observed results, commands, logs, covered regions, and unresolved discrepancies.</p>
+<p><strong>Ready when:</strong> every claim of successful validation is tied to a particular experiment. “All tests passed” must identify the tests and their scope.</p>
+<p><a id="publication"></a></p>
+<h2>07. Publication: leave a package others can continue</h2>
+<p><strong>Input:</strong> research artifacts and a report of what was checked.</p>
+<p>This minimal layout is a proposal for a new project, not a mandatory standard shared by all sources:</p>
+<pre><code class="language-text">chip/
+  README.md       # specimen, objective, block map, status
+  datasets.md     # provenance, layers, scale, defects, checksums
+  cells/          # library, ports, functions, uncertainties
+  netlist/        # annotations, structural export, ID mappings
+  model/          # primitives and functional model
+  tests/          # stimuli, expected results, run command
+  reports/        # validation results and unresolved discrepancies
+  imgstore/       # small illustrations and their provenance
+</code></pre>
+<p>Create directories when material exists for them. Large images may live elsewhere, but links, permissions, and checksums must identify the exact version used. Check redistribution permission separately for third-party inputs.</p>
+<p>In <a href="https://github.com/emu-russia/SovietChips/tree/2b64738d83768f9edce4935c2581f0002a4c49fa/580%D0%92%D0%9853">SovietChips</a>, 580ВИ53 research is published as photographs, a PDF, Logisim, and small Verilog examples. It illustrates a package of different artifacts; it does not establish a separate universal decapsulation method or complete test coverage. In breaks, <a href="https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/Topo/Readme.md">reconstructed masks</a> are explicitly distinguished from fabrication-ready masks: label the intended use of your result just as precisely.</p>
+<p><strong>Output:</strong> a version another contributor can open and continue without a personal explanation from its author.</p>
+<p><strong>Ready when:</strong> a reader can follow <strong>source → image → element/net → model → test → conclusion</strong>. Include licenses, attribution, commands, limitations, and the next testable hypothesis. A new release must not make old logs appear to validate a changed model.</p>
+<p><a id="checklist"></a></p>
+<h2>Checklist for the first working fragment</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Specimen, revision, target module, and observable result are recorded.</li>
+<li><input disabled="" type="checkbox"> Existing datasets were assessed before planning new decapsulation.</li>
+<li><input disabled="" type="checkbox"> Original frames are preserved; master, scale, orientation, and defects are described.</li>
+<li><input disabled="" type="checkbox"> Elements have defined ports, functions, reflections, and confidence status.</li>
+<li><input disabled="" type="checkbox"> Annotations and export refer to the same module and share IDs.</li>
+<li><input disabled="" type="checkbox"> Export diagnostics were reviewed; unknown connections are listed.</li>
+<li><input disabled="" type="checkbox"> The model builds with recorded versions and initial state.</li>
+<li><input disabled="" type="checkbox"> At least one scenario has an expected result defined in advance.</li>
+<li><input disabled="" type="checkbox"> Completed, failed, and not-yet-performed checks are listed separately.</li>
+<li><input disabled="" type="checkbox"> Another person can locate sources, open the project, and repeat the experiment.</li>
+</ul>
+<p><a id="evidence"></a></p>
+<h2>Sources and history: why the route takes this form</h2>
+<p>These are selected milestones, not complete project histories. Dates refer to commits. Moving existing material into a repository does not establish when the research itself began. Method and illustration links are pinned to the versions inspected for this guide.</p>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Verifiable development milestones</th>
+<th>What to carry into new work</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>breaks</strong></td>
+<td><a href="https://github.com/emu-russia/breaks/commit/27b023e79aff4eaa72353ed8128e4f657c63666f">2023-04-01: core HDL refactoring</a>; <a href="https://github.com/emu-russia/breaks/commit/362df9b0e25a7b4dc0c60a905498f96807f727a1">2025-11-10: standalone PPU testbench</a></td>
+<td>Maintain models and independent testbenches after structural reconstruction. Read <a href="https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/HDL/Readme.md">HDL</a> and <a href="https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/Topo/Readme.md">topology limitations</a>.</td>
+</tr>
+<tr>
+<td><strong>SEGAChips</strong></td>
+<td><a href="https://github.com/emu-russia/SEGAChips/commit/6ae6ef92b7bf">2022-09-09: two-story cells</a>; <a href="https://github.com/emu-russia/SEGAChips/commit/c93c2ad35ceb">2024-06-26: cell 49 added</a></td>
+<td>Libraries grow during research; geometry and orientation are part of their contract. Read <a href="https://github.com/emu-russia/SEGAChips/blob/1b378b45c8f0a88501ba593cc480dc5159149a8d/YM6_Cells/cells.md">YM6_Cells</a> and <a href="https://github.com/emu-russia/SEGAChips/blob/1b378b45c8f0a88501ba593cc480dc5159149a8d/VDP/PSG/Readme.md">PSG reconstruction</a>.</td>
+</tr>
+<tr>
+<td><strong>dmgcpu</strong></td>
+<td><a href="https://github.com/emu-russia/dmgcpu/commit/958c7c1dea5baff69b31786c84351efcc3a4985b">2022-10-09: seq_netlist ready</a>; <a href="https://github.com/emu-russia/dmgcpu/commit/c20290419fc0f4190fc5b4dc3f4664af777ec4ce">2024-07-09: expansion to SoC research</a></td>
+<td>Work in verifiable modules and expand scope gradually. Read the <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/netlist/Readme.md">five recovery steps</a> and <a href="https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/wiki/methods.md">physical methods</a>.</td>
+</tr>
+<tr>
+<td><strong>Deroute</strong></td>
+<td><a href="https://github.com/emu-russia/Deroute/commit/927f86f95a2f">2023-01-17: Verilog exporter integration</a>; <a href="https://github.com/emu-russia/Deroute/commit/1ec5e7fc975c">2024-04-15: sanity check</a></td>
+<td>Preserve annotations, exports, and diagnostics as separate artifacts. Read the <a href="https://github.com/emu-russia/Deroute/blob/86950a9466f6df8a60ac6c306f60cda4abdb07f0/UserManual/DerouteUserManual.md">manual</a> and <a href="https://github.com/emu-russia/Deroute/blob/86950a9466f6df8a60ac6c306f60cda4abdb07f0/Deroute/GetVerilog.cs">exporter</a>.</td>
+</tr>
+<tr>
+<td><strong>mappers</strong></td>
+<td><a href="https://github.com/emu-russia/mappers/commit/b4874cbfd1b6115c0c31d4de92db9311cc191d20">2023-06-07: Netlist WIP</a>; <a href="https://github.com/emu-russia/mappers/commit/9fcb4b3b39e922466577d56152488886fa1c034e">2023-06-10: mmc1 test ok</a></td>
+<td>Connect small-chip reconstruction to a meaningful test; a commit title does not replace a new run. Read <a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/SharpGateArray/cells.md">cells</a> and the <a href="https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/MMC1/icarus/Readme.md">MMC1 testbench</a>.</td>
+</tr>
+<tr>
+<td><strong>SovietChips</strong></td>
+<td><a href="https://github.com/emu-russia/SovietChips/commit/08e309661636">2025-06-14: repository created</a>; <a href="https://github.com/emu-russia/SovietChips/commit/2b64738d83768f9edce4935c2581f0002a4c49fa">2025-06-14: initial 580ВИ53 research</a></td>
+<td>Publish a connected set of artifacts without attributing absent methods. Browse the <a href="https://github.com/emu-russia/SovietChips/tree/2b64738d83768f9edce4935c2581f0002a4c49fa/580%D0%92%D0%9853">research contents</a>.</td>
+</tr>
+<tr>
+<td><strong>ula</strong></td>
+<td><a href="https://github.com/emu-russia/ula/commit/c75ea3e4f661">2024-10-24: first netlist</a>; <a href="https://github.com/emu-russia/ula/commit/a2791c34ded9">2026-09-04: HDL vs netlist report</a></td>
+<td>Retain IDs for static comparison and establish dynamic behavior separately. Read the <a href="https://github.com/emu-russia/ula/blob/7fafd3939c181559ce3d2932773ea987a33c2bb4/docs/hdl-vs-netlist-verification.md">report with incomplete checks</a>.</td>
+</tr>
+<tr>
+<td><strong>psxcpu</strong></td>
+<td><a href="https://github.com/emu-russia/psxcpu/commit/7c5ac6810ab8">2022-08-31: M2 fused</a>; <a href="https://github.com/emu-russia/psxcpu/commit/f5d216d48f2f">2023-10-09: CoreWare RevA2</a></td>
+<td>Version the master and library; record layer losses. Read the <a href="https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/datasets.md">dataset register</a> and <a href="https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/cells/Readme.md">cell catalog</a>.</td>
+</tr>
+<tr>
+<td><strong>Patterns</strong></td>
+<td><a href="https://github.com/emu-russia/Patterns/commit/021b70dece72">2022-08-06: moved from psxdev</a>; <a href="https://github.com/emu-russia/Patterns/commit/23c18cbee74b">2023-10-03: text export</a></td>
+<td>Keep the workspace with its image and transfer annotations between tools. Read the <a href="https://github.com/emu-russia/Patterns/blob/6dd2badffa8d5422da66b78d20b7330df30ec5c4/UserManual/patterns_english.md">manual</a>.</td>
+</tr>
+</tbody></table>
+<h3>Illustrations and source boundaries</h3>
+<p>Seven illustrations were copied byte-for-byte from the pinned primary sources above; paths and checksums are in the <a href="illustrations.html">image register</a>. Their repositories declare CC0-1.0. This does not automatically assign that license to every external photograph, dataset, or cited work. Individual authorship is not invented: when unknown, the source repository is credited; the psxcpu caption separately clarifies its dataset credits.</p>
+<p>External multi-gigabyte datasets were not downloaded. This work covers available documents, artifacts, and selected changes; it does not certify the complete correctness of each project, availability of every external host, or compatibility of their tools with your OS.</p>
+</article><footer class="footer"><span>Independent guide · source-backed, reproducible work</span><a href="illustrations.html">Image register</a></footer></div></main><script defer src="assets/theme.js"></script></body></html>
