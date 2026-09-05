@@ -455,6 +455,12 @@ The outcome of the annotation is a **cell map**: a photograph with named instanc
 *Cell map of a PSX CPU part: every rectangle is a cell instance with its type name
 (psxcpu, the Patterns tool).*
 
+**Megacells** (psxcpu): when the chip contains large repeating blocks (memory, register arrays,
+video-decoder blocks), they are called "megacells". You only need to dissect **one representative of
+each type** — the other instances differ only in size; their purpose is cross-checked against the
+capacity and surroundings (e.g., a 768-byte block in the PSX CPU turned out to be the MDEC RGB
+macroblock). The PSX CPU has ~16 such megablocks of three types — this trick saves months of work.
+
 Cell libraries are **reused**: the SHARP fab library serves both MMC1 and MBC1;
 SEGA has its own for each sound chip (`Arbiter/ArbPatterns`, `VDP/PSG/PatternsForPSG`),
 and SEGAChips even singled out common Yamaha libraries (`YM_Cells`, `YM6_Cells`).
