@@ -1,0 +1,41 @@
+{
+  "cutoff_utc": "2026-09-05T06:42:43Z",
+  "repositories": {
+    "Deroute": {
+      "commit": "86950a9466f6df8a60ac6c306f60cda4abdb07f0",
+      "url": "https://github.com/emu-russia/Deroute/tree/86950a9466f6df8a60ac6c306f60cda4abdb07f0"
+    },
+    "Patterns": {
+      "commit": "6dd2badffa8d5422da66b78d20b7330df30ec5c4",
+      "url": "https://github.com/emu-russia/Patterns/tree/6dd2badffa8d5422da66b78d20b7330df30ec5c4"
+    },
+    "SEGAChips": {
+      "commit": "1b378b45c8f0a88501ba593cc480dc5159149a8d",
+      "url": "https://github.com/emu-russia/SEGAChips/tree/1b378b45c8f0a88501ba593cc480dc5159149a8d"
+    },
+    "SovietChips": {
+      "commit": "2b64738d83768f9edce4935c2581f0002a4c49fa",
+      "url": "https://github.com/emu-russia/SovietChips/tree/2b64738d83768f9edce4935c2581f0002a4c49fa"
+    },
+    "breaks": {
+      "commit": "a378efe01259735813a6edd3dd6090e27ee0ee32",
+      "url": "https://github.com/emu-russia/breaks/tree/a378efe01259735813a6edd3dd6090e27ee0ee32"
+    },
+    "dmgcpu": {
+      "commit": "f0fbc8f293b1687d22cd157968a49cf6e3b13280",
+      "url": "https://github.com/emu-russia/dmgcpu/tree/f0fbc8f293b1687d22cd157968a49cf6e3b13280"
+    },
+    "mappers": {
+      "commit": "d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4",
+      "url": "https://github.com/emu-russia/mappers/tree/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4"
+    },
+    "psxcpu": {
+      "commit": "df47207c9deed1e9e488c49b8b0c362813102863",
+      "url": "https://github.com/emu-russia/psxcpu/tree/df47207c9deed1e9e488c49b8b0c362813102863"
+    },
+    "ula": {
+      "commit": "475d40245c478bda1a3a760b0e50be66f2f3f7ff",
+      "url": "https://github.com/emu-russia/ula/tree/475d40245c478bda1a3a760b0e50be66f2f3f7ff"
+    }
+  }
+}

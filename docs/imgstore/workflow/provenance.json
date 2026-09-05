@@ -1,0 +1,72 @@
+[
+  {
+    "file": "psxcpu-metal.jpg",
+    "repository": "psxcpu",
+    "commit": "df47207c9deed1e9e488c49b8b0c362813102863",
+    "source_path": "imgstore/m2_Fused_sm.jpg",
+    "source_url": "https://github.com/emu-russia/psxcpu/blob/df47207c9deed1e9e488c49b8b0c362813102863/imgstore/m2_Fused_sm.jpg",
+    "license": "CC0-1.0",
+    "sha256": "f0fe2ee7253c4fdca14d22b207917a9bd7d7330f93717c6185da9044ff03cea6",
+    "bytes": 168852
+  },
+  {
+    "file": "microscope-tiles.jpg",
+    "repository": "dmgcpu",
+    "commit": "f0fbc8f293b1687d22cd157968a49cf6e3b13280",
+    "source_path": "imgstore/shop/dataset.jpg",
+    "source_url": "https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/imgstore/shop/dataset.jpg",
+    "license": "CC0-1.0",
+    "sha256": "345239b45c6aa2f3d3ca0b2baa19675602ee889ef02e76f5643d7bc4146c3822",
+    "bytes": 156107
+  },
+  {
+    "file": "patterns-workspace.png",
+    "repository": "Patterns",
+    "commit": "6dd2badffa8d5422da66b78d20b7330df30ec5c4",
+    "source_path": "imgstore/workspace.png",
+    "source_url": "https://github.com/emu-russia/Patterns/blob/6dd2badffa8d5422da66b78d20b7330df30ec5c4/imgstore/workspace.png",
+    "license": "CC0-1.0",
+    "sha256": "8d9bd7181bd7413c4c2b8aaabea5b3ae1b03c366f59ba356cb0b6e5fe150681f",
+    "bytes": 788103
+  },
+  {
+    "file": "deroute-interconnects.png",
+    "repository": "dmgcpu",
+    "commit": "f0fbc8f293b1687d22cd157968a49cf6e3b13280",
+    "source_path": "imgstore/shop/netlist4.png",
+    "source_url": "https://github.com/emu-russia/dmgcpu/blob/f0fbc8f293b1687d22cd157968a49cf6e3b13280/imgstore/shop/netlist4.png",
+    "license": "CC0-1.0",
+    "sha256": "5bc584621564f75a11b610500807dbfe092d3342bfad39d635036ee538b53dd9",
+    "bytes": 811026
+  },
+  {
+    "file": "chip-perfect.png",
+    "repository": "breaks",
+    "commit": "a378efe01259735813a6edd3dd6090e27ee0ee32",
+    "source_path": "HDL/Design/chip-perfect-approach.png",
+    "source_url": "https://github.com/emu-russia/breaks/blob/a378efe01259735813a6edd3dd6090e27ee0ee32/HDL/Design/chip-perfect-approach.png",
+    "license": "CC0-1.0",
+    "sha256": "3e3ff3ffd4b1820bc743bafd6c0e9baf59579ff70335a329f81f57faa633bcd9",
+    "bytes": 50126
+  },
+  {
+    "file": "mmc1-write-waves.png",
+    "repository": "mappers",
+    "commit": "d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4",
+    "source_path": "MMC1/icarus/waves_ignored.png",
+    "source_url": "https://github.com/emu-russia/mappers/blob/d5bb7ac15363f63ff26762b000a1e76ac7aa9ae4/MMC1/icarus/waves_ignored.png",
+    "license": "CC0-1.0",
+    "sha256": "8c22a5d0cf8e817b5cd625651c4ead33b5a7592333be7c45245a3de9b90409a6",
+    "bytes": 31313
+  },
+  {
+    "file": "vi53-control-word.png",
+    "repository": "SovietChips",
+    "commit": "2b64738d83768f9edce4935c2581f0002a4c49fa",
+    "source_path": "580ВИ53/cw.png",
+    "source_url": "https://github.com/emu-russia/SovietChips/blob/2b64738d83768f9edce4935c2581f0002a4c49fa/580%D0%92%D0%9853/cw.png",
+    "license": "CC0-1.0",
+    "sha256": "edcecc0824c742fbe3d4a1469fa029b33dc04aa5f50ab76d50275bfe89a40acc",
+    "bytes": 49874
+  }
+]
