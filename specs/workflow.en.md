@@ -321,6 +321,10 @@ The most labor-intensive stage — "untangling the wires". Canonical description
 5. **Export to Verilog** — then the module's schematic can be obtained in any EDA
    (the projects used Xilinx PlanAhead: "we load the Verilog, and it draws the schematic itself").
 
+A useful practice from mappers: the netlist is exported **at two levels** — the whole chip and a
+hierarchical per-cell one (`mmc1.v` + `mmc1_cells.v`): this makes tracing errors easier to spot and
+the schematic easier to map back onto the photo.
+
 ### Tool: Deroute
 
 [Deroute](https://github.com/emu-russia/Deroute) — "a tool for untangling wires"
