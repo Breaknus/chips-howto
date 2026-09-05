@@ -47,9 +47,9 @@ Save the settings; use the deployment URL GitHub reports when it completes.
 `.nojekyll` keeps these generated pages as plain static files.
 See the [official GitHub Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-This contribution supplies the files; it does not change repository settings or
-claim that a Pages deployment has run. If the branch is merged, choose the
-destination branch instead.
+Repository settings determine which branch is live. If the branch is merged,
+choose the destination branch instead. Verify the latest deployment's commit
+before treating the published site as a preview of your changes.
 
 ## Проверка перед обновлением / release check
 
